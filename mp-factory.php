@@ -30,6 +30,14 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+
+if (!defined("mp_cf"))
+    define("mp_cf", "mp_cf");
+if (!defined("mp_cf_PLAGIN_DIR"))
+    define("mp_cf_PLAGIN_DIR", plugin_dir_path(__FILE__));
+if (!defined("mp_cf_PLAGIN_URL"))
+    define("mp_cf_PLAGIN_URL", plugin_dir_url(__FILE__));
+
 /**
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org

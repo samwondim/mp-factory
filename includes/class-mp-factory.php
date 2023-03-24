@@ -114,13 +114,19 @@ class Mp_Factory {
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
+		
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-mp-factory-admin.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/post_types/request-content.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/post_types/common.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-mp-factory-public.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-mp-factory-public.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/shortcodes/home.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/shortcodes/content-request.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/request_content.php';
 
 		$this->loader = new Mp_Factory_Loader();
 
@@ -157,6 +163,12 @@ class Mp_Factory {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+		$Mp_cf_rq_Admin = new Mp_cf_rq_Admin();
+		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_post_type_rq_init', 1, 1);
+
+
+		$Mp_cf_common_post_type_Admin = new Mp_cf_common_post_type_Admin();
+		$this->loader->add_action('init', $Mp_cf_common_post_type_Admin, 'mp_cf_post_type_registration_init', 1, 1);
 	}
 
 	/**
@@ -172,6 +184,17 @@ class Mp_Factory {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+
+		$Mp_cf_home_public = new Mp_cf_home_public();
+		$this->loader->add_shortcode('mp_cf_home_code', $Mp_cf_home_public, 'mp_cf_home_shortcode');
+
+		$Mp_cf_content_request_public = new Mp_cf_content_request_public();
+		$this->loader->add_shortcode('mp_cf_request_content_code', $Mp_cf_content_request_public, 'mp_cf_request_content_shortcode');
+	
+
+
+		$Mp_cf_request_content = new Mp_cf_request_content();
+		$this->loader->add_action('wp_ajax_submit_requested_content', $Mp_cf_request_content, 'wp_ajax_submit_requested_content', 1, 1);
 
 	}
 

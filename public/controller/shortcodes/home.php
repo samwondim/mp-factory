@@ -25,15 +25,15 @@ class Mp_cf_home_public
 
 	public function mp_cf_home_shortcode()
 	{
+		$user = wp_get_current_user();
 		$mp_rep_base_api = get_option('mp_rep_base_api', 'none');
-		$mp_rep_community = get_option('mp_rep_community', 'none');
-
-		if ($mp_rep_base_api == "none" || $mp_rep_community == "none") {
+		$mp_rep_community_slug = get_option('mp_rep_community_slug', 'none');
+		if ($mp_rep_base_api == "none" || $mp_rep_community_slug == "none") {
 			echo "Admin should set reputation settings first!";
 		} else {
 
 
-			$url = $mp_rep_base_api . "core/communities/" . $mp_rep_community . "/users/" . get_current_user_id() . "/";
+			$url = $mp_rep_base_api . "core/communities/" . $mp_rep_community_slug . "/users/" . get_current_user_id() . "/";
 
             $server_output = wp_remote_get(
                 $url,
@@ -50,7 +50,7 @@ class Mp_cf_home_public
             
             if (isset($response['mpxr'])) $mpxr = $response['mpxr'];
 			else $mpxr = 0;
-			if (isset($response['vote_rep_availabe'])) $vote_rep_availabe = $response['vote_rep_availabe'];
+			if (isset($response['vote_rep_availabe'])) $vote_rep_availabe = round($response['vote_rep_availabe'],3);
 			else $vote_rep_availabe = 0;
 			if (isset($response['public_address'])) $public_address = $response['public_address'];
 			else $public_address = 0;
@@ -59,10 +59,15 @@ class Mp_cf_home_public
 			$mpxr = 0;
 			$vote_rep_availabe = 0;
 			$public_address = 0;
+		} 
 
-            }
-
-			include_once mp_cf_PLAGIN_DIR . 'public/partials/view/home.php';
+		// category lists
+		$categories = get_categories(array(
+			'orderby' => 'name',
+			'order'   => 'ASC',
+			'hide_empty' => FALSE
+		));
+		include_once mp_cf_PLAGIN_DIR . 'public/partials/view/request_content/index.php';
 		}
 	}
 }

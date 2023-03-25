@@ -194,7 +194,7 @@ class Mp_Factory {
 
 
 		$Mp_cf_request_content = new Mp_cf_request_content();
-		$this->loader->add_action('wp_ajax_submit_requested_content', $Mp_cf_request_content, 'wp_ajax_submit_requested_content', 1, 1);
+		$this->loader->add_action('wp_ajax_mp_cf_submit_requested_content', $Mp_cf_request_content, 'wp_ajax_mp_cf_submit_requested_content', 1, 1);
 
 	}
 

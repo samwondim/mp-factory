@@ -242,3 +242,7 @@ form {
     margin-bottom: 19px;
     cursor: pointer;
 }
+
+.hidden {
+    display: none !important;
+}

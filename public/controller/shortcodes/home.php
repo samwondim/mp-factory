@@ -55,6 +55,7 @@ class Mp_cf_home_public
 			if (isset($response['public_address'])) $public_address = $response['public_address'];
 			else $public_address = 0;
 
+				
         }else{
 			$mpxr = 0;
 			$vote_rep_availabe = 0;
@@ -67,6 +68,9 @@ class Mp_cf_home_public
 			'order'   => 'ASC',
 			'hide_empty' => FALSE
 		));
+		// get guarantee value in percent
+		$guarantee_value = get_option('mp_cf_guarantee_value','none');
+		
 		include_once mp_cf_PLAGIN_DIR . 'public/partials/view/request_content/index.php';
 		}
 	}

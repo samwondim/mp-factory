@@ -193,8 +193,8 @@
             placeholder="Submission Deadline in Days"
           />
         </div>
-
-        <div class="cf-form-input">
+        
+        <div class="cf-form-input media-type ">
           <label for="mediaType">Media type</label>
           <div class="cf-request-mediaType-radio-container">
             <input type="radio" name="mediaType" id="text" value="text" checked="true"/>
@@ -204,20 +204,31 @@
             <input type="radio" name="mediaType" id="video" value="video" />
             <label for="video">Video</label>
           </div>
-
-          <!-- <input type="text" id="mediaType" placeholder="mediaType" /> -->
         </div>
+
+        <div class="cf-form-input cf-media-length hidden">
+          <label for="mediaLength">Media length</label>
+          <input type="number" id="mediaLength" name="media_length" placeholder="Media length"/>
+        </div>
+
+        <!-- on free request -->
         <div class="cf-form-input">
           <label for="requestType">Request type</label>
           <div class="cf-request-mediaType-radio-container">
-            <input type="radio" name="requestType" id="free" value="free" checked="true"/>
+            <input type="radio" name="requestType" id="free" value="free" checked="checked"/>
             <label for="free">Free</label>
             <input type="radio" name="requestType" id="paid" value="paid" />
             <label for="paid">Paid</label>
           </div>
           <!-- <input type="text" id="requestType" placeholder="requestType" /> -->
         </div>
-        <div class="cf-form-input">
+        
+        <div class="cf-form-input cf-tip-amount ">
+          <label for="MPXRewardValue">Tip Amount</label>
+          <input type="number" id="backingAmount" name="backing_amount" placeholder="Content backing amount"/>
+        </div>
+        
+        <div class="cf-form-input license hidden">
           <label for="license">License</label>
           <select>
             <option value="" disabled selected>Choose license</option>
@@ -228,26 +239,33 @@
             <option value="MPL">Mozilla Public License 2.0.</option>
           </select>
         </div>
-        <div class="cf-form-input">
+        <div class="cf-form-input cf-submissions hidden">
           <label for="submissions">Submissions</label>
           <div class="cf-request-mediaType-radio-container">
-            <input
-              type="radio"
-              name="submissions"
-              id="singleSubmission"
-              value="singleSubmission"
-            />
+            <input type="radio" name="submissions" id="singleSubmission" value="singleSubmission"/>
             <label for="singleSubmission">Single submission</label>
-            <input
-              type="radio"
-              name="submissions"
-              id="multipleSubmission"
-              value="multipleSubmission"
-            />
+            <input type="radio" name="submissions" id="multipleSubmission"  value="multipleSubmission"/>
             <label for="multipleSubmission">Multiple submission</label>
           </div>
         </div>
-        <div class="cf-form-input">
+
+        <div class="cf-form-input cf-max-submissions hidden">
+          <label for="max-submissions"> Maximum submissions</label>
+          <div class="cf-request-mediaType-radio-container">
+            <input type="radio" class="hidden" name="max-submissions" id="maxSubmission1" value="1"/>
+
+            <input type="radio" name="max-submissions" id="maxSubmission2" value="2"/>
+            <label for="maxSubmission2">2 claims</label>
+            <input type="radio" name="max-submissions" id="maxSubmission3" value="3"/>
+            <label for="maxSubmission3">3 claims</label>
+            <input type="radio" name="max-submissions" id="maxSubmission4" value="4"/>
+            <label for="maxSubmission4">4 claims</label>
+            <input type="radio" name="max-submissions" id="maxSubmission5" value="5"/>
+            <label for="maxSubmission5">5 claims</label>
+          </div>
+        </div>
+
+        <div class="cf-form-input cf-MPX-reward-value hidden">
           <label for="MPXRewardValue">MPX reward value</label>
           <input
             type="number"
@@ -255,9 +273,10 @@
             placeholder="MPX reward value(MPX)"
           />
         </div>
-        <div class="cf-form-input">
-          <label for="guaranteeValue">Guarantee Value</label>
-          <input type="number" id="guaranteeValue" placeholder="Guarantee value(MPX)" />
+
+        <div class="cf-form-input cf-guarantee-value hidden">
+          <label for="guaranteeValue">Guarantee Value (%)</label>
+          <input type="number" id="guaranteeValue" placeholder="Guarantee value(MPX)" value="<?php echo $guarantee_value?>"/>
         </div>
         <button type="submit" class="cf-submit" id="cf-submit-request" >Submit</button>
       </form>
@@ -269,6 +288,49 @@
   window.addEventListener("DOMContentLoaded", () => {
     var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
     cfTitle = document.querySelector('#idTitle')
+
+    // show/hide on free and paid radio buttons
+    jQuery("input[name='requestType']").click(function() {
+        if(jQuery(this).val() == 'paid'){
+          jQuery('.license').removeClass('hidden')
+          jQuery('.cf-submissions').removeClass('hidden')
+          jQuery('.cf-MPX-reward-value').removeClass('hidden')
+          jQuery('.cf-guarantee-value').removeClass('hidden')
+
+          jQuery('.cf-tip-amount').addClass('hidden')
+        }
+        else if(jQuery(this).val() == 'free'){
+          jQuery('.license').addClass('hidden')
+          jQuery('.cf-submissions').addClass('hidden')
+          jQuery('.cf-MPX-reward-value').addClass('hidden')
+          jQuery('.cf-guarantee-value').addClass('hidden')
+
+          jQuery('.cf-tip-amount').removeClass('hidden')
+        }
+
+    })
+
+    jQuery("input[name='mediaType']").click(function() {
+
+        if(jQuery(this).val() !== 'text'){
+          jQuery('.cf-media-length').removeClass('hidden')
+        }
+        else {
+          jQuery('.cf-media-length').addClass('hidden')
+        }
+
+    })
+    
+    jQuery("input[name='submissions']").click(function() {
+      if(jQuery(this).val() == 'multipleSubmission'){
+        jQuery('.cf-max-submissions').removeClass('hidden')
+      }
+      else{
+        jQuery('.cf-max-submissions').addClass('hidden')
+      }
+    })
+
+
     $(".cf-submit").click(async function(e) {
       e.preventDefault();
       var editor_content = tinyMCE.activeEditor.getContent({

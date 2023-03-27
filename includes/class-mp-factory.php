@@ -27,7 +27,8 @@
  * @subpackage Mp_Factory/includes
  * @author     Esubalew Amenu <esubalew.a2009@gmail.com>
  */
-class Mp_Factory {
+class Mp_Factory
+{
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -66,8 +67,9 @@ class Mp_Factory {
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct() {
-		if ( defined( 'MP_FACTORY_VERSION' ) ) {
+	public function __construct()
+	{
+		if (defined('MP_FACTORY_VERSION')) {
 			$this->version = MP_FACTORY_VERSION;
 		} else {
 			$this->version = '1.0.0';
@@ -78,7 +80,6 @@ class Mp_Factory {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -97,26 +98,28 @@ class Mp_Factory {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function load_dependencies() {
+	private function load_dependencies()
+	{
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-mp-factory-loader.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-mp-factory-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-mp-factory-i18n.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-mp-factory-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-mp-factory-admin.php';
-		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/post_types/request-content.php';
+
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-mp-factory-admin.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/post_types/requested_content/request-content.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/post_types/requested_content/approve_request.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/post_types/common.php';
 
 		/**
@@ -129,7 +132,6 @@ class Mp_Factory {
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/request_content.php';
 
 		$this->loader = new Mp_Factory_Loader();
-
 	}
 
 	/**
@@ -141,12 +143,12 @@ class Mp_Factory {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function set_locale() {
+	private function set_locale()
+	{
 
 		$plugin_i18n = new Mp_Factory_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
+		$this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
 	}
 
 	/**
@@ -156,12 +158,13 @@ class Mp_Factory {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_admin_hooks() {
+	private function define_admin_hooks()
+	{
 
-		$plugin_admin = new Mp_Factory_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Mp_Factory_Admin($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
+		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 
 		$Mp_cf_rq_Admin = new Mp_cf_rq_Admin();
 		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_post_type_rq_init', 1, 1);
@@ -169,6 +172,14 @@ class Mp_Factory {
 
 		$Mp_cf_common_post_type_Admin = new Mp_cf_common_post_type_Admin();
 		$this->loader->add_action('init', $Mp_cf_common_post_type_Admin, 'mp_cf_post_type_registration_init', 1, 1);
+	
+	
+		$Mp_cf_approve_requested_content_Admin = new Mp_cf_approve_requested_content_Admin();
+		$this->loader->add_filter('manage_cf-requested-content_posts_columns', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_columns');
+		$this->loader->add_action('manage_cf-requested-content_posts_custom_column', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_columns_content', 10, 2);
+		$this->loader->add_action('quick_edit_custom_box', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_quick_edit', 10, 2);
+		$this->loader->add_action('save_post', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_save_post');
+
 	}
 
 	/**
@@ -178,24 +189,24 @@ class Mp_Factory {
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_public_hooks() {
+	private function define_public_hooks()
+	{
 
-		$plugin_public = new Mp_Factory_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Mp_Factory_Public($this->get_plugin_name(), $this->get_version());
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
+		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
 		$Mp_cf_home_public = new Mp_cf_home_public();
 		$this->loader->add_shortcode('mp_cf_home_code', $Mp_cf_home_public, 'mp_cf_home_shortcode');
 
 		$Mp_cf_content_request_public = new Mp_cf_content_request_public();
 		$this->loader->add_shortcode('mp_cf_request_content_code', $Mp_cf_content_request_public, 'mp_cf_request_content_shortcode');
-	
+
 
 
 		$Mp_cf_request_content = new Mp_cf_request_content();
 		$this->loader->add_action('wp_ajax_submit_requested_content', $Mp_cf_request_content, 'wp_ajax_submit_requested_content', 1, 1);
-
 	}
 
 	/**
@@ -203,7 +214,8 @@ class Mp_Factory {
 	 *
 	 * @since    1.0.0
 	 */
-	public function run() {
+	public function run()
+	{
 		$this->loader->run();
 	}
 
@@ -214,7 +226,8 @@ class Mp_Factory {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_plugin_name() {
+	public function get_plugin_name()
+	{
 		return $this->plugin_name;
 	}
 
@@ -224,7 +237,8 @@ class Mp_Factory {
 	 * @since     1.0.0
 	 * @return    Mp_Factory_Loader    Orchestrates the hooks of the plugin.
 	 */
-	public function get_loader() {
+	public function get_loader()
+	{
 		return $this->loader;
 	}
 
@@ -234,8 +248,8 @@ class Mp_Factory {
 	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
 	 */
-	public function get_version() {
+	public function get_version()
+	{
 		return $this->version;
 	}
-
 }

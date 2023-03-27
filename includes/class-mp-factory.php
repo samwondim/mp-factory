@@ -191,6 +191,8 @@ class Mp_Factory {
 
 		$Mp_cf_home_public = new Mp_cf_home_public();
 		$this->loader->add_shortcode('mp_cf_home_code', $Mp_cf_home_public, 'mp_cf_home_shortcode');
+		$this->loader->add_shortcode('mp_cf_request_code', $Mp_cf_home_public, 'mp_cf_request_shortcode');
+		
 
 		$Mp_cf_content_request_public = new Mp_cf_content_request_public();
 		$this->loader->add_shortcode('mp_cf_request_content_code', $Mp_cf_content_request_public, 'mp_cf_request_content_shortcode');

@@ -178,11 +178,11 @@ class Mp_Factory
 		$this->loader->add_action('init', $Mp_cf_common_post_type_Admin, 'mp_cf_post_type_registration_init', 1, 1);
 	
 	
-		$Mp_cf_approve_requested_content_Admin = new Mp_cf_approve_requested_content_Admin();
-		$this->loader->add_filter('manage_cf-requested-content_posts_columns', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_columns');
-		$this->loader->add_action('manage_cf-requested-content_posts_custom_column', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_columns_content', 10, 2);
-		$this->loader->add_action('quick_edit_custom_box', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_quick_edit', 10, 2);
-		$this->loader->add_action('save_post', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_save_post');
+		// $Mp_cf_approve_requested_content_Admin = new Mp_cf_approve_requested_content_Admin();
+		// $this->loader->add_filter('manage_cf-requested-content_posts_columns', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_columns');
+		// $this->loader->add_action('manage_cf-requested-content_posts_custom_column', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_columns_content', 10, 2);
+		// $this->loader->add_action('quick_edit_custom_box', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_quick_edit', 10, 2);
+		// $this->loader->add_action('save_post', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_save_post');
 
 	}
 

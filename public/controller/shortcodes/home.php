@@ -77,6 +77,7 @@ class Mp_cf_home_public
 		include_once mp_cf_PLAGIN_DIR . 'public/partials/view/home/index.php';
 	}
 	public function mp_cf_request_shortcode(){
+		$guarantee_value = get_option('mp_cf_guarantee_value','none');
 		$categories = get_categories(array(
 			'orderby' => 'name',
 			'order'   => 'ASC',

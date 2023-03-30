@@ -43,7 +43,7 @@ class Mp_cf_request_content
 			// $additional_fields = [];
 			
 
-			$cf_category = isset($_POST['cf_category']) ? esc_attr($_POST['cf_category']) : '';
+			$cf_category = isset($_POST['cfCategory']) ? esc_attr($_POST['cfCategory']) : '';
 
 			// $req_deadline = isset($_POST['req_deadline']) ? esc_attr($_POST['req_deadline']) : '';
 			// $submission_deadline = isset($_POST['submission_deadline']) ? esc_attr($_POST['submission_deadline']) : '';
@@ -61,14 +61,15 @@ class Mp_cf_request_content
 			$insert_id = wp_insert_post(array(
 				'post_title'    => $_POST['topic'],
 				'post_content'  => $_POST['desc'],
-				'post_status'   => 'requested',
+				'post_status'   => "draft",//'requested',
 				'post_author'   => get_current_user_id(),
 				'post_type' => 'cf-requested-content',
 
-				'meta_input' => array(
-					'cf_category' => $cf_category
-				)
 			));
+
+			if (!is_wp_error($insert_id)) {
+				wp_set_post_terms($insert_id, $cf_category, 'category');
+			}
 
 			echo "done";
 			die();

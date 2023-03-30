@@ -6,8 +6,8 @@
  * @link       https://github.com/EsubalewAmenu
  * @since      1.0.0
  *
- * @package    Xcc_cf
- * @subpackage Xcc_cf/admin
+ * @package    Mp_cf
+ * @subpackage Mp_cf/admin
  */
 
 /**
@@ -16,8 +16,8 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Xcc_cf
- * @subpackage Xcc_cf/admin
+ * @package    Mp_cf
+ * @subpackage Mp_cf/admin
  * @author     Esubalew A. <esubalew.amenu@singularitynet.io>
  */
 class Mp_cf_rq_Admin

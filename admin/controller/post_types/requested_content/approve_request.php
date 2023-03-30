@@ -38,29 +38,29 @@ class Mp_cf_approve_requested_content_Admin
 
     function custom_cf_requested_content_columns($columns)
     {
-        $columns['content_status_box'] = 'Content Status';
+        $columns['content_status_box'] = 'Status Reason';
         return $columns;
     }
     function custom_cf_requested_content_columns_content($column_name, $post_id)
     {
         if ($column_name == 'content_status_box') {
-            echo '<input type="text" name="content_status_box" value="' . get_post_meta($post_id, 'content_status_box', true) . '" />';
+            echo get_post_meta($post_id, 'content_status_box', true) . " " . $post_id;
         }
     }
     function custom_cf_requested_content_quick_edit($column_name, $post_type) {
-        // if ($column_name == 'content_status_box') {
+        if ($column_name == 'content_status_box') {
             global $post;
             ?>
             <fieldset class="inline-edit-col-right">
                 <div class="inline-edit-col">
                     <span class="title">Status Reason</span>
                     <span class="input-text-wrap">
-                        <input type="text" name="content_status_box" class="text" value="<?php echo get_post_meta($post->ID, 'content_status_box', true) ?>">
+                        <input type="text" name="content_status_box" class="text" value="<?php echo get_post_meta($post->ID, 'content_status_box', true)?>">
                     </span>
                 </div>
             </fieldset>
             <?php
-        // }
+        }
      }
      
     function custom_cf_requested_content_save_post($post_id) {

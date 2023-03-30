@@ -1,6 +1,8 @@
 <?php get_header() ?>
 <?php get_sidebar() ?>
+
 <?php 
+if(get_current_user_id() > 0){
 		include_once mp_cf_PLAGIN_DIR . 'public/cf-single-pages/dashboard_init.php';?>
 
 <link rel="stylesheet" href="<?php echo mp_cf_PLAGIN_URL . 'public/css/mp-factory-home.css' ?>" />
@@ -85,6 +87,12 @@
 
 </article>
 
-<?php get_footer() ?>
+<?php
+}
+else {
+  echo "You must loggin first ";
+}
+
+get_footer() ?>
 
 </body>

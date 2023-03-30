@@ -211,42 +211,40 @@
       // loader('cf-submit-request',true,'')
       
       // if (!$("#cfCategory").val()) {
-      //   showNotification('Please select category!', 'danger')
-      //   loader('cf-submit-request',false,'Submit')
+      //   // showNotification('Please select category!', 'danger')
+      //   // loader('cf-submit-request',false,'Submit')
       // }
-
-      // window.location.href+'#cfCategory';
       
-      // jQuery.ajax({
-      //   url: ajaxurl,
-      //   type: 'POST',
-      //   data: {
-      //       action: 'mp_cf_submit_requested_content',
-      //       topic: $("#idTitle").val(),
-      //       category: $("#cfCategory").val(),
-      //       minMpxr: $("#minMpxr").val(),
-      //       req_deadline: $("#requestDeadline").val(),
-      //       submission_deadline: $("#submitionDeadline").val(),
-      //       desc: editor_content,
-      //       media_type: $('input[name=mediaType]:checked').val(),
-      //       // media_length: $("#id_media_length").val(),
-      //       req_type: $('input[name=requestType]:checked').val(),
-      //       // license: $("#id_license").val(),
-      //       // backing_amount: $("#id_backing_amount").val(),
-      //       submissions: $('input[name=submissions]:checked').val(), //$("#id_submissions").val(),
-      //       // max_submissions: $('input[name=max_submissions]:checked').val(),
-      //       MPXreward: $("#MPXRewardValue").val(),
-      //       guarantee_amount: $("#guaranteeValue").val()
-      //   },
-      //   success: async function(response) {
-      //     if(response == 'done'){
-      //       showNotification("Request submitted successfully!")
-      //     }
-      //     else{
-      //       console.log(response);
-      //     }
-      //   }
-      // })
+      jQuery.ajax({
+        url: ajaxurl,
+        type: 'POST',
+        data: {
+            action: 'mp_cf_submit_requested_content',
+            topic: $("#idTitle").val(),
+            cfCategory: $("#cfCategory").val(),
+            minMpxr: $("#minMpxr").val(),
+            req_deadline: $("#requestDeadline").val(),
+            submission_deadline: $("#submitionDeadline").val(),
+            desc: editor_content,
+            media_type: $('input[name=mediaType]:checked').val(),
+            // media_length: $("#id_media_length").val(),
+            req_type: $('input[name=requestType]:checked').val(),
+            // license: $("#id_license").val(),
+            // backing_amount: $("#id_backing_amount").val(),
+            submissions: $('input[name=submissions]:checked').val(), //$("#id_submissions").val(),
+            // max_submissions: $('input[name=max_submissions]:checked').val(),
+            MPXreward: $("#MPXRewardValue").val(),
+            guarantee_amount: $("#guaranteeValue").val()
+        },
+        success: async function(response) {
+          if(response == 'done'){
+            // showNotification("Request submitted successfully!")
+          }
+          else{
+            console.log(response);
+          }
+        }
+      })
     })
   })
 </script>

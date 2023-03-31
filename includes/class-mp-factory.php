@@ -120,6 +120,7 @@ class Mp_Factory
 		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-mp-factory-admin.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/post_types/requested_content/request-content.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/post_types/requested_content/approve_request.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/post_types/submitted_contents/submitted-content.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/post_types/common.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/controller/cf_settings/settings.php';
 
@@ -169,6 +170,9 @@ class Mp_Factory
 
 		$Mp_cf_rq_Admin = new Mp_cf_rq_Admin();
 		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_post_type_rq_init', 1, 1);
+
+		$Mp_cf_submitted_contents_Admin = new Mp_cf_submitted_contents_Admin();
+		$this->loader->add_action('init', $Mp_cf_submitted_contents_Admin, 'mp_cf_post_type_submitted_content_init', 1, 1);
 
 		$mp_cf_set_value = new Mp_cf_settings_page();
 		$this->loader->add_action('admin_menu', $mp_cf_set_value, 'mp_cf_settings');

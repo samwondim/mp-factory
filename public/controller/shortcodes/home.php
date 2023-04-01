@@ -25,13 +25,6 @@ class Mp_cf_home_public
 
 	public function mp_cf_dashboard_shortcode()
 	{
-		global $wp_post_statuses;
-		
-
-		foreach($wp_post_statuses as $status) {
-		echo $status->name ." - ". $status->label."<br>";
-		}
-		
 		include_once mp_cf_PLAGIN_DIR . 'public/partials/view/home/index.php';
 	}
 	public function mp_cf_request_shortcode(){

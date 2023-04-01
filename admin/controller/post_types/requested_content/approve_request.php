@@ -34,7 +34,13 @@ class Mp_cf_approve_requested_content_Admin
 	public function __construct()
 	{
 	}
+    
+    function mp_cf_quick_edit_script($hook){
 
+		if ( 'edit.php' === $hook && isset( $_GET['post_type'] ) && 'cf-requested-content' === $_GET['post_type'] ) {
+		    wp_enqueue_script( 'mp_cf_quick', mp_cf_PLAGIN_URL . 'admin/js/mp-factory-quick-edit.js',false, null, true );
+        }
+    }
 
     function custom_cf_requested_content_columns($columns)
     {

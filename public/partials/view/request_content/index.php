@@ -102,7 +102,7 @@
     
     <div class="cf-form-input license hidden">
       <label for="license">License</label>
-      <select>
+      <select name="cf-license" id="cfLicense">
         <option value="" disabled selected>Choose license</option>
         <option value="mindplex">Mindplex</option>
         <option value="mit">MIT</option>
@@ -124,7 +124,7 @@
     <div class="cf-form-input cf-max-submissions hidden">
       <label for="max-submissions"> Maximum submissions</label>
       <div class="cf-request-mediaType-radio-container">
-        <input type="radio" class="hidden" name="max-submissions" id="maxSubmission1" value="1"/>
+        <input type="radio" class="hidden" name="max-submissions" id="maxSubmission1" value="1" checked="true"/>
 
         <input type="radio" name="max-submissions" id="maxSubmission2" value="2"/>
         <label for="maxSubmission2">2 claims</label>
@@ -148,7 +148,7 @@
 
     <div class="cf-form-input cf-guarantee-value hidden">
       <label for="guaranteeValue">Guarantee Value (%)</label>
-      <input type="number" id="guaranteeValue" placeholder="Guarantee value(MPX)" value="<?php echo $guarantee_value?>"/>
+      <input type="number" id="guaranteeValue" placeholder="<?php echo $guarantee_value."%"?>" guarantee="<?php echo $guarantee_value?>" />
     </div>
     <button type="submit" class="cf-submit" id="cf-submit-request" >Submit</button>
   </form>
@@ -159,6 +159,9 @@
   window.addEventListener("DOMContentLoaded", () => {
     var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
     cfTitle = document.querySelector('#idTitle')
+    mpxReward = document.querySelector('#MPXRewardValue')
+    guaranteeValue = document.querySelector('#guaranteeValue')
+    guaranteeAmount = parseInt(guaranteeValue.getAttribute("guarantee"))/100
 
     // show/hide on free and paid radio buttons
     jQuery("input[name='requestType']").click(function() {
@@ -201,6 +204,10 @@
       }
     })
 
+    mpxReward.addEventListener("keyup", () => {
+      guaranteeValue.value = mpxReward.value * guaranteeAmount
+    })
+
 
     $(".cf-submit").click(async function(e) {
       e.preventDefault();
@@ -208,36 +215,54 @@
           format: 'raw'
       });
 
-      // loader('cf-submit-request',true,'')
+      loader('cf-submit-request',true,'')
       
       // if (!$("#cfCategory").val()) {
       //   // showNotification('Please select category!', 'danger')
       //   // loader('cf-submit-request',false,'Submit')
       // }
+
+
+      var submitRequest = new FormData();
+      submitRequest.append('action', 'mp_cf_submit_requested_content');
+      submitRequest.append('topic', $("#idTitle").val());
+      submitRequest.append('cfCategory',  $("#cfCategory").val());
+      submitRequest.append('minMpxr', $("#minMpxr").val());
+      submitRequest.append('req_deadline', $("#requestDeadline").val());
+      submitRequest.append('submission_deadline',  $("#submitionDeadline").val());
+      submitRequest.append('desc', editor_content);
+      submitRequest.append('media_type', $('input[name=mediaType]:checked').val());
+      submitRequest.append('req_type', $('input[name=requestType]:checked').val());
       
+      if($('input[name=mediaType]:checked').val() != 'text')
+        submitRequest.append('media_length', $("#mediaLength").val());
+
+      if($('input[name=requestType]:checked').val() == 'paid'){
+        submitRequest.append('license',$("#cfLicense").val());
+
+        if($('input[name=submissions]:checked').val() == 'multipleSubmission'){
+
+          submitRequest.append('submissions',  $('input[name=max-submissions]:checked').val());
+        }
+        else
+          submitRequest.append('submissions',  '1');
+
+        submitRequest.append('MPXreward',  $("#MPXRewardValue").val());
+        submitRequest.append('guarantee_amount', $("#guaranteeValue").val());
+      }
+      else {
+        submitRequest.append('backing_amount',$("#backingAmount").val());
+      }
+
       jQuery.ajax({
         url: ajaxurl,
         type: 'POST',
-        data: {
-            action: 'mp_cf_submit_requested_content',
-            topic: $("#idTitle").val(),
-            cfCategory: $("#cfCategory").val(),
-            minMpxr: $("#minMpxr").val(),
-            req_deadline: $("#requestDeadline").val(),
-            submission_deadline: $("#submitionDeadline").val(),
-            desc: editor_content,
-            media_type: $('input[name=mediaType]:checked').val(),
-            // media_length: $("#id_media_length").val(),
-            req_type: $('input[name=requestType]:checked').val(),
-            // license: $("#id_license").val(),
-            // backing_amount: $("#id_backing_amount").val(),
-            submissions: $('input[name=submissions]:checked').val(), //$("#id_submissions").val(),
-            // max_submissions: $('input[name=max_submissions]:checked').val(),
-            MPXreward: $("#MPXRewardValue").val(),
-            guarantee_amount: $("#guaranteeValue").val()
-        },
+        contentType: false,
+        processData: false,
+        data: submitRequest,
         success: async function(response) {
           if(response == 'done'){
+            loader('cf-submit-request',false,'Submit')
             // showNotification("Request submitted successfully!")
           }
           else{

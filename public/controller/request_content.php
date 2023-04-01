@@ -49,7 +49,7 @@ class Mp_cf_request_content
 			$insert_id = wp_insert_post(array(
 				'post_title'    => $_POST['topic'],
 				'post_content'  => $_POST['desc'],
-				'post_status'   => "draft",//'requested',
+				'post_status'   => "pending",//'requested',
 				'post_author'   => get_current_user_id(),
 				'post_type' => 'cf-requested-content',
 				

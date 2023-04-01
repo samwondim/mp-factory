@@ -169,7 +169,11 @@ class Mp_Factory
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 
 		$Mp_cf_rq_Admin = new Mp_cf_rq_Admin();
+		$Mp_cf_rq_Admin->main();
 		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_post_type_rq_init', 1, 1);
+		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_approved_post_status', 1, 1);
+		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_declined_post_status', 1, 1);
+
 
 		$Mp_cf_submitted_contents_Admin = new Mp_cf_submitted_contents_Admin();
 		$this->loader->add_action('init', $Mp_cf_submitted_contents_Admin, 'mp_cf_post_type_submitted_content_init', 1, 1);
@@ -208,7 +212,7 @@ class Mp_Factory
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
 
 		$Mp_cf_home_public = new Mp_cf_home_public();
-		$this->loader->add_shortcode('mp_cf_home_code', $Mp_cf_home_public, 'mp_cf_home_shortcode');
+		$this->loader->add_shortcode('mp_cf_dashboard_code', $Mp_cf_home_public, 'mp_cf_dashboard_shortcode');
 		$this->loader->add_shortcode('mp_cf_request_code', $Mp_cf_home_public, 'mp_cf_request_shortcode');
 		
 

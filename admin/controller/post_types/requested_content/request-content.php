@@ -35,6 +35,25 @@ class Mp_cf_rq_Admin
 	{
 	}
 
+	public function main(){
+		function mp_cf_approved_status_add_in_quick_edit() {
+			echo "<script>
+			jQuery(document).ready( function() {
+				jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"approved\">Approved</option>' );      
+			}); 
+			</script>";
+		}
+		add_action('admin_footer-edit.php','mp_cf_approved_status_add_in_quick_edit');
+		function mp_cf_declined_status_add_in_quick_edit() {
+			echo "<script>
+			jQuery(document).ready( function() {
+				jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"declined\">Declined</option>' );      
+			}); 
+			</script>";
+		}
+		add_action('admin_footer-edit.php','mp_cf_declined_status_add_in_quick_edit');
+	}
+
 	function mp_cf_post_type_rq_init()
 	{
 		$labels = array(
@@ -83,4 +102,27 @@ class Mp_cf_rq_Admin
 
 		register_post_type('cf-requested-content', $args);
 	}
+	function mp_cf_approved_post_status(){
+        register_post_status( 'approved', array(
+            'label'                     => _x( 'Approved', 'post' ),
+            'label_count'               => _n_noop( 'Approved <span class="count">(%s)</span>', 'Approved <span class="count">(%s)</span>'),
+            'public'                    => true,
+            'exclude_from_search'       => true,
+            'publicly_queryable'       => true,
+            'show_in_admin_all_list'    => true,
+            'show_in_admin_status_list' => true
+        ));
+    }
+
+	function mp_cf_declined_post_status(){
+        register_post_status( 'declined', array(
+            'label'                     => _x( 'Declined', 'post' ),
+            'label_count'               => _n_noop( 'Declined <span class="count">(%s)</span>', 'Declined <span class="count">(%s)</span>'),
+            'public'                    => true,
+            'exclude_from_search'       => true,
+            'publicly_queryable'       => true,
+            'show_in_admin_all_list'    => true,
+            'show_in_admin_status_list' => true
+        ));
+    }
 }

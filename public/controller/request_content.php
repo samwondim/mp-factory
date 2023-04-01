@@ -59,19 +59,18 @@ class Mp_cf_request_content
 				wp_set_post_terms($insert_id, $cf_category, 'category');
 			
 				
+				isset($_POST['minMpxr']) ? add_post_meta($insert_id, 'minMpxr', esc_attr($_POST['minMpxr']), true) : '';
 				isset($_POST['req_deadline']) ? add_post_meta($insert_id, 'req_deadline', esc_attr($_POST['req_deadline']), true) : '';
 				isset($_POST['submission_deadline']) ? add_post_meta($insert_id, 'submission_deadline', esc_attr($_POST['submission_deadline']), true) : '';
 				isset($_POST['media_type']) ? add_post_meta($insert_id, 'media_type', esc_attr($_POST['media_type']), true) : '';				
 				isset($_POST['media_length']) ? add_post_meta($insert_id, 'media_length', esc_attr($_POST['media_length']), true) : '';
 				isset($_POST['req_type']) ? add_post_meta($insert_id, 'req_type', esc_attr($_POST['req_type']), true) : '';
-				isset($_POST['backing_amount']) ? add_post_meta($insert_id, 'backing_amount', esc_attr($_POST['backing_amount']), true) : '';
 				isset($_POST['license']) ? add_post_meta($insert_id, 'license', esc_attr($_POST['license']), true) : '';
 				isset($_POST['submissions']) ? add_post_meta($insert_id, 'submissions', esc_attr($_POST['submissions']), true) : '';
-				isset($_POST['max_submissions']) ? add_post_meta($insert_id, 'max_submissions', esc_attr($_POST['max_submissions']), true) : '';
 				isset($_POST['MPXreward']) ? add_post_meta($insert_id, 'MPXreward', esc_attr($_POST['MPXreward']), true) : '';
 				isset($_POST['guarantee_amount']) ? add_post_meta($insert_id, 'guarantee_amount', esc_attr($_POST['guarantee_amount']), true) : '';
-			
-			
+				isset($_POST['backing_amount']) ? add_post_meta($insert_id, 'backing_amount', esc_attr($_POST['backing_amount']), true) : '';
+				
 			}
 
 			echo "done";

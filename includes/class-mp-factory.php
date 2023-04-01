@@ -183,6 +183,8 @@ class Mp_Factory
 	
 	
 		$Mp_cf_approve_requested_content_Admin = new Mp_cf_approve_requested_content_Admin();
+		$this->loader->add_action('admin_enqueue_scripts', $Mp_cf_approve_requested_content_Admin, 'mp_cf_quick_edit_script');
+		
 		$this->loader->add_filter('manage_cf-requested-content_posts_columns', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_columns');
 		$this->loader->add_action('manage_cf-requested-content_posts_custom_column', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_columns_content', 10, 2);
 		$this->loader->add_action('quick_edit_custom_box', $Mp_cf_approve_requested_content_Admin, 'custom_cf_requested_content_quick_edit', 10, 2);

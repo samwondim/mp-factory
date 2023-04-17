@@ -131,7 +131,8 @@ class Mp_Factory
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-mp-factory-public.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/shortcodes/home.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/shortcodes/content-request.php';
-		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/request_content.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/actions/request_content.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/actions/request_details.php';
 
 		$this->loader = new Mp_Factory_Loader();
 	}
@@ -214,15 +215,19 @@ class Mp_Factory
 		$Mp_cf_home_public = new Mp_cf_home_public();
 		$this->loader->add_shortcode('mp_cf_dashboard_code', $Mp_cf_home_public, 'mp_cf_dashboard_shortcode');
 		$this->loader->add_shortcode('mp_cf_request_code', $Mp_cf_home_public, 'mp_cf_request_shortcode');
+		$this->loader->add_shortcode('mp_cf_requested_articles_code', $Mp_cf_home_public, 'mp_cf_requested_articles_shortcode');
 		
 
 		$Mp_cf_content_request_public = new Mp_cf_content_request_public();
 		$this->loader->add_shortcode('mp_cf_request_content_code', $Mp_cf_content_request_public, 'mp_cf_request_content_shortcode');
 
-
-
 		$Mp_cf_request_content = new Mp_cf_request_content();
 		$this->loader->add_action('wp_ajax_mp_cf_submit_requested_content', $Mp_cf_request_content, 'wp_ajax_mp_cf_submit_requested_content', 1, 1);
+
+		$mp_cf_request_details = new Mp_cf_request_details();
+		$this->loader->add_action('wp_ajax_mp_cf_details', $mp_cf_request_details, 'wp_ajax_mp_cf_details', 1, 1);
+
+		
 	}
 
 	/**

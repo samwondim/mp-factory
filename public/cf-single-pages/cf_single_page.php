@@ -60,6 +60,16 @@ if(get_current_user_id() > 0){
         <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
         <span>(0)</span>
       </div>
+
+      <div class="cf-left-tabs">
+        <a href="<?php echo home_url('mp_cf_plugin/requested-articles')?>">
+          <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/graph-icon.svg') ?>
+          <span class="cf-left-tabs-title">Requested articles</span>
+          <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
+        </a>
+        <span>(0)</span>
+      </div>
+
       <div class="cf-left-tabs">
       <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/User.svg') ?>
         <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/3 User.svg'?>" alt="ICO" /> -->

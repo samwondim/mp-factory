@@ -40,35 +40,41 @@ if(get_current_user_id() > 0){
     </div>
     <div class="cf-left-bottom-section">
       <div class="cf-left-tabs">
-        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Category.svg' ?>" alt=" " />
+        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Category.svg'); 
+        ?>
+
         <a href="<?php echo home_url('mp_cf_plugin/factory-dashboard')?>">
           <span class="cf-left-tabs-title">Factory Dashboard</span>
         </a>
       </div>
       <div class="cf-left-tabs">
-        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Edit Square.svg'?>" alt=" " />
+      <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Edit-Square.svg') ?>
         <a href="<?php echo home_url('mp_cf_plugin/request-content')?>">
           <span class="cf-left-tabs-title">Request content</span>
         </a>
       </div>
       <div class="cf-left-tabs">
-        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Edit Square.svg'?>" alt=" " />
+      <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Edit-Square.svg') ?>
+        <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/Edit Square.svg'?>" alt=" " /> -->
         <span class="cf-left-tabs-title">My request</span>
         <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
         <span>(0)</span>
       </div>
       <div class="cf-left-tabs">
-        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/3 User.svg'?>" alt="ICO" />
+      <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/User.svg') ?>
+        <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/3 User.svg'?>" alt="ICO" /> -->
         <span class="cf-left-tabs-title">My Community Request</span>
         <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
         <span>(0)</span>
       </div>
       <div class="cf-left-tabs">
-        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/money-recive.svg'?>" alt="ICO" />
+      <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/money-recive.svg') ?>
+        <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/money-recive.svg'?>" alt="ICO" /> -->
         <span class="cf-left-tabs-title">Claim Payment</span>
       </div>
       <div class="cf-left-tabs">
-        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/refresh.svg'?>" alt="ICO" />
+      <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/refresh.svg') ?>
+        <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/refresh.svg'?>" alt="ICO" /> -->
         <span class="cf-left-tabs-title">History</span>
       </div>
     </div>

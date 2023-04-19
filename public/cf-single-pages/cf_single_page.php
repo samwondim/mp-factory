@@ -54,10 +54,13 @@ if(get_current_user_id() > 0){
         </a>
       </div>
       <div class="cf-left-tabs">
-      <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Edit-Square.svg') ?>
+      <a href="<?php echo home_url('mp_cf_plugin/my-requests')?>">
+
+        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Edit-Square.svg') ?>
         <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/Edit Square.svg'?>" alt=" " /> -->
         <span class="cf-left-tabs-title">My request</span>
         <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
+      </a>
         <span>(0)</span>
       </div>
 

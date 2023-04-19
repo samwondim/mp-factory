@@ -22,21 +22,17 @@
           <tr>
             <th>Topic</th>
             <th>Request Type</th>
-            <th>No. of Claim</th>
+            <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($requested_articles as $article){
-            
-            $is_claimed = get_post_meta($article->ID, 'mp_cf_claim_article',true);
-            if($is_claimed == get_current_user_id())
-              continue;
+          <?php foreach ($my_requests as $article){
             ?>
           <tr>
             <td data-label="Topic"><?php echo strlen($article->post_title) > 50 ? substr($article->post_title, 0, 50) . '...' : $article->post_title?></td>
             <td data-label="Request Type"><?php echo get_post_meta($article->ID, 'req_type',true)?></td>
-            <td data-label="No. of Claim">1 out of <?php echo get_post_meta($article->ID, 'submissions',true)?></td>
+            <td data-label="status">claimed </td>
             <td data-label="Action">
               <button class="cf-request-btn" postId="<?php echo $article->ID?>">Detail</button>
             </td>

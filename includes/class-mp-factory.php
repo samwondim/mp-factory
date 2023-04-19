@@ -216,6 +216,8 @@ class Mp_Factory
 		$this->loader->add_shortcode('mp_cf_dashboard_code', $Mp_cf_home_public, 'mp_cf_dashboard_shortcode');
 		$this->loader->add_shortcode('mp_cf_request_code', $Mp_cf_home_public, 'mp_cf_request_shortcode');
 		$this->loader->add_shortcode('mp_cf_requested_articles_code', $Mp_cf_home_public, 'mp_cf_requested_articles_shortcode');
+		$this->loader->add_shortcode('mp_cf_my_requests_code', $Mp_cf_home_public, 'mp_cf_my_requests_shortcode');
+		
 		
 
 		$Mp_cf_content_request_public = new Mp_cf_content_request_public();
@@ -226,6 +228,7 @@ class Mp_Factory
 
 		$mp_cf_request_details = new Mp_cf_request_details();
 		$this->loader->add_action('wp_ajax_mp_cf_details', $mp_cf_request_details, 'wp_ajax_mp_cf_details', 1, 1);
+		$this->loader->add_action('wp_ajax_mp_cf_claim_article', $mp_cf_request_details, 'wp_ajax_mp_cf_claim_article', 1, 1);
 
 		
 	}

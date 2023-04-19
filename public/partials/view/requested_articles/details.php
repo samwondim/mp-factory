@@ -106,7 +106,7 @@
   </div>
   <?php }?>
 
-    <button type="submit" class="cf-submit" id="cf-submit-request" >Claim</button>
+    <button type="submit" userId="<?php echo get_current_user_id()?>" postId="<?php echo $details->ID?>" class="cf-submit cf-claim" id="cf-claim-request">Claim</button>
   </form>
 </div>
 
@@ -116,11 +116,35 @@
 
 <script type='module'>
   window.addEventListener("DOMContentLoaded", () => {
-      const quill = new Quill('#bioEditor', {  
-              modules: {
-                  toolbar: '#cf-content'
-              },
-              theme: 'snow'
-      });
-    })
+    var ajaxurl = "< ?php echo admin_url('admin-ajax.php'); ?>";
+
+    const quill = new Quill('#cf-content', {  
+            theme: 'snow'
+    });
+     
+  })
+</script>
+
+<script>
+  const claimBtn = document.querySelector('.cf-claim')
+
+  claimBtn.addEventListener("click",function(e){
+    e.preventDefault()
+    loader('cf-claim-request',true,' Loading...')
+
+    jQuery.ajax({
+        url: ajaxurl,
+        type: 'POST',
+        data: {
+          action: 'mp_cf_claim_article',
+          postId: claimBtn.getAttribute('postId'),
+          userId: claimBtn.getAttribute('userId')
+        },
+        success: async function(response) {
+          loader('cf-claim-request',false,'Claim')
+
+        }
+      })
+    
+  })
 </script>

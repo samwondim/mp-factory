@@ -57,9 +57,9 @@ class Mp_cf_rq_Admin
 	function mp_cf_post_type_rq_init()
 	{
 		$labels = array(
-			'name'                  => _x('Request Content', 'Post type general name', 'Requested Content'),
+			'name'                  => _x('Requested Content', 'Post type general name', 'Requested Content'),
 			'singular_name'         => _x('Factory', 'Post type singular name', 'Requested Content'),
-			'menu_name'             => _x('Request Content', 'Admin Menu text', 'Requested Content'),
+			'menu_name'             => _x('Requested Content', 'Admin Menu text', 'Requested Content'),
 			'name_admin_bar'        => _x('Factory', 'Add New on Toolbar', 'Requested Content'),
 			'add_new'               => __('Add New', 'Requested Content'),
 			'add_new_item'          => __('Add New Requested Content', 'Requested Content'),
@@ -79,8 +79,8 @@ class Mp_cf_rq_Admin
 			'insert_into_item'      => _x('Insert into Requested Content', 'Overrides the “Insert into post”/”Insert into page” phrase (used when inserting media into a post). Added in 4.4', 'Requested Content'),
 			'uploaded_to_this_item' => _x('Uploaded to this Requested Content', 'Overrides the “Uploaded to this post”/”Uploaded to this page” phrase (used when viewing media attached to a post). Added in 4.4', 'Requested Content'),
 			'filter_items_list'     => _x('Filter Requested Contents list', 'Screen reader text for the filter links heading on the post type listing screen. Default “Filter posts list”/”Filter pages list”. Added in 4.4', 'Requested Content'),
-			'items_list_navigation' => _x('Request Content list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'Requested Content'),
-			'items_list'            => _x('Request Content list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'Requested Content'),
+			'items_list_navigation' => _x('Requested Content list navigation', 'Screen reader text for the pagination heading on the post type listing screen. Default “Posts list navigation”/”Pages list navigation”. Added in 4.4', 'Requested Content'),
+			'items_list'            => _x('Requested Content list', 'Screen reader text for the items list heading on the post type listing screen. Default “Posts list”/”Pages list”. Added in 4.4', 'Requested Content'),
 		);
 		$args = array(
 			'labels'             => $labels,

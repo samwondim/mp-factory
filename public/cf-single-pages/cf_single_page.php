@@ -47,36 +47,32 @@ if(get_current_user_id() > 0){
           <span class="cf-left-tabs-title">Factory Dashboard</span>
         </a>
       </div>
+
       <div class="cf-left-tabs">
-      <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Edit-Square.svg') ?>
-        <a href="<?php echo home_url('mp_cf_plugin/request-content')?>">
-          <span class="cf-left-tabs-title">Request content</span>
+        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/activity-icon.svg'); ?>
+
+        <a href="<?php echo home_url('mp_cf_plugin/factory-dashboard')?>">
+          <span class="cf-left-tabs-title">Active Jobs</span>
+        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
         </a>
+        <span>(0)</span>
       </div>
+
       <div class="cf-left-tabs">
+        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Edit-Square.svg') ?>
       <a href="<?php echo home_url('mp_cf_plugin/my-requests')?>">
 
-        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Edit-Square.svg') ?>
         <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/Edit Square.svg'?>" alt=" " /> -->
-        <span class="cf-left-tabs-title">My request</span>
+        <span class="cf-left-tabs-title">My requests</span>
         <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
       </a>
         <span>(0)</span>
       </div>
 
       <div class="cf-left-tabs">
-        <a href="<?php echo home_url('mp_cf_plugin/requested-articles')?>">
-          <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/graph-icon.svg') ?>
-          <span class="cf-left-tabs-title">Requested articles</span>
-          <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
-        </a>
-        <span>(0)</span>
-      </div>
-
-      <div class="cf-left-tabs">
       <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/User.svg') ?>
         <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/3 User.svg'?>" alt="ICO" /> -->
-        <span class="cf-left-tabs-title">My Community Request</span>
+        <span class="cf-left-tabs-title">My Community Requests</span>
         <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
         <span>(0)</span>
       </div>

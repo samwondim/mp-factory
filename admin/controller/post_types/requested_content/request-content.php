@@ -110,7 +110,8 @@ class Mp_cf_rq_Admin
             'exclude_from_search'       => true,
             'publicly_queryable'       => true,
             'show_in_admin_all_list'    => true,
-            'show_in_admin_status_list' => true
+            'show_in_admin_status_list' => true,
+			'description'               => __( 'Approved by moderator.' ),
         ));
     }
 
@@ -122,7 +123,9 @@ class Mp_cf_rq_Admin
             'exclude_from_search'       => true,
             'publicly_queryable'       => true,
             'show_in_admin_all_list'    => true,
-            'show_in_admin_status_list' => true
+            'show_in_admin_status_list' => true,
+			'description'               => __( 'Declined by Moderator.' ),
+			
         ));
     }
 }

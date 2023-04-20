@@ -1,4 +1,10 @@
 <div class="cf-right-section">
+  <div class="cf-right-top-section">
+    <h1>Requested articles</h1>
+    <div class="cf-right-top-icon-container">
+      <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Setting.svg'?>" alt="" />
+    </div>
+  </div>
   <div class="cf-requested-top-container">
     <div class="cf-requested-top-left">
       <span> show</span>
@@ -22,17 +28,26 @@
           <tr>
             <th>Topic</th>
             <th>Request Type</th>
+            <th>No. of Claim</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($my_requests as $article){
+            $status_object = get_post_status_object( $article->post_status );
+            
+            $is_claimed = get_post_meta($article->ID, 'mp_cf_claim_article',true);
+            if($is_claimed == get_current_user_id())
+              continue;
+
+            $post_meta = get_post_meta($article->ID, 'mp_cf_claim_article');
             ?>
-          <tr>
+          <tr> 
             <td data-label="Topic"><?php echo strlen($article->post_title) > 50 ? substr($article->post_title, 0, 50) . '...' : $article->post_title?></td>
             <td data-label="Request Type"><?php echo get_post_meta($article->ID, 'req_type',true)?></td>
-            <td data-label="status">claimed </td>
+            <td data-label="No. of Claim"> <?php echo count($post_meta).' out of '. get_post_meta($article->ID, 'submissions',true) ?></td>
+            <td data-label="status"><?php echo isset($status_object->description) ? $status_object->description : 'Waiting for moderator.'?></td>
             <td data-label="Action">
               <button class="cf-request-btn" postId="<?php echo $article->ID?>">Detail</button>
             </td>
@@ -50,7 +65,7 @@
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
-    const mainContainer = document.querySelector('.cf-requested-top')
+    const mainContainer = document.querySelector('.cf-right-section')
     const detailBtn = document.querySelectorAll('.cf-request-btn')
 
 
@@ -65,11 +80,12 @@
         type: 'POST',
         data: {
           action: 'mp_cf_details',
-          postId: clickedElement.getAttribute('postId')
+          postId: clickedElement.getAttribute('postId'),
+          detailType: 'my_request'
         },
         success: async function(response) {
           mainContainer.innerHTML = response
-          document.querySelector('.cf-requested-top-container').innerHTML = ''
+          // document.querySelector('.cf-right-section').innerHTML = ''
 
           var arr = document.getElementsByTagName('script')
           for (var n = 0; n < arr.length; n++)

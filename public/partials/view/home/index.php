@@ -23,7 +23,7 @@
           </div>
           <p class="cf-card-notification">Write an article and get Paid</p>
           <p class="cf-card-notification">
-            <b>Available jobs: <span>(70)</span></b>
+            <b>Available jobs: <span><?php do_shortcode('[mp_cf_requested_articles_code display = "count"]')?></span></b>
           </p>
           <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
         </div>

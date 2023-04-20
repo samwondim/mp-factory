@@ -333,3 +333,91 @@ form {
         font-weight: bold;
     }
 }
+
+
+/* ------------------------ my request section -------------------------------------     */
+.cf-request-content-back {
+    border: none;
+    background: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.cf-requested-bottom-container {
+    padding: 23px;
+}
+
+.cf-requested-bottom-container table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 20px;
+    border-radius: 5px;
+    background: linear-gradient(180deg, #652FAA -216%, rgba(255, 138, 0, 0.51) 421.76%);
+}
+
+.cf-requested-bottom-container thead tr th {
+    font-weight: 700;
+}
+
+.cf-requested-bottom-container th,
+.cf-requested-bottom-container td {
+    padding: 0 8px;
+    text-align: left;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.cf-requested-bottom-container td:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.cf-requested-bottom-container td:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.cf-requested-bottom-container th {
+    background-color: transparent;
+}
+
+/* style for responsiveness */
+@media only screen and (max-width: 768px) {
+
+    /* make the table cells stack on top of each other */
+    .cf-requested-bottom-container td,
+    .cf-requested-bottom-container th {
+        display: block;
+    }
+
+
+    .cf-requested-bottom-container td:first-child {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .cf-requested-bottom-container td:last-child {
+        border-radius: 0 0 10px 10px;
+    }
+
+    /* add some padding and style for better readability */
+    .cf-requested-bottom-container td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    .cf-requested-bottom-container td:before {
+        position: absolute;
+        left: 6px;
+        content: attr(data-label);
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+}

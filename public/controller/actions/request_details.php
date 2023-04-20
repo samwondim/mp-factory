@@ -23,6 +23,7 @@
 class Mp_cf_request_details
 {
 	public function wp_ajax_mp_cf_details(){
+		
 		$post_id = $_POST['postId'];
 		$details = get_post($post_id);
 		$category = wp_get_post_terms($post_id, 'category',true);
@@ -38,14 +39,23 @@ class Mp_cf_request_details
 		$MPXreward = get_post_meta($post_id, 'MPXreward',true);
 		$guarantee_amount = get_post_meta($post_id, 'guarantee_amount',true);
 
-		include_once mp_cf_PLAGIN_DIR . 'public/partials/view/requested_articles/details.php';
+		if(isset($_POST['detailType']) && $_POST['detailType'] == 'my_request'){
+
+			$all_claimers = get_post_meta($post_id, 'mp_cf_claim_article');
+
+			include_once mp_cf_PLAGIN_DIR . 'public/partials/view/my_requests/details.php';
+		}
+		else {
+			
+			include_once mp_cf_PLAGIN_DIR . 'public/partials/view/requested_articles/details.php';
+		}
 
 		die();
 	}
 
 	public function wp_ajax_mp_cf_claim_article(){
 		if(isset($_POST['postId']) && isset($_POST['userId'])){
-			update_post_meta($_POST['postId'], 'mp_cf_claim_article',$_POST['userId']);
+			add_post_meta($_POST['postId'], 'mp_cf_claim_article',$_POST['userId']);
 		}
 	}
 }

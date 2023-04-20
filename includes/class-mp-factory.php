@@ -216,7 +216,11 @@ class Mp_Factory
 		$this->loader->add_shortcode('mp_cf_dashboard_code', $Mp_cf_home_public, 'mp_cf_dashboard_shortcode');
 		$this->loader->add_shortcode('mp_cf_request_code', $Mp_cf_home_public, 'mp_cf_request_shortcode');
 		$this->loader->add_shortcode('mp_cf_requested_articles_code', $Mp_cf_home_public, 'mp_cf_requested_articles_shortcode');
+
 		$this->loader->add_shortcode('mp_cf_my_requests_code', $Mp_cf_home_public, 'mp_cf_my_requests_shortcode');
+		
+		$this->loader->add_shortcode('mp_cf_active_jobs_code', $Mp_cf_home_public, 'mp_cf_active_jobs_shortcode');
+		
 		
 		
 

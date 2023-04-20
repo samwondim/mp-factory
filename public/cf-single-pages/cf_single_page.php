@@ -51,7 +51,7 @@ if(get_current_user_id() > 0){
       <div class="cf-left-tabs">
         <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/activity-icon.svg'); ?>
 
-        <a href="<?php echo home_url('mp_cf_plugin/factory-dashboard')?>">
+        <a href="<?php echo home_url('mp_cf_plugin/active-jobs')?>">
           <span class="cf-left-tabs-title">Active Jobs</span>
         <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
         </a>
@@ -88,17 +88,18 @@ if(get_current_user_id() > 0){
       </div>
     </div>
   </div>
+  <?php echo the_content() ?>
 
-    <div class="cf-right-section">
+    <!-- <div class="cf-right-section">
       <div class="cf-right-top-section">
-        <h1><?php echo get_the_title()?></h1>
+        <h1>< ?php echo get_the_title()?></h1>
         <div class="cf-right-top-icon-container">
-          <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Setting.svg'?>" alt="" />
+          <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/Setting.svg'?>" alt="" />
         </div>
       </div>
-      <?php echo the_content() ?>
+      < ?php echo the_content() ?>
     </div>
-  </div>
+  </div> -->
 
 </article>
 

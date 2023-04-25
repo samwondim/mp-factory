@@ -19,7 +19,8 @@ html {
 }
 
 .cf-left-section {
-    background: linear-gradient(180deg, #0E375E 0%, rgba(43, 171, 180, 0.29) 118.35%);
+    background:
+        linear-gradient(180deg, #0E375E 0%, rgba(43, 171, 180, 0.29) 118.35%);
     width: 397px;
     padding: 63px 20px;
 }
@@ -74,6 +75,8 @@ html {
     border-bottom: 1px solid rgba(99, 159, 152, 1);
     padding: 17px;
     cursor: pointer;
+    fill: white;
+    stroke: white;
 }
 
 .cf-right-top-section {
@@ -97,6 +100,12 @@ html {
     /* grid-template-columns: repeat(auto-fill, minmax(min(417px, 100%), 1fr)); */
     gap: 19.67px;
     grid-template-columns: repeat(auto-fill, minmax(417px, 1fr));
+}
+
+.cf-active {
+    fill: #49FFB3;
+    stroke: #49FFB3;
+    color: #49FFB3;
 }
 
 .cf-center-grid-card {
@@ -182,7 +191,7 @@ form {
     line-height: 19px;
 }
 
- /* .cf-form-input div {
+/* .cf-form-input div {
 	display: flex;
 	flex-direction: column;
 	flex: 1;

@@ -6,12 +6,6 @@ if(get_current_user_id() > 0){
 		include_once mp_cf_PLAGIN_DIR . 'public/cf-single-pages/dashboard_init.php';?>
 
 <link rel="stylesheet" href="<?php echo mp_cf_PLAGIN_URL . 'public/css/mp-factory-home.css' ?>" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;700&display=swap"
-  rel="stylesheet"
-/>
 
 <article class="article-container">
 
@@ -53,7 +47,8 @@ if(get_current_user_id() > 0){
 
         <a href="<?php echo home_url('mp_cf_plugin/active-jobs')?>">
           <span class="cf-left-tabs-title">Active Jobs</span>
-        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
+          <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/notification-bing.svg'); 
+        ?>
         </a>
         <span>(0)</span>
       </div>
@@ -61,29 +56,25 @@ if(get_current_user_id() > 0){
       <div class="cf-left-tabs">
         <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Edit-Square.svg') ?>
       <a href="<?php echo home_url('mp_cf_plugin/my-requests')?>">
-
-        <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/Edit Square.svg'?>" alt=" " /> -->
         <span class="cf-left-tabs-title">My requests</span>
-        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
+        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/notification-bing.svg'); ?>
       </a>
         <span>(0)</span>
       </div>
 
       <div class="cf-left-tabs">
       <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/User.svg') ?>
-        <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/3 User.svg'?>" alt="ICO" /> -->
         <span class="cf-left-tabs-title">My Community Requests</span>
-        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
+        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/notification-bing.svg'); ?>
+
         <span>(0)</span>
       </div>
       <div class="cf-left-tabs">
       <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/money-recive.svg') ?>
-        <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/money-recive.svg'?>" alt="ICO" /> -->
         <span class="cf-left-tabs-title">Claim Payment</span>
       </div>
       <div class="cf-left-tabs">
       <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/refresh.svg') ?>
-        <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/refresh.svg'?>" alt="ICO" /> -->
         <span class="cf-left-tabs-title">History</span>
       </div>
     </div>

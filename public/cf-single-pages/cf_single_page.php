@@ -33,7 +33,7 @@ if(get_current_user_id() > 0){
       </div>
     </div>
     <div class="cf-left-bottom-section">
-      <div class="cf-left-tabs">
+      <div class="cf-left-tabs cf-dashboard-tab">
         <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Category.svg'); 
         ?>
 
@@ -42,7 +42,7 @@ if(get_current_user_id() > 0){
         </a>
       </div>
 
-      <div class="cf-left-tabs">
+      <div class="cf-left-tabs cf-active-jobs-tab">
         <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/activity-icon.svg'); ?>
 
         <a href="<?php echo home_url('mp_cf_plugin/active-jobs')?>">
@@ -53,7 +53,7 @@ if(get_current_user_id() > 0){
         <span>(<?php do_shortcode('[mp_cf_active_jobs_code display = "count"]')?>)</span>
       </div>
 
-      <div class="cf-left-tabs">
+      <div class="cf-left-tabs cf-my-request-tab">
         <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Edit-Square.svg') ?>
       <a href="<?php echo home_url('mp_cf_plugin/my-requests')?>">
 

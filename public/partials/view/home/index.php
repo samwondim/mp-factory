@@ -58,3 +58,11 @@
         <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
       </div>
     </div>
+    
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+
+    document.querySelector('.cf-dashboard-tab').classList.add('cf-active')
+
+  })
+</script>

@@ -40,6 +40,8 @@
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.cf-active-jobs-tab').classList.add('cf-active')
+
     var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
     const mainContainer = document.querySelector('.cf-right-section')
     const submitBtn = document.querySelectorAll('.cf-submit-content')

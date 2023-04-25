@@ -66,7 +66,7 @@ class Mp_cf_request_content
 				isset($_POST['media_length']) ? add_post_meta($insert_id, 'media_length', esc_attr($_POST['media_length']), true) : '';
 				isset($_POST['req_type']) ? add_post_meta($insert_id, 'req_type', esc_attr($_POST['req_type']), true) : '';
 				isset($_POST['license']) ? add_post_meta($insert_id, 'license', esc_attr($_POST['license']), true) : '';
-				isset($_POST['submissions']) ? add_post_meta($insert_id, 'submissions', esc_attr($_POST['submissions']), true) : '';
+				isset($_POST['submissions']) ? add_post_meta($insert_id, 'submissions', esc_attr($_POST['submissions']), true) : add_post_meta($insert_id, 'submissions', '1');
 				isset($_POST['MPXreward']) ? add_post_meta($insert_id, 'MPXreward', esc_attr($_POST['MPXreward']), true) : '';
 				isset($_POST['guarantee_amount']) ? add_post_meta($insert_id, 'guarantee_amount', esc_attr($_POST['guarantee_amount']), true) : '';
 				isset($_POST['backing_amount']) ? add_post_meta($insert_id, 'backing_amount', esc_attr($_POST['backing_amount']), true) : '';

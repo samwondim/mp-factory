@@ -80,7 +80,7 @@
 
     <div class="cf-form-input cf-media-length hidden">
       <label for="mediaLength">Media length</label>
-      <input type="number" id="mediaLength" name="media_length" placeholder="Media length"/>
+      <input type="number" id="mediaLength" name="media_length" placeholder="Media length (min.)"/>
     </div>
 
     <!-- on free request -->
@@ -111,6 +111,7 @@
         <option value="MPL">Mozilla Public License 2.0.</option>
       </select>
     </div>
+
     <div class="cf-form-input cf-submissions hidden">
       <label for="submissions">Submissions</label>
       <div class="cf-request-mediaType-radio-container">
@@ -150,6 +151,7 @@
       <label for="guaranteeValue">Guarantee Value (%)</label>
       <input type="number" id="guaranteeValue" placeholder="<?php echo $guarantee_value."%"?>" guarantee="<?php echo $guarantee_value?>" />
     </div>
+    
     <button type="submit" class="cf-submit" id="cf-submit-request" >Submit</button>
   </form>
 </div>

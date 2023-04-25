@@ -1,0 +1,423 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Barlow', sans-serif;
+}
+
+html {
+    background: linear-gradient(180deg, #052F46 0%, #1E253D 100%);
+}
+
+.cf-dashboard {
+    /* background: linear-gradient(180deg, #052F46 0%, #1E253D 100%); */
+    color: #fff;
+    display: grid;
+    grid-template-columns: 370px auto;
+    gap: 40px;
+    margin: 34px;
+}
+
+.cf-left-section {
+    background: linear-gradient(180deg, #0E375E 0%, rgba(43, 171, 180, 0.29) 118.35%);
+    width: 397px;
+    padding: 63px 20px;
+}
+
+.cf-left-top-section {
+    display: flex;
+    gap: 13px;
+}
+
+.cf-left-top-section img {
+    width: 114px;
+    height: 114px;
+    border-radius: 50%;
+}
+
+.cf-meta-data-name {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    display: flex;
+    align-items: center;
+}
+
+.cf-meta-contain {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    margin-top: 5px;
+}
+
+.cf-left-bottom-section {
+    margin-top: 49px;
+}
+
+.cf-left-tabs-title {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.cf-left-tabs {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(99, 159, 152, 1);
+    padding: 17px;
+    cursor: pointer;
+}
+
+.cf-right-top-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 36px;
+}
+
+.cd-right-top-icon-container {
+    padding: 10px;
+    background: linear-gradient(180deg, #0E375E -65.74%, rgba(43, 171, 180, 0.29) 421.76%);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.cf-right-center-grid {
+    display: grid;
+    /* grid-template-columns: repeat(auto-fill, minmax(min(417px, 100%), 1fr)); */
+    gap: 19.67px;
+    grid-template-columns: repeat(auto-fill, minmax(417px, 1fr));
+}
+
+.cf-center-grid-card {
+    background: linear-gradient(180deg, #0E375E -65.74%, rgba(43, 171, 180, 0.29) 421.76%);
+    margin-bottom: 23px;
+    padding: 19px 26px;
+    min-height: 276px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    max-width: 417.66px;
+    border-radius: 4px;
+}
+
+.cf-card-notification {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.cf-line {
+    pointer-events: none;
+}
+
+.cf-center-grid-card-top {
+    display: flex;
+    flex-direction: column;
+}
+
+.cf-center-grid-card-heading {
+    /* font-family: 'Barlow'; */
+    font-style: normal;
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 43px;
+    justify-items: right;
+    margin-top: 19px;
+
+}
+
+.cf-center-grid-card-img {
+    width: 100%;
+    max-width: 70px;
+}
+
+@media screen and (max-width:760px) {
+    .cf-dashboard {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .cf-left-section {
+        width: 100%;
+    }
+}
+
+/* --------------------------------------------------Request Content ------------------------------------------------------------- */
+
+.cf-request-center {
+    background: linear-gradient(180deg, #0E375E -65.74%, rgba(43, 171, 180, 0.29) 421.76%);
+    border-radius: 4px;
+}
+
+form {
+    padding-bottom: 19px;
+}
+
+.cf-form-input {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 23px;
+
+}
+
+.cf-form-input label {
+    width: 160px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.cf-form-input>*:nth-child(2) {
+    flex: 1;
+    padding: 16px;
+    border: 1px solid #FFFFFF;
+    border-radius: 9px;
+    background: no-repeat;
+    color: #fff;
+
+}
+
+.cf-request-mediaType-radio-container {
+    border: none !important;
+}
+
+.cf-request-mediaType-radio-container label {
+    margin-right: 16px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+
+    /* or 122% */
+
+    color: #FFFFFF;
+}
+
+.cf-submit {
+    background: #2CD2F7;
+    box-shadow: 0px 0px 20px #2CB9F6;
+    border-radius: 5px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 22px;
+    text-align: center;
+    color: #000000;
+    padding: 12px;
+    border: none;
+    margin: auto;
+    display: flex;
+    margin-bottom: 19px;
+}
+
+/* ---------------------------------------------- requested article css ---------------------------------------------------------------- */
+.cf-requested-top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 11px;
+}
+
+.cf-requested-top-right {
+    display: flex;
+    gap: 11px;
+    align-items: center;
+}
+
+.cf-requested-top-right input[type="text"] {
+    padding: 8px;
+    border: 1px solid #FFFFFF;
+    border-radius: 4px;
+    background: no-repeat;
+    color: #fff;
+    width: 200px;
+}
+
+.cf-requested-top-left span {
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 20px;
+}
+
+.cf-requested-top-left select {
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    background: #00FCCE5C;
+    color: #fff;
+    font-weight: 400;
+
+}
+
+.cf-requested-top table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 20px;
+}
+
+.cf-requested-top th,
+.cf-requested-top td {
+    padding: 8px;
+    text-align: left;
+    background-color: #00FCCE47;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.cf-requested-top td:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.cf-requested-top td:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.cf-requested-top th {
+    background-color: transparent;
+}
+
+.cf-request-btn {
+    background: #0094FF;
+    border-radius: 5px;
+    padding: 8px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* style for responsiveness */
+@media only screen and (max-width: 768px) {
+
+    /* make the table cells stack on top of each other */
+    .cf-requested-top td,
+    .cf-requested-top th {
+        display: block;
+    }
+
+
+    .cf-requested-top td:first-child {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .cf-requested-top td:last-child {
+        border-radius: 0 0 10px 10px;
+    }
+
+    /* add some padding and style for better readability */
+    .cf-requested-top td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    .cf-requested-top td:before {
+        position: absolute;
+        left: 6px;
+        content: attr(data-label);
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+}
+
+
+/* ------------------------ my request section -------------------------------------     */
+.cf-request-content-back {
+    border: none;
+    background: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.cf-requested-bottom-container {
+    padding: 23px;
+}
+
+.cf-requested-bottom-container table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 20px;
+    border-radius: 5px;
+    background: linear-gradient(180deg, #652FAA -216%, rgba(255, 138, 0, 0.51) 421.76%);
+}
+
+.cf-requested-bottom-container thead tr th {
+    font-weight: 700;
+}
+
+.cf-requested-bottom-container th,
+.cf-requested-bottom-container td {
+    padding: 0 8px;
+    text-align: left;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.cf-requested-bottom-container td:first-child {
+    border-radius: 10px 0 0 10px;
+}
+
+.cf-requested-bottom-container td:last-child {
+    border-radius: 0 10px 10px 0;
+}
+
+.cf-requested-bottom-container th {
+    background-color: transparent;
+}
+
+/* style for responsiveness */
+@media only screen and (max-width: 768px) {
+
+    /* make the table cells stack on top of each other */
+    .cf-requested-bottom-container td,
+    .cf-requested-bottom-container th {
+        display: block;
+    }
+
+
+    .cf-requested-bottom-container td:first-child {
+        border-radius: 10px 10px 0 0;
+    }
+
+    .cf-requested-bottom-container td:last-child {
+        border-radius: 0 0 10px 10px;
+    }
+
+    /* add some padding and style for better readability */
+    .cf-requested-bottom-container td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    .cf-requested-bottom-container td:before {
+        position: absolute;
+        left: 6px;
+        content: attr(data-label);
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+}

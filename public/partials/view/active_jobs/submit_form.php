@@ -6,18 +6,25 @@
       <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Setting.svg'?>" alt="" />
     </div>
   </div>
+  <a href="<?php echo home_url('mp_cf_plugin/active-jobs')?>">
+  <button class="cf-request-content-back">
+    <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/back.svg'?>" alt="" />
+    Active jobs
+  </button>
+  </a>
+
   <div class="cf-request-center">
     <div class="form-container">     
       <form>
         <div class="cf-form-input">
           <label for="title">Title</label>
-          <input type="text" id="idTitle" placeholder="Title"  value="<?php echo $requested_title?>" />
+          <input type="text" id="contentTitle" placeholder="Title"  value="<?php echo $requested_title?>" />
         </div>
         
 
         <div class="cf-form-input">
           <label for="category">Category</label>
-          <select name="cf-category" id="cfCategory">
+          <select name="cf-category" id="submitCategory">
             <option value="<?php echo $requested_category->term_id?>" selected><?php echo $requested_category->name?></option>
             <?php
             foreach ($categories as $category){
@@ -52,7 +59,7 @@
           ?>
         </div>
         
-        <button type="submit" class="cf-submit" id="cf-submit-request" >Submit</button>
+        <button id ="submitContent" postID="<?php echo $post_id?>" userId="<?php echo get_current_user_id()?>" type="submit" class="cf-submit cf-submit-content" >Submit</button>
       </form>
     </div>
 
@@ -80,6 +87,42 @@
 <script>
   window.addEventListener("DOMContentLoaded", () => {
     var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
-    
+    const submitBtn = document.querySelector('.cf-submit-content')
+    const formContainer = document.querySelector('.form-container')
+    const submittedCenter = document.querySelector('.cf-submitted-center')
+    const contentTitle = document.getElementById('contentTitle')
+    const submitCategory = document.getElementById('submitCategory')
+
+    submitBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      
+      loader('submitContent',true,'Submit')
+
+      var submit_content = tinyMCE.activeEditor.getContent({
+          format: 'raw'
+      });
+
+      jQuery.ajax({
+        url: ajaxurl,
+        type: 'POST',
+        data: {
+          action: 'mp_cf_submit_content',
+          postId: submitBtn.getAttribute('postId'),
+          userId: submitBtn.getAttribute('userId'),
+          submitTitle: contentTitle.value,
+          contentCategory: submitCategory.value,submit_content
+        },
+        success: async function(response) {
+          loader('submitContent',false,'Submit')
+          formContainer.classList.add('hidden')
+          submittedCenter.classList.remove('hidden')
+        },
+        error: function(response) {
+          loader('submitContent',false,'Submit')
+        }
+      })
+
+    })
+
   })
 </script>

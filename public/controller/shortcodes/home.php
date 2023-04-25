@@ -105,6 +105,8 @@ class Mp_cf_home_public
 		if(isset($data['display']) && $data['display'] === 'count') echo count($active_jobs);
 
 		else{
+			wp_enqueue_style( 'mp-factory-active-jobs-style', mp_cf_PLAGIN_URL . 'public/css/mp-factory-active-jobs.css', false, '1.0', 'all' ); 
+
 			if(isset($_GET['submit_request'])){
 
 				$post_id = $_GET['submit_request'];
@@ -119,7 +121,6 @@ class Mp_cf_home_public
 				include_once mp_cf_PLAGIN_DIR . 'public/partials/view/active_jobs/submit_form.php';
 			}
 			else {
-				wp_enqueue_style( 'mp-factory-active-jobs-style', mp_cf_PLAGIN_URL . 'public/css/mp-factory-active-jobs.css', false, '1.0', 'all' ); 
 				include_once mp_cf_PLAGIN_DIR . 'public/partials/view/active_jobs/index.php';
 			}
 		}

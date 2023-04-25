@@ -55,51 +55,41 @@ if(get_current_user_id() > 0){
           <span class="cf-left-tabs-title">Active Jobs</span>
         <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
         </a>
-        <span>(0)</span>
+        <span>(<?php do_shortcode('[mp_cf_active_jobs_code display = "count"]')?>)</span>
       </div>
 
       <div class="cf-left-tabs">
         <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Edit-Square.svg') ?>
       <a href="<?php echo home_url('mp_cf_plugin/my-requests')?>">
 
-        <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/Edit Square.svg'?>" alt=" " /> -->
         <span class="cf-left-tabs-title">My requests</span>
         <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
       </a>
-        <span>(0)</span>
+        <span>(<?php do_shortcode('[mp_cf_my_requests_code display = "count"]')?>)</span>
       </div>
 
       <div class="cf-left-tabs">
       <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/User.svg') ?>
-        <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/3 User.svg'?>" alt="ICO" /> -->
+      
         <span class="cf-left-tabs-title">My Community Requests</span>
         <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/notification-bing.svg'?>" alt="" />
         <span>(0)</span>
       </div>
       <div class="cf-left-tabs">
       <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/money-recive.svg') ?>
-        <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/money-recive.svg'?>" alt="ICO" /> -->
+      
         <span class="cf-left-tabs-title">Claim Payment</span>
       </div>
       <div class="cf-left-tabs">
       <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/refresh.svg') ?>
-        <!-- <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/refresh.svg'?>" alt="ICO" /> -->
+      
         <span class="cf-left-tabs-title">History</span>
       </div>
     </div>
   </div>
   <?php echo the_content() ?>
 
-    <!-- <div class="cf-right-section">
-      <div class="cf-right-top-section">
-        <h1>< ?php echo get_the_title()?></h1>
-        <div class="cf-right-top-icon-container">
-          <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/Setting.svg'?>" alt="" />
-        </div>
-      </div>
-      < ?php echo the_content() ?>
-    </div>
-  </div> -->
+  </div> 
 
 </article>
 

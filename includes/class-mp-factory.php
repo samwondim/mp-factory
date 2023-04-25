@@ -133,6 +133,7 @@ class Mp_Factory
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/shortcodes/content-request.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/actions/request_content.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/actions/request_details.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/actions/submit_request.php';
 
 		$this->loader = new Mp_Factory_Loader();
 	}
@@ -233,7 +234,6 @@ class Mp_Factory
 		$mp_cf_request_details = new Mp_cf_request_details();
 		$this->loader->add_action('wp_ajax_mp_cf_details', $mp_cf_request_details, 'wp_ajax_mp_cf_details', 1, 1);
 		$this->loader->add_action('wp_ajax_mp_cf_claim_article', $mp_cf_request_details, 'wp_ajax_mp_cf_claim_article', 1, 1);
-
 		
 	}
 

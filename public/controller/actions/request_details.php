@@ -54,8 +54,14 @@ class Mp_cf_request_details
 	}
 
 	public function wp_ajax_mp_cf_claim_article(){
+		$current_date = date( 'Y-m-d h:i:s' );
 		if(isset($_POST['postId']) && isset($_POST['userId'])){
 			add_post_meta($_POST['postId'], 'mp_cf_claim_article',$_POST['userId']);
+			add_post_meta($_POST['postId'], 'mp_cf_claimed_status','submit');
+
+			$submissions = get_post_meta($_POST['postId'], 'submissions',true);
+			if(count(get_post_meta($_POST['postId'], 'mp_cf_claim_article')) >= $submissions)
+				update_post_meta($_POST['postId'], 'mp_cf_is_claim_full',true);
 		}
 	}
 }

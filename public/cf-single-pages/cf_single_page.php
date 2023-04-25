@@ -50,20 +50,22 @@ if(get_current_user_id() > 0){
           <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/notification-bing.svg'); 
         ?>
         </a>
-        <span>(0)</span>
+        <span>(<?php do_shortcode('[mp_cf_active_jobs_code display = "count"]')?>)</span>
       </div>
 
       <div class="cf-left-tabs">
         <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Edit-Square.svg') ?>
       <a href="<?php echo home_url('mp_cf_plugin/my-requests')?>">
+
         <span class="cf-left-tabs-title">My requests</span>
         <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/notification-bing.svg'); ?>
       </a>
-        <span>(0)</span>
+        <span>(<?php do_shortcode('[mp_cf_my_requests_code display = "count"]')?>)</span>
       </div>
 
       <div class="cf-left-tabs">
       <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/User.svg') ?>
+
         <span class="cf-left-tabs-title">My Community Requests</span>
         <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/notification-bing.svg'); ?>
 
@@ -71,26 +73,19 @@ if(get_current_user_id() > 0){
       </div>
       <div class="cf-left-tabs">
       <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/money-recive.svg') ?>
+
         <span class="cf-left-tabs-title">Claim Payment</span>
       </div>
       <div class="cf-left-tabs">
       <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/refresh.svg') ?>
+
         <span class="cf-left-tabs-title">History</span>
       </div>
     </div>
   </div>
   <?php echo the_content() ?>
 
-    <!-- <div class="cf-right-section">
-      <div class="cf-right-top-section">
-        <h1>< ?php echo get_the_title()?></h1>
-        <div class="cf-right-top-icon-container">
-          <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/Setting.svg'?>" alt="" />
-        </div>
-      </div>
-      < ?php echo the_content() ?>
-    </div>
-  </div> -->
+  </div> 
 
 </article>
 

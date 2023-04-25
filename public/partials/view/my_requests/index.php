@@ -41,12 +41,12 @@
             if($is_claimed == get_current_user_id())
               continue;
 
-            $post_meta = get_post_meta($article->ID, 'mp_cf_claim_article');
+            $claimed_count = get_post_meta($article->ID, 'mp_cf_claim_article');
             ?>
           <tr> 
             <td data-label="Topic"><?php echo strlen($article->post_title) > 50 ? substr($article->post_title, 0, 50) . '...' : $article->post_title?></td>
             <td data-label="Request Type"><?php echo get_post_meta($article->ID, 'req_type',true)?></td>
-            <td data-label="No. of Claim"> <?php echo count($post_meta).' out of '. get_post_meta($article->ID, 'submissions',true) ?></td>
+            <td data-label="No. of Claim"> <?php echo count($claimed_count).' out of '. get_post_meta($article->ID, 'submissions',true) ?></td>
             <td data-label="status"><?php echo isset($status_object->description) ? $status_object->description : 'Waiting for moderator.'?></td>
             <td data-label="Action">
               <button class="cf-request-btn" postId="<?php echo $article->ID?>">Detail</button>

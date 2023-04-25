@@ -50,7 +50,7 @@ class Mp_cf_approve_requested_content_Admin
     function custom_cf_requested_content_columns_content($column_name, $post_id)
     {
         if ($column_name == 'content_status_box') {
-            echo get_post_meta($post_id, 'content_status_box', true) . " " . $post_id;
+            echo get_post_meta($post_id, 'content_status_box', true);
         }
     }
     function custom_cf_requested_content_quick_edit($column_name, $post_type) {

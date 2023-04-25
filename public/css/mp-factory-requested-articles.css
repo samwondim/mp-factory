@@ -1,21 +1,14 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Barlow', sans-serif;
-}
-
+/* 
 html {
     background: linear-gradient(180deg, #052F46 0%, #1E253D 100%);
 }
 
 .cf-dashboard {
-    /* background: linear-gradient(180deg, #052F46 0%, #1E253D 100%); */
-    color: #fff;
-    display: grid;
-    grid-template-columns: 370px auto;
-    gap: 40px;
-    margin: 34px;
+color: #fff;
+display: grid;
+grid-template-columns: 370px auto;
+gap: 40px;
+margin: 34px;
 }
 
 .cf-left-section {
@@ -74,8 +67,10 @@ html {
     border-bottom: 1px solid rgba(99, 159, 152, 1);
     padding: 17px;
     cursor: pointer;
+    stroke: #fff;
 }
 
+*/
 .cf-right-top-section {
     display: flex;
     justify-content: space-between;

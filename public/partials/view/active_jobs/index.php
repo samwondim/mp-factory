@@ -25,8 +25,9 @@
             <td data-label="Request Type"><?php echo $status === 'submit'? 'Waiting for content': 'Waiting for moderator'?></td>
             <td data-label="request-deadline"><?php echo get_post_meta($job->ID, 'req_deadline',true)?></td>
             <td data-label="submission-deadline"><?php echo get_post_meta($job->ID, 'submission_deadline',true)?></td>
+
             <td data-label="Action"><?php if($status==='submit'){?>
-              <button  class="cf-request-btn cf-submit-content" postId="<?php echo $job->ID?>">Submit your content</button>
+              <button  data-postSlug="<?php echo $job->post_name?>"class="cf-request-btn cf-submit-content" postId="<?php echo $job->ID?>">Submit your content</button>
               <?php }else echo 'No action needed'?></td>
           </tr>
           <?php }?>
@@ -53,9 +54,8 @@
     function submitContent(event){
       const clickedElement = event.target;
       const currentUrl = window.location.href;
-      const postId = clickedElement.getAttribute('postId');
-      console.log(postId);
-      window.location.href = `<?php echo home_url('mp_cf_plugin/active-jobs/?submit_request=956')?>`;
+      const postSlug = clickedElement.getAttribute('data-postSlug');
+      window.location.href = `<?php echo home_url('mp_cf_plugin/active-jobs/?submit_request=')?>${postSlug}`;
     }
   })
 </script>

@@ -108,6 +108,12 @@ html {
     color: #49FFB3;
 }
 
+.cf-editor-active {
+    fill: #FF5C97;
+    stroke: #FF5C97;
+    color: #FF5C97;
+}
+
 .cf-center-grid-card {
     background: linear-gradient(180deg, #0E375E -65.74%, rgba(43, 171, 180, 0.29) 421.76%);
     margin-bottom: 23px;

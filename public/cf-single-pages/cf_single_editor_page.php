@@ -28,11 +28,11 @@
     </div>
     <div class="cf-left-bottom-section">
       <div class="cf-left-tabs cf-dashboard-tab">
-        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Category.svg'); 
+        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/layer.svg'); 
         ?>
 
         <a href="<?php echo home_url('mp_cf_plugin/factory-dashboard')?>">
-          <span class="cf-left-tabs-title">Factory Dashboard</span>
+          <span class="cf-left-tabs-title">MP Content Factory</span>
         </a>
       </div>
 

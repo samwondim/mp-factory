@@ -1,4 +1,7 @@
-<div class="cf-right-center-grid">
+<?php 
+$user = get_user_by('id', get_current_user_id());
+?>
+<div class="cf-right-center-grid" data-user-role ="<?php echo $user->roles[0]?>">
       <div class="cf-center-grid-card">
         <div class="cf-center-grid-card-top">
           <img
@@ -61,8 +64,12 @@
     
 <script>
   window.addEventListener('DOMContentLoaded', () => {
-
-    document.querySelector('.cf-dashboard-tab').classList.add('cf-active')
-
+    const userRole = document.querySelector('.cf-right-center-grid')
+    
+    if( userRole.getAttribute('data-user-role')== 'editor'){
+      document.querySelector('.cf-dashboard-tab').classList.add('cf-editor-active')
+    }else {
+      document.querySelector('.cf-dashboard-tab').classList.add('cf-active')
+    }
   })
 </script>

@@ -59,6 +59,8 @@ class Mp_cf_request_details
 			add_post_meta($_POST['postId'], 'mp_cf_claim_article',$_POST['userId']);
 			add_post_meta($_POST['postId'], 'mp_cf_claimed_status','submit');
 
+			add_user_meta($_POST['userId'], 'mp_cf_claimed_count', $_POST['postId']);
+
 			$submissions = get_post_meta($_POST['postId'], 'submissions',true);
 			if(count(get_post_meta($_POST['postId'], 'mp_cf_claim_article')) >= $submissions)
 				update_post_meta($_POST['postId'], 'mp_cf_is_claim_full',true);

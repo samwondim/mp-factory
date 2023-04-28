@@ -74,25 +74,30 @@ class Mp_cf_home_public
 	}
 
 	public function mp_cf_my_requests_shortcode($data){
+		$user_id =  get_current_user_id();
 		$my_requests = get_posts(array(
 			'post_type' => 'cf-requested-content',
 			'post_status' => ['approved','declined','pending'],
-			'author__in' => get_current_user_id(),
+			'author__in' => $user_id ,
 			'posts_per_page' => -1
 
 		));
 
-		if(isset($data['display']) && $data['display'] === 'count') echo count($my_requests);
+		if(isset($data['display']) && $data['display'] === 'count'){
+			$new_requests = count(get_user_meta($user_id, 'mp_cf_new_request'));
+			echo $new_requests;
+		}
+			
 		
 		else{
+			delete_user_meta(get_current_user_id(), 'mp_cf_new_request');
 			wp_enqueue_style( 'mp-factory-requested-articles-style', mp_cf_PLAGIN_URL . 'public/css/mp-factory-requested-articles.css', false, '1.0', 'all' ); 
 			include_once mp_cf_PLAGIN_DIR . 'public/partials/view/my_requests/index.php';
 		}
 	}
 	
 	public function mp_cf_active_jobs_shortcode($data){
-		
-		
+		$user_id =  get_current_user_id();
 
 		$active_jobs = get_posts(array(
 			'post_type' => 'cf-requested-content',
@@ -100,11 +105,15 @@ class Mp_cf_home_public
 			'meta_query' => array(
 				array(
 					'key' => 'mp_cf_claim_article', 
-					'value' => get_current_user_id(),
+					'value' => $user_id,
 				)
 			)
 		));
-		if(isset($data['display']) && $data['display'] === 'count') echo count($active_jobs);
+
+		if(isset($data['display']) && $data['display'] === 'count'){
+			$new_claim = count(get_user_meta($user_id, 'mp_cf_claimed_count'));
+			echo $new_claim;
+		}
 
 		else{
 			wp_enqueue_style( 'mp-factory-active-jobs-style', mp_cf_PLAGIN_URL . 'public/css/mp-factory-active-jobs.css', false, '1.0', 'all' ); 

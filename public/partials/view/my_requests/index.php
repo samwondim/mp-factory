@@ -62,8 +62,12 @@
 </div>
 <script src="<?php echo mp_cf_PLAGIN_URL . 'public/js/validation.js'?>"></script>
 
+
 <script>
   window.addEventListener('DOMContentLoaded', () => {
+    
+    document.querySelector('.cf-my-request-tab').classList.add('cf-active')
+
     var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
     const mainContainer = document.querySelector('.cf-right-section')
     const detailBtn = document.querySelectorAll('.cf-request-btn')

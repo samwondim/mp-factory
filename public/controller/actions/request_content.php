@@ -70,7 +70,8 @@ class Mp_cf_request_content
 				isset($_POST['MPXreward']) ? add_post_meta($insert_id, 'MPXreward', esc_attr($_POST['MPXreward']), true) : '';
 				isset($_POST['guarantee_amount']) ? add_post_meta($insert_id, 'guarantee_amount', esc_attr($_POST['guarantee_amount']), true) : '';
 				isset($_POST['backing_amount']) ? add_post_meta($insert_id, 'backing_amount', esc_attr($_POST['backing_amount']), true) : '';
-				
+
+				add_user_meta(get_current_user_id(), 'mp_cf_new_request', $insert_id);
 			}
 
 			echo "done";

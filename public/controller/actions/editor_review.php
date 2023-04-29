@@ -45,4 +45,26 @@ class Mp_cf_editor_review
 		die();
 	}
 
+	public function wp_ajax_mp_cf_search_review_request(){
+
+		$search_term = isset($_POST['searchContent']) ? sanitize_text_field($_POST['searchContent']) : '';
+		
+		if (!preg_match('/^[a-zA-Z0-9\s]+$/', $search_term)) {
+			echo 'Invalid characters in search term';
+			exit;
+		}
+
+		// If the search term is valid, proceed with the search
+		$args = array(
+			'post_type' => 'cf-requested-content',
+			'post_status' => ['pending','approved','declined','published'],
+			'posts_per_page' => -1,
+			's' => $search_term,
+		);
+
+		$searched_reviews = get_posts($args);
+		include_once mp_cf_PLAGIN_DIR . 'public/partials/editor/review_requests/search.php';
+		die();
+	}
+
 }

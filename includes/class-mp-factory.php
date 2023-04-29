@@ -241,6 +241,7 @@ class Mp_Factory
 		
 		$mp_cf_editor_review = new Mp_cf_editor_review();
 		$this->loader->add_action('wp_ajax_mp_cf_review_request', $mp_cf_editor_review, 'wp_ajax_mp_cf_review_request');
+		$this->loader->add_action('wp_ajax_mp_cf_search_review_request', $mp_cf_editor_review, 'wp_ajax_mp_cf_search_review_request');
 
 
 		

@@ -15,9 +15,11 @@
       </select>
       <span>entries</span>
     </div>
-    <div class="cf-requested-top-right">
-      <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/search.svg'?>" alt="" />
-      <input type="text" placeholder="Search" />
+    <div class="cf-requested-top-right cf-search">
+      <div class="search-icon-container">
+        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/search.svg'?>" alt="" />
+      </div>
+      <input id="searchReview" type="text" placeholder="Search" />
     </div>
   </div>
 
@@ -67,11 +69,11 @@
     const mainContainer = document.querySelector('.cf-right-section')
     const detailBtn = document.querySelectorAll('.cf-request-btn')
 
-    document.querySelector('.cf-review-requests-tab').classList.add('cf-editor-active')
+    const searchBtn = document.querySelector('.search-icon-container')
+    const searchContainer = document.querySelector('.cf-request-center')
+    
 
-    detailBtn.forEach(element=>{
-      element.addEventListener('click', seeDetail);
-    })
+    document.querySelector('.cf-review-requests-tab').classList.add('cf-editor-active')
 
     function seeDetail(event){
       const clickedElement = event.target;
@@ -92,5 +94,33 @@
         }
       })
     }
+
+    function searchArticles(element){
+      const searchContent = document.getElementById('searchReview')
+
+      if(searchContent.value.trim() == ''){
+        return
+      }
+      
+      jQuery.ajax({
+        url: ajaxurl,
+        type: 'POST',
+        data: {
+          action: 'mp_cf_search_review_request',
+          searchContent:searchContent.value
+        },
+        success: async function(response) {
+          searchContainer.innerHTML = response
+        }
+      })
+    }
+
+    detailBtn.forEach(element=>{
+      element.addEventListener('click', seeDetail);
+    })
+
+    searchBtn.addEventListener('click', searchArticles)
+
+
   })
 </script>

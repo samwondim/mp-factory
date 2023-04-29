@@ -1,6 +1,6 @@
 <div class="cf-right-section">
   <div class="cf-right-top-section">
-    <h1>Requested articles</h1>
+    <h1>Review articles</h1>
     <div class="cf-right-top-icon-container">
       <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Setting.svg'?>" alt="" />
     </div>
@@ -28,28 +28,27 @@
           <tr>
             <th>Topic</th>
             <th>Request Type</th>
-            <th>No. of Claim</th>
-            <th>Status</th>
+            <th>Min MPX value</th>
+            <!-- <th>No. of Claim</th> -->
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($my_requests as $article){
-            $status_object = get_post_status_object( $article->post_status );
+          <?php foreach ($review_requests as $request){
             
-            $is_claimed = get_post_meta($article->ID, 'mp_cf_claim_article',true);
-            if($is_claimed == get_current_user_id())
+            $is_claimed = get_post_meta($request->ID, 'mp_cf_claim_article',true);
+            $submissions = get_post_meta($request->ID, 'submissions',true);
+            if($is_claimed == get_current_user_id() || $submissions <= count(get_post_meta($request->ID, 'mp_cf_claim_article')))
               continue;
-
-            $claimed_count = get_post_meta($article->ID, 'mp_cf_claim_article');
+              
             ?>
           <tr> 
-            <td data-label="Topic"><?php echo strlen($article->post_title) > 50 ? substr($article->post_title, 0, 50) . '...' : $article->post_title?></td>
-            <td data-label="Request Type"><?php echo get_post_meta($article->ID, 'req_type',true)?></td>
-            <td data-label="No. of Claim"> <?php echo count($claimed_count).' out of '. get_post_meta($article->ID, 'submissions',true) ?></td>
-            <td data-label="status"><?php echo isset($status_object->description) ? $status_object->description : 'Waiting for moderator.'?></td>
+            <td data-label="Topic"><?php echo strlen($request->post_title) > 50 ? substr($request->post_title, 0, 50) . '...' : $request->post_title?></td>
+            <td data-label="Request Type"><?php echo get_post_meta($request->ID, 'req_type',true)?></td>
+            <td data-label="Min MPX value"><?php echo get_post_meta($request->ID, 'minMpxr',true)?></td>
+            <!-- <td data-label="No. of Claim"> < ?php echo count(get_post_meta($request->ID, 'mp_cf_claim_article')) . ' out of '. $submissions?></td> -->
             <td data-label="Action">
-              <button class="cf-request-btn" postId="<?php echo $article->ID?>">Detail</button>
+              <button class="cf-request-btn" postId="<?php echo $request->ID?>">Detail</button>
             </td>
           </tr>
 
@@ -62,17 +61,13 @@
 </div>
 <script src="<?php echo mp_cf_PLAGIN_URL . 'public/js/validation.js'?>"></script>
 
-
 <script>
   window.addEventListener('DOMContentLoaded', () => {
-    
-    document.querySelector('.cf-my-request-tab').classList.add('cf-active')
-    
-
     var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
     const mainContainer = document.querySelector('.cf-right-section')
     const detailBtn = document.querySelectorAll('.cf-request-btn')
 
+    document.querySelector('.cf-review-requests-tab').classList.add('cf-editor-active')
 
     detailBtn.forEach(element=>{
       element.addEventListener('click', seeDetail);
@@ -84,13 +79,12 @@
         url: ajaxurl,
         type: 'POST',
         data: {
-          action: 'mp_cf_details',
-          postId: clickedElement.getAttribute('postId'),
-          detailType: 'my_request'
+          action: 'mp_cf_review_request',
+          postId: clickedElement.getAttribute('postId')
         },
         success: async function(response) {
+          // document.querySelector('.cf-requested-top-container').innerHTML = ''
           mainContainer.innerHTML = response
-          // document.querySelector('.cf-right-section').innerHTML = ''
 
           var arr = document.getElementsByTagName('script')
           for (var n = 0; n < arr.length; n++)

@@ -135,6 +135,9 @@ class Mp_Factory
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/actions/request_details.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/actions/submit_content.php';
 
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/shortcodes/home_editor.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/actions/editor_review.php';
+
 		$this->loader = new Mp_Factory_Loader();
 	}
 
@@ -231,6 +234,16 @@ class Mp_Factory
 		
 		$mp_cf_submit_content = new Mp_cf_submit_content();
 		$this->loader->add_action('wp_ajax_mp_cf_submit_content', $mp_cf_submit_content, 'wp_ajax_mp_cf_submit_content');
+
+		$mp_cf_home_editor_public = new Mp_cf_home_editor_public();
+		$this->loader->add_shortcode('mp_cf_review_requests_code', $mp_cf_home_editor_public, 'mp_cf_review_requests_shortcode');
+
+		
+		$mp_cf_editor_review = new Mp_cf_editor_review();
+		$this->loader->add_action('wp_ajax_mp_cf_review_request', $mp_cf_editor_review, 'wp_ajax_mp_cf_review_request');
+
+
+		
 	}
 
 	/**

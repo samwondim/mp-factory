@@ -36,15 +36,15 @@
         </a>
       </div>
 
-      <div class="cf-left-tabs cf-active-jobs-tab">
-        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/activity-icon.svg'); ?>
+      <div class="cf-left-tabs cf-review-requests-tab">
+        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Edit-Square.svg'); ?>
 
-        <a href="<?php echo home_url('mp_cf_plugin/active-jobs')?>">
-          <span class="cf-left-tabs-title">Active Jobs</span>
+        <a href="<?php echo home_url('mp_cf_plugin/review-requests')?>">
+          <span class="cf-left-tabs-title">Review Requests</span>
           <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/notification-bing.svg'); 
         ?>
         </a>
-        <span>(<?php do_shortcode('[mp_cf_active_jobs_code display = "count"]')?>)</span>
+        <span>(<?php do_shortcode('[mp_cf_review_requests_code display = "count"]')?>)</span>
       </div>
 
       <div class="cf-left-tabs cf-my-request-tab">

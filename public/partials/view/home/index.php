@@ -1,7 +1,10 @@
 <?php 
-$user = get_user_by('id', get_current_user_id());
+$user_data = get_userdata(get_current_user_id());
+$user_roles = $user_data->roles;
+if(isset($_GET['moderate']) && $_GET['moderate'] === 'true' &&  in_array('editor', $user_roles)) $is_moderator = 'moderator';
+else $is_moderator = 'user'
 ?>
-<div class="cf-right-center-grid" data-user-role ="<?php echo $user->roles[0]?>">
+<div class="cf-right-center-grid" data-user ="<?php echo $is_moderator?>">
       <div class="cf-center-grid-card">
         <div class="cf-center-grid-card-top">
           <img
@@ -65,8 +68,9 @@ $user = get_user_by('id', get_current_user_id());
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     const userRole = document.querySelector('.cf-right-center-grid')
+    console.log(userRole.getAttribute('data-user'));
     
-    if( userRole.getAttribute('data-user-role')== 'editor'){
+    if( userRole.getAttribute('data-user') == 'moderator'){
       document.querySelector('.cf-dashboard-tab').classList.add('cf-editor-active')
     }else {
       document.querySelector('.cf-dashboard-tab').classList.add('cf-active')

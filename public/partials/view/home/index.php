@@ -9,12 +9,12 @@ else $is_moderator = 'user'
         <div class="cf-center-grid-card-top">
           <img
             class="cf-center-grid-card-img"
-            src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/color-swatch.svg'?>"
+            src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/color-swatch.svg'?>"
             alt=""
           />
           <span class="cf-center-grid-card-heading">How it Works</span>
         </div>
-        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
+        <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
       </div>
       <a href="<?php echo home_url('mp_cf_plugin/view-all-jobs/')?>">
 
@@ -22,7 +22,7 @@ else $is_moderator = 'user'
           <div class="cf-center-grid-card-top">
             <img
               class="cf-center-grid-card-img"
-              src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/personalcard.svg'?>"
+              src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/personalcard.svg'?>"
               alt=""
             />
             <span class="cf-center-grid-card-heading">View Jobs</span>
@@ -31,7 +31,7 @@ else $is_moderator = 'user'
           <p class="cf-card-notification">
             <b>Available jobs: <span><?php do_shortcode('[mp_cf_requested_articles_code display = "count"]')?></span></b>
           </p>
-          <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
+          <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
         </div>
       </a>
       <a href="<?php echo home_url('mp_cf_plugin/request-content')?>">
@@ -39,20 +39,20 @@ else $is_moderator = 'user'
           <div class="cf-center-grid-card-top">
             <img
               class="cf-center-grid-card-img"
-              src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/graph.svg'?>"
+              src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/graph.svg'?>"
               alt=""
             />
             <span class="cf-center-grid-card-heading">Request content</span>
           </div>
 
-          <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
+          <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
         </div>
       </a>
       <div class="cf-center-grid-card">
         <div class="cf-center-grid-card-top">
           <img
             class="cf-center-grid-card-img"
-            src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/chart-2.svg'?>"
+            src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/chart-2.svg'?>"
             alt=""
           />
           <span class="cf-center-grid-card-heading">Vote</span>
@@ -61,7 +61,7 @@ else $is_moderator = 'user'
         <p class="cf-card-notification">
           <b>Active votes: <span>(20)</span></b>
         </p>
-        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
+        <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
       </div>
     </div>
     

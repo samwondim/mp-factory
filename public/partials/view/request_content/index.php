@@ -291,9 +291,8 @@
         success: async function(response) {
           if(response == 'done'){
             loader('cf-submit-request',false,'Submit')
-            // document.querySelector('.form-container').classList.add('hidden')
-            // document.querySelector('.cf-submitted-center').classList.remove('hidden')
-            // showNotification("Request submitted successfully!")
+            document.querySelector('.form-container').classList.add('hidden')
+            document.querySelector('.cf-submitted-center').classList.remove('hidden')
           }
           else{
             console.log(response);

@@ -2,7 +2,7 @@
   <div class="cf-right-top-section">
     <h1>Review articles</h1>
     <div class="cf-right-top-icon-container">
-      <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Setting.svg'?>" alt="" />
+      <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Setting.svg'?>" alt="" />
     </div>
   </div>
   <div class="cf-requested-top-container">
@@ -17,7 +17,7 @@
     </div>
     <div class="cf-requested-top-right cf-search">
       <div class="search-icon-container">
-        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/search.svg'?>" alt="" />
+        <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/search.svg'?>" alt="" />
       </div>
       <input id="searchReview" type="text" placeholder="Search" />
     </div>
@@ -42,7 +42,6 @@
             $submissions = get_post_meta($request->ID, 'submissions',true);
             if($is_claimed == get_current_user_id() || $submissions <= count(get_post_meta($request->ID, 'mp_cf_claim_article')))
               continue;
-              
             ?>
           <tr> 
             <td data-label="Topic"><?php echo strlen($request->post_title) > 50 ? substr($request->post_title, 0, 50) . '...' : $request->post_title?></td>
@@ -75,6 +74,29 @@
 
     document.querySelector('.cf-review-requests-tab').classList.add('cf-editor-active')
 
+    mainContainer.addEventListener('click', function(event) {
+      
+      if (event.target.matches('.cf-request-bottom-button-primary') || event.target.matches('.cf-request-bottom-button-secondary')) {
+
+        jQuery.ajax({
+          url: ajaxurl,
+          type: 'POST',
+          data: {
+            action: 'mp_cf_review_request_update',
+            postId: event.target.parentElement.getAttribute('data-post-id'),
+            status: event.target.getAttribute('data-status')
+          },
+          success: function(response) {
+            console.log(response);
+            document.querySelector('.form-container').classList.add('hidden')
+            document.querySelector('.cf-submitted-center').classList.remove('hidden')
+            
+           
+          }
+        })
+      }
+    });
+
     function seeDetail(event){
       const clickedElement = event.target;
       jQuery.ajax({
@@ -87,7 +109,7 @@
         success: async function(response) {
           // document.querySelector('.cf-requested-top-container').innerHTML = ''
           mainContainer.innerHTML = response
-
+          
           var arr = document.getElementsByTagName('script')
           for (var n = 0; n < arr.length; n++)
             eval(arr[n].innerHTML) //run script inside div
@@ -120,7 +142,7 @@
     })
 
     searchBtn.addEventListener('click', searchArticles)
-
+    
 
   })
 </script>

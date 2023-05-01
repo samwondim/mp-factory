@@ -2,7 +2,7 @@
   <div class="cf-right-top-section">
     <h1>View all jobs</h1>
     <div class="cf-right-top-icon-container">
-      <img src="< ?php echo mp_cf_PLAGIN_URL . '/public/assets/Setting.svg'?>" alt="" />
+      <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Setting.svg'?>" alt="" />
     </div>
   </div>
   <div class="cf-right-section">
@@ -17,7 +17,7 @@
         <span>entries</span>
       </div>
       <div class="cf-requested-top-right">
-        <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/search.svg'?>" alt="" />
+        <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/search.svg'?>" alt="" />
         <input type="text" placeholder="Search" />
       </div>
     </div>

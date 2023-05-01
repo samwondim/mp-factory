@@ -39,7 +39,7 @@ if ( is_user_logged_in() ) {
     }
    
     $user_role = array_shift($user->roles);
-    if($user_role == 'editor'){
+    if(isset($_GET['moderate']) && $_GET['moderate'] === 'true' && $user_role == 'editor'){
         include_once mp_cf_PLAGIN_DIR . 'public/cf-single-pages/cf_single_editor_page.php';
     }
     else{

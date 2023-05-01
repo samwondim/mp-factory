@@ -27,6 +27,7 @@
       </div>
     </div>
     <div class="cf-left-bottom-section">
+      
       <div class="cf-left-tabs cf-dashboard-tab">
         <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Category.svg'); 
         ?>
@@ -35,6 +36,20 @@
           <span class="cf-left-tabs-title">Factory Dashboard</span>
         </a>
       </div>
+
+      <?php
+        $user_data = get_userdata(get_current_user_id());
+        $user_roles = $user_data->roles;
+        if(in_array('editor', $user_roles)){?> 
+          <div class="cf-left-tabs ">
+            <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/layer.svg'); 
+            ?>
+
+            <a href="<?php echo home_url('mp_cf_plugin/factory-dashboard/?moderate=true')?>">
+              <span class="cf-left-tabs-title">Moderate Requests</span>
+            </a>
+          </div>
+      <?php }?>
 
       <div class="cf-left-tabs cf-active-jobs-tab">
         <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/activity-icon.svg'); ?>

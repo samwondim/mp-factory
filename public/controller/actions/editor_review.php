@@ -67,4 +67,20 @@ class Mp_cf_editor_review
 		die();
 	}
 
+	public function wp_ajax_mp_cf_review_request_update(){
+
+		// Update post status
+		$post_id = $_POST['postId'];
+		$post_status = $_POST['status'];
+		if(get_post($post_id)){
+			$update_post = array(
+				'ID'           => $post_id,
+				'post_status'  => $post_status,
+			);
+			wp_update_post( $update_post );
+		}
+		else echo 'Error updating post status';
+		die();
+	}
+
 }

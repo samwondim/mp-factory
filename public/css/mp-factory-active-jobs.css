@@ -564,3 +564,25 @@ form {
         font-weight: bold;
     }
 }
+
+.cf-request-bottom-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 15px;
+}
+.cf-request-bottom-button-primary {
+    background: #65DF87;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 20px;
+    cursor: pointer
+}
+
+.cf-request-bottom-button-secondary {
+    background: #FF8787;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 20px;
+    cursor: pointer
+}

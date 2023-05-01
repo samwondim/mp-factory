@@ -27,7 +27,7 @@ class Mp_cf_home_editor_public
 
 		$review_requests = get_posts(array(
 			'post_type' => 'cf-requested-content',
-			'post_status' => ['pending','approved','declined','published'],
+			'post_status' => 'pending',
 			'posts_per_page' => -1
 		));
 		

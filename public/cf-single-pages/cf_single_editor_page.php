@@ -48,7 +48,7 @@
       <div class="cf-left-tabs cf-review-requests-tab">
         <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Edit-Square.svg'); ?>
 
-        <a href="<?php echo home_url('mp_cf_plugin/review-requests')?>">
+        <a href="<?php echo home_url('mp_cf_plugin/review-requests/?moderate=true')?>">
           <span class="cf-left-tabs-title">Review Requests</span>
           <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/notification-bing.svg'); 
         ?>

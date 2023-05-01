@@ -59,7 +59,7 @@
           <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/notification-bing.svg'); 
         ?>
         </a>
-        <span>(<?php do_shortcode('[mp_cf_active_jobs_code display = "count"]')?>)</span>
+        <span class="cf-active-jobs-notif">(<?php do_shortcode('[mp_cf_active_jobs_code display = "count"]')?>)</span>
       </div>
 
       <div class="cf-left-tabs cf-my-request-tab">

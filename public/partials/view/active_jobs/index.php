@@ -2,7 +2,7 @@
   <div class="cf-right-top-section">
     <h1>Your current active jobs</h1>
     <div class="cf-right-top-icon-container">
-      <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Setting.svg'?>" alt="" />
+      <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Setting.svg'?>" alt="" />
     </div>
   </div>
   <div class="cf-request-center">
@@ -19,14 +19,22 @@
         </thead>
         <tbody>
           <?php foreach($active_jobs as $job){
-            $status = get_post_meta($job->ID, 'mp_cf_claimed_status'.get_current_user_id(),true)?>
+
+            $status = get_post_meta($job->ID, 'mp_cf_claim_data',true);
+            if($status['user_id'] == get_current_user_id() && $status['claim_status'] ==='waiting_content'){
+              $is_submitted = false;
+            }else {
+              $is_submitted = true;
+
+            }
+            ?>
           <tr>
             <td data-label="Topic"><?php echo  strlen($job->post_title) > 50 ? substr($job->post_title, 0, 50) . '...' : $job->post_title?></td>
-            <td data-label="Request Type"><?php echo $status === 'submit'? 'Waiting for content': 'Waiting for moderator'?></td>
+            <td data-label="Request Type"><?php echo !$is_submitted ? 'Waiting for content': 'Waiting for moderator'?></td>
             <td data-label="request-deadline"><?php echo get_post_meta($job->ID, 'req_deadline',true)?></td>
             <td data-label="submission-deadline"><?php echo get_post_meta($job->ID, 'submission_deadline',true)?></td>
 
-            <td data-label="Action"><?php if($status==='submit'){?>
+            <td data-label="Action"><?php if(!$is_submitted){?>
               <button  data-postSlug="<?php echo $job->post_name?>"class="cf-request-btn cf-submit-content" postId="<?php echo $job->ID?>">Submit your content</button>
               <?php }else echo 'No action needed'?></td>
           </tr>

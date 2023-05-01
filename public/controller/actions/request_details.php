@@ -54,17 +54,21 @@ class Mp_cf_request_details
 	}
 
 	public function wp_ajax_mp_cf_claim_article(){
-		$current_date = date( 'Y-m-d h:i:s' );
+		$request_time = date( 'Y-m-d h:i:s' );
+
 		if(isset($_POST['postId']) && isset($_POST['userId'])){
 			add_post_meta($_POST['postId'], 'mp_cf_claim_article',$_POST['userId']);
+
+			$data = array(
+				'user_id' => $_POST['userId'],
+				'claim_status' => 'waiting_content',
+				'request_time' => $request_time,
+			);
 			
-			add_post_meta($_POST['postId'], 'mp_cf_claimed_status'.$_POST['userId'],'submit');
+			add_post_meta( $_POST['postId'], 'mp_cf_claim_data', $data );
 
 			add_user_meta($_POST['userId'], 'mp_cf_claimed_count', $_POST['postId']);
-
-			$submissions = get_post_meta($_POST['postId'], 'submissions',true);
-			if(count(get_post_meta($_POST['postId'], 'mp_cf_claim_article')) >= $submissions)
-				update_post_meta($_POST['postId'], 'mp_cf_is_claim_full',true);
 		}
+		die();
 	}
 }

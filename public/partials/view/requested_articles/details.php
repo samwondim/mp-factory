@@ -161,9 +161,20 @@
           userId: claimBtn.getAttribute('userId')
         },
         success: async function(response) {
+          if(!response){
           loader('cf-claim-request',false,'Claim')
           document.querySelector('.view-jobs-container').classList.add('hidden')
           document.querySelector('.cf-submitted-center').classList.remove('hidden')
+
+          const activeJobsSpan = document.querySelector('.cf-active-jobs-notif')
+          const currentValue = parseInt(activeJobsSpan.innerHTML.match(/\d+/)[0]);
+          
+          activeJobsSpan.innerHTML = `(${currentValue + 1})`;
+          }
+          else{
+          loader('cf-claim-request',false,'Claim')
+
+          }
 
         }
       })

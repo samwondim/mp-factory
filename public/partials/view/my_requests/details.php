@@ -136,13 +136,19 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($all_claimers as $claimer){?>
-
+            <?php 
+            $claimer_data = get_post_meta($details->ID, 'mp_cf_claim_data',true);
+            
+            foreach($all_claimers as $claimer){
+              if($claimer == $claimer_data['user_id']){
+                $status = $claimer_data['claim_status'] === 'waiting_content' ? "Waiting content" : ''; 
+              }else $status = 'Active'
+              ?>
             <tr>
               <td data-label="Topic"><?php echo get_user_meta($claimer, 'first_name', true);?></td>
               <td data-label="public-0address">user public address</td>
-              <td data-label="claimed-time">01-01-2023:12:52:45</td>
-              <td data-label="Status">Active</td>
+              <td data-label="claimed-time"><?php echo $claimer == $claimer_data['user_id'] ? $claimer_data['request_time']:''?></td>
+              <td data-label="Status"><?php echo $status?></td>
               <td data-label="Status">Not yet</td>
             </tr>
 

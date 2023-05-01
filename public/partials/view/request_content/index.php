@@ -237,7 +237,7 @@
     })
 
 
-    $(".cf-submit").click(async function(e) {
+    jQuery(".cf-submit").click(async function(e) {
       e.preventDefault();
       var editor_content = tinyMCE.activeEditor.getContent({
           format: 'raw'
@@ -245,7 +245,7 @@
 
       loader('cf-submit-request',true,'')
       
-      // if (!$("#cfCategory").val()) {
+      // if (!jQuery("#cfCategory").val()) {
       //   // showNotification('Please select category!', 'danger')
       //   // loader('cf-submit-request',false,'Submit')
       // }
@@ -253,33 +253,33 @@
 
       var submitRequest = new FormData();
       submitRequest.append('action', 'mp_cf_submit_requested_content');
-      submitRequest.append('topic', $("#idTitle").val());
-      submitRequest.append('cfCategory',  $("#cfCategory").val());
-      submitRequest.append('minMpxr', $("#minMpxr").val());
-      submitRequest.append('req_deadline', $("#requestDeadline").val());
-      submitRequest.append('submission_deadline',  $("#submitionDeadline").val());
+      submitRequest.append('topic', jQuery("#idTitle").val());
+      submitRequest.append('cfCategory',  jQuery("#cfCategory").val());
+      submitRequest.append('minMpxr', jQuery("#minMpxr").val());
+      submitRequest.append('req_deadline', jQuery("#requestDeadline").val());
+      submitRequest.append('submission_deadline',  jQuery("#submitionDeadline").val());
       submitRequest.append('desc', editor_content);
-      submitRequest.append('media_type', $('input[name=mediaType]:checked').val());
-      submitRequest.append('req_type', $('input[name=requestType]:checked').val());
+      submitRequest.append('media_type', jQuery('input[name=mediaType]:checked').val());
+      submitRequest.append('req_type', jQuery('input[name=requestType]:checked').val());
       
-      if($('input[name=mediaType]:checked').val() != 'text')
-        submitRequest.append('media_length', $("#mediaLength").val());
+      if(jQuery('input[name=mediaType]:checked').val() != 'text')
+        submitRequest.append('media_length', jQuery("#mediaLength").val());
 
-      if($('input[name=requestType]:checked').val() == 'paid'){
-        submitRequest.append('license',$("#cfLicense").val());
+      if(jQuery('input[name=requestType]:checked').val() == 'paid'){
+        submitRequest.append('license',jQuery("#cfLicense").val());
 
-        if($('input[name=submissions]:checked').val() == 'multipleSubmission'){
+        if(jQuery('input[name=submissions]:checked').val() == 'multipleSubmission'){
 
-          submitRequest.append('submissions',  $('input[name=max-submissions]:checked').val());
+          submitRequest.append('submissions',  jQuery('input[name=max-submissions]:checked').val());
         }
         else
           submitRequest.append('submissions',  '1');
 
-        submitRequest.append('MPXreward',  $("#MPXRewardValue").val());
-        submitRequest.append('guarantee_amount', $("#guaranteeValue").val());
+        submitRequest.append('MPXreward',  jQuery("#MPXRewardValue").val());
+        submitRequest.append('guarantee_amount', jQuery("#guaranteeValue").val());
       }
       else {
-        submitRequest.append('backing_amount',$("#backingAmount").val());
+        submitRequest.append('backing_amount',jQuery("#backingAmount").val());
       }
 
       jQuery.ajax({
@@ -291,8 +291,8 @@
         success: async function(response) {
           if(response == 'done'){
             loader('cf-submit-request',false,'Submit')
-            document.querySelector('.form-container').classList.add('hidden')
-            document.querySelector('.cf-submitted-center').classList.remove('hidden')
+            // document.querySelector('.form-container').classList.add('hidden')
+            // document.querySelector('.cf-submitted-center').classList.remove('hidden')
             // showNotification("Request submitted successfully!")
           }
           else{

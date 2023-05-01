@@ -43,12 +43,13 @@ class Mp_cf_home_public
 	public function mp_cf_requested_articles_shortcode($data){
 		// need more filters
 		$current_date = date( 'Y-m-d' ); // Get the current date in YYYY-MM-DD format
-
+		$user_id = get_current_user_id();
 
 		$requested_articles = get_posts(array(
 			'post_type' => 'cf-requested-content',
 			'post_status' => 'approved',
 			'posts_per_page' => -1,
+			'author__not_in' => array( $user_id ),
 			'meta_query' => array(
 				
 				array(
@@ -57,10 +58,7 @@ class Mp_cf_home_public
 					'compare' => '>=',
 					'type' => 'DATE'
 				),
-				array(
-					'key' => 'mp_cf_is_claim_full',
-					'compare' => 'NOT EXISTS', // get posts that have remaining claims.
-				),
+				
 			)
 		));
 		if(isset($data['display']) && $data['display'] === 'count') echo count($requested_articles);
@@ -98,7 +96,7 @@ class Mp_cf_home_public
 	
 	public function mp_cf_active_jobs_shortcode($data){
 		$user_id =  get_current_user_id();
-
+		
 		$active_jobs = get_posts(array(
 			'post_type' => 'cf-requested-content',
 			'post_status' => 'approved',

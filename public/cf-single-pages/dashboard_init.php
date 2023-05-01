@@ -37,12 +37,15 @@ if ( is_user_logged_in() ) {
             $public_address = 0;
         } 
     }
-   
-    $user_role = array_shift($user->roles);
-    if($user_role == 'editor'){
-        include_once mp_cf_PLAGIN_DIR . 'public/cf-single-pages/cf_single_editor_page.php';
+    if ( current_user_can( 'editor')) {
+        if (isset( $_GET['moderate'] )) {
+            include_once mp_cf_PLAGIN_DIR . 'public/cf-single-pages/cf_single_editor_page.php';
+        }
+        else {
+            include_once mp_cf_PLAGIN_DIR . 'public/cf-single-pages/cf_single_page.php';
+        }
     }
-    else{
+    else {
         include_once mp_cf_PLAGIN_DIR . 'public/cf-single-pages/cf_single_page.php';
     }
 }

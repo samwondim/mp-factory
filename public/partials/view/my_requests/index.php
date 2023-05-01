@@ -2,7 +2,7 @@
   <div class="cf-right-top-section">
     <h1>Requested articles</h1>
     <div class="cf-right-top-icon-container">
-      <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Setting.svg'?>" alt="" />
+      <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Setting.svg'?>" alt="" />
     </div>
   </div>
   <div class="cf-requested-top-container">
@@ -16,7 +16,7 @@
       <span>entries</span>
     </div>
     <div class="cf-requested-top-right">
-      <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/search.svg'?>" alt="" />
+      <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/search.svg'?>" alt="" />
       <input type="text" placeholder="Search" />
     </div>
   </div>
@@ -67,6 +67,7 @@
   window.addEventListener('DOMContentLoaded', () => {
     
     document.querySelector('.cf-my-request-tab').classList.add('cf-active')
+    
 
     var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
     const mainContainer = document.querySelector('.cf-right-section')

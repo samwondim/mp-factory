@@ -20,10 +20,10 @@
  * @subpackage Mp_cf/admin
  * @author     Esubalew A. <esubalew.amenu@singularitynet.io>
  */
-class Mp_cf_request_details
+class Mp_cf_editor_review
 {
-	public function wp_ajax_mp_cf_details(){
-		
+	public function wp_ajax_mp_cf_review_request(){
+
 		$post_id = $_POST['postId'];
 		$details = get_post($post_id);
 		$category = wp_get_post_terms($post_id, 'category',true);
@@ -39,36 +39,48 @@ class Mp_cf_request_details
 		$MPXreward = get_post_meta($post_id, 'MPXreward',true);
 		$guarantee_amount = get_post_meta($post_id, 'guarantee_amount',true);
 
-		if(isset($_POST['detailType']) && $_POST['detailType'] == 'my_request'){
-
-			$all_claimers = get_post_meta($post_id, 'mp_cf_claim_article');
-
-			include_once mp_cf_PLAGIN_DIR . 'public/partials/view/my_requests/details.php';
-		}
-		else {
-			
-			include_once mp_cf_PLAGIN_DIR . 'public/partials/view/requested_articles/details.php';
-		}
+		
+		include_once mp_cf_PLAGIN_DIR . 'public/partials/editor/review_requests/details.php';
 
 		die();
 	}
 
-	public function wp_ajax_mp_cf_claim_article(){
-		$request_time = date( 'Y-m-d h:i:s' );
+	public function wp_ajax_mp_cf_search_review_request(){
 
-		if(isset($_POST['postId']) && isset($_POST['userId'])){
-			add_post_meta($_POST['postId'], 'mp_cf_claim_article',$_POST['userId']);
+		$search_term = isset($_POST['searchContent']) ? sanitize_text_field($_POST['searchContent']) : '';
+		
+		if (!preg_match('/^[a-zA-Z0-9\s]+$/', $search_term)) {
+			echo 'Invalid characters in search term';
+			exit;
+		}
 
-			$data = array(
-				'user_id' => $_POST['userId'],
-				'claim_status' => 'waiting_content',
-				'request_time' => $request_time,
+		// If the search term is valid, proceed with the search
+		$args = array(
+			'post_type' => 'cf-requested-content',
+			'post_status' => ['pending','approved','declined','published'],
+			'posts_per_page' => -1,
+			's' => $search_term,
+		);
+
+		$searched_reviews = get_posts($args);
+		include_once mp_cf_PLAGIN_DIR . 'public/partials/editor/review_requests/search.php';
+		die();
+	}
+
+	public function wp_ajax_mp_cf_review_request_update(){
+
+		// Update post status
+		$post_id = $_POST['postId'];
+		$post_status = $_POST['status'];
+		if(get_post($post_id)){
+			$update_post = array(
+				'ID'           => $post_id,
+				'post_status'  => $post_status,
 			);
-			
-			add_post_meta( $_POST['postId'], 'mp_cf_claim_data', $data );
-
-			add_user_meta($_POST['userId'], 'mp_cf_claimed_count', $_POST['postId']);
+			wp_update_post( $update_post );
 		}
+		else echo 'Error updating post status';
 		die();
 	}
+
 }

@@ -3,7 +3,7 @@
   <div class="cf-right-top-section">
     <h1>Submit content</h1>
     <div class="cf-right-top-icon-container">
-      <img src="<?php echo mp_cf_PLAGIN_URL . '/public/assets/Setting.svg'?>" alt="" />
+      <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Setting.svg'?>" alt="" />
     </div>
   </div>
   <a href="<?php echo home_url('mp_cf_plugin/active-jobs')?>">

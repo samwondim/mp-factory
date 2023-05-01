@@ -1,6 +1,10 @@
 
 <link rel="stylesheet" href="<?php echo mp_cf_PLAGIN_URL . 'public/css/mp-factory-home.css' ?>" />
-
+<style>
+  .cf-left-tabs{
+    border-bottom: 1px solid #FF5C97 !important;
+  }
+</style>
 <article class="article-container">
 
   <div class="cf-dashboard">
@@ -56,34 +60,18 @@
         <span>(<?php do_shortcode('[mp_cf_review_requests_code display = "count"]')?>)</span>
       </div>
 
-      <div class="cf-left-tabs cf-my-request-tab">
-        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/Edit-Square.svg') ?>
-      <a href="<?php echo home_url('mp_cf_plugin/my-requests')?>">
+      <div class="cf-left-tabs cf-review-submissions-tab">
+        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/copy-success.svg'); ?>
 
-        <span class="cf-left-tabs-title">My requests</span>
-        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/notification-bing.svg'); ?>
-      </a>
-        <span>(<?php do_shortcode('[mp_cf_my_requests_code display = "count"]')?>)</span>
+        <a href="<?php echo home_url('mp_cf_plugin/review-submissions/?moderate=true')?>">
+          <span class="cf-left-tabs-title">Review Submissions</span>
+          <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/notification-bing.svg'); 
+        ?>
+        </a>
+        <span>(<?php do_shortcode('[mp_cf_review_submissions_code display = "count"]')?>)</span>
       </div>
 
-      <div class="cf-left-tabs">
-      <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/User.svg') ?>
-
-        <span class="cf-left-tabs-title">My Community Requests</span>
-        <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/notification-bing.svg'); ?>
-
-        <span>(0)</span>
-      </div>
-      <div class="cf-left-tabs">
-      <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/money-recive.svg') ?>
-
-        <span class="cf-left-tabs-title">Claim Payment</span>
-      </div>
-      <div class="cf-left-tabs">
-      <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/refresh.svg') ?>
-
-        <span class="cf-left-tabs-title">History</span>
-      </div>
+      
     </div>
   </div>
   <?php echo the_content() ?>

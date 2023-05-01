@@ -20,8 +20,8 @@
       </div>
 
       <div class="cf-form-input">
-        <label for="category">Title</label>
-        <input type="text"  placeholder="Title" value="<?php echo $category[0]->name?>"/>
+        <label for="category">Category</label>
+        <input type="text"  placeholder="Category" value="<?php echo $category[0]->name?>"/>
       </div>
      
       <div class="cf-form-input">
@@ -141,7 +141,13 @@
             
             foreach($all_claimers as $claimer){
               if($claimer == $claimer_data['user_id']){
-                $status = $claimer_data['claim_status'] === 'waiting_content' ? "Waiting content" : ''; 
+                if($claimer_data['claim_status'] === 'waiting_content'){
+                  $status = "Waiting content"; 
+                } 
+                else if($claimer_data['claim_status'] === 'submitted'){
+                  $status = "Waiting moderator."; 
+                }
+
               }else $status = 'Active'
               ?>
             <tr>

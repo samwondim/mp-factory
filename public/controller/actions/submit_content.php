@@ -42,7 +42,13 @@ class Mp_cf_submit_content
 			
 			if (!is_wp_error($insert_id)) {
 				wp_set_post_terms($insert_id, $_POST['contentCategory'], 'category');
-				update_post_meta($_POST['postId'], 'mp_cf_claimed_status', 'submitted');
+				
+				$claim_status_array = get_post_meta($_POST['postId'], 'mp_cf_claim_data', true);
+				$claim_status_array['claim_status'] = 'submitted';
+
+				update_post_meta($_POST['postId'], 'mp_cf_claim_data', $claim_status_array);
+
+				add_post_meta($insert_id, 'mp_cf_submitted_from', $_POST['postId']);
 				echo 'done';
 			}
 		}

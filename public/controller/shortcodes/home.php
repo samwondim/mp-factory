@@ -121,16 +121,27 @@ class Mp_cf_home_public
 				$postSlug = esc_attr($_GET['submit_request']);
 				$post = get_page_by_path($postSlug, OBJECT, 'cf-requested-content');
 				if ($post && in_array(get_current_user_id(), get_post_meta($post->ID, 'mp_cf_claim_article'))) {
-					$categories = get_categories(array(
-						'orderby' => 'name',
-						'order'   => 'ASC',
-						'hide_empty' => FALSE
-					));
-					$requested_title = get_the_title($post->ID);
-					$requested_category = get_the_category($post->ID)[0];
-		
-					include_once mp_cf_PLAGIN_DIR . 'public/partials/view/active_jobs/submit_form.php';
+					$claim_data = get_post_meta($post->ID, 'mp_cf_claim_data',true);
+					if($claim_data['claim_status'] === 'waiting_content'){
+						$categories = get_categories(array(
+							'orderby' => 'name',
+							'order'   => 'ASC',
+							'hide_empty' => FALSE
+						));
+						$requested_title = get_the_title($post->ID);
+						$requested_category = get_the_category($post->ID)[0];
+			
+						include_once mp_cf_PLAGIN_DIR . 'public/partials/view/active_jobs/submit_form.php';
+					}
+					else {
+						?>
+				 	<script>
+						window.location.replace("<?php echo esc_url( home_url('mp_cf_plugin/active-jobs/') ); ?>");
+					</script>
+					<?php
+					} 
 				} 
+				
 				else {
 					
 					?>

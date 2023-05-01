@@ -237,12 +237,14 @@ class Mp_Factory
 
 		$mp_cf_home_editor_public = new Mp_cf_home_editor_public();
 		$this->loader->add_shortcode('mp_cf_review_requests_code', $mp_cf_home_editor_public, 'mp_cf_review_requests_shortcode');
-
+		$this->loader->add_shortcode('mp_cf_review_submissions_code', $mp_cf_home_editor_public, 'mp_cf_review_submissions_shortcode');
+		
 		
 		$mp_cf_editor_review = new Mp_cf_editor_review();
 		$this->loader->add_action('wp_ajax_mp_cf_review_request', $mp_cf_editor_review, 'wp_ajax_mp_cf_review_request');
 		$this->loader->add_action('wp_ajax_mp_cf_search_review_request', $mp_cf_editor_review, 'wp_ajax_mp_cf_search_review_request');
 		$this->loader->add_action('wp_ajax_mp_cf_review_request_update', $mp_cf_editor_review, 'wp_ajax_mp_cf_review_request_update');
+		$this->loader->add_action('wp_ajax_mp_cf_detail_submissions', $mp_cf_editor_review, 'wp_ajax_mp_cf_detail_submissions');
 		
 
 

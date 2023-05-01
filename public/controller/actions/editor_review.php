@@ -83,4 +83,15 @@ class Mp_cf_editor_review
 		die();
 	}
 
+	public function wp_ajax_mp_cf_detail_submissions(){
+		$post_id = $_POST['postId'];
+		$post = get_post($post_id);
+
+		if($post){
+			$category = wp_get_post_terms($post_id, 'category',true);
+			include_once mp_cf_PLAGIN_DIR . 'public/partials/editor/review_submissions/details.php';
+		}
+		die();
+	}
+
 }

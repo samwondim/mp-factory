@@ -19,7 +19,7 @@
         </thead>
         <tbody>
           <?php foreach($active_jobs as $job){
-            $status = get_post_meta($job->ID, 'mp_cf_claimed_status',true)?>
+            $status = get_post_meta($job->ID, 'mp_cf_claimed_status'.get_current_user_id(),true)?>
           <tr>
             <td data-label="Topic"><?php echo  strlen($job->post_title) > 50 ? substr($job->post_title, 0, 50) . '...' : $job->post_title?></td>
             <td data-label="Request Type"><?php echo $status === 'submit'? 'Waiting for content': 'Waiting for moderator'?></td>

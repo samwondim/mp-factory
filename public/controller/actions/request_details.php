@@ -57,7 +57,8 @@ class Mp_cf_request_details
 		$current_date = date( 'Y-m-d h:i:s' );
 		if(isset($_POST['postId']) && isset($_POST['userId'])){
 			add_post_meta($_POST['postId'], 'mp_cf_claim_article',$_POST['userId']);
-			add_post_meta($_POST['postId'], 'mp_cf_claimed_status','submit');
+			
+			add_post_meta($_POST['postId'], 'mp_cf_claimed_status'.$_POST['userId'],'submit');
 
 			add_user_meta($_POST['userId'], 'mp_cf_claimed_count', $_POST['postId']);
 

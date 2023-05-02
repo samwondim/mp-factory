@@ -124,7 +124,23 @@
       <?php }?>
 
 
-      <div class="cf-requested-bottom-container">
+      
+      
+    </form>
+    
+  </div>
+  
+  <?php if(!empty($moderator_comment) && get_post_status($details->ID) !== 'pending'){?>
+  <div class="cf-request-center" style="margin-top: 23px;">
+    <div class="cf-form-input">
+    
+      <p><?php echo $moderator_comment?></p>
+      </div>
+  </div>
+  <?php }?>
+
+  
+  <div class="cf-requested-bottom-container">
         <table>
           <thead>
             <tr>
@@ -163,9 +179,6 @@
           </tbody>
         </table>
       </div>
-      
-    </form>
-  </div>
 
 
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>

@@ -38,6 +38,8 @@ class Mp_cf_request_details
 		$submissions = get_post_meta($post_id, 'submissions',true);
 		$MPXreward = get_post_meta($post_id, 'MPXreward',true);
 		$guarantee_amount = get_post_meta($post_id, 'guarantee_amount',true);
+		$moderator_comment = get_post_meta($post_id, 'mp_cf_moderator_comment',true);
+
 
 		if(isset($_POST['detailType']) && $_POST['detailType'] == 'my_request'){
 

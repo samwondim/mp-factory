@@ -72,12 +72,14 @@ class Mp_cf_editor_review
 		// Update post status
 		$post_id = $_POST['postId'];
 		$post_status = $_POST['status'];
+		$moderator_comment = $_POST['comment'];
 		if(get_post($post_id)){
 			$update_post = array(
 				'ID'           => $post_id,
 				'post_status'  => $post_status,
 			);
 			wp_update_post( $update_post );
+			update_post_meta($post_id, 'mp_cf_moderator_comment', $moderator_comment);
 		}
 		else echo 'Error updating post status';
 		die();

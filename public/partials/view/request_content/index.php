@@ -206,6 +206,8 @@
           jQuery('.cf-submissions').addClass('hidden')
           jQuery('.cf-MPX-reward-value').addClass('hidden')
           jQuery('.cf-guarantee-value').addClass('hidden')
+          jQuery('.cf-max-submissions').addClass('hidden')
+
 
           jQuery('.cf-tip-amount').removeClass('hidden')
         }
@@ -232,9 +234,9 @@
       }
     })
 
-    mpxReward.addEventListener("keyup", () => {
-      guaranteeValue.value = mpxReward.value * guaranteeAmount
-    })
+    // mpxReward.addEventListener("keyup", () => {
+    //   guaranteeValue.value = mpxReward.value * guaranteeAmount
+    // })
 
 
     jQuery(".cf-submit").click(async function(e) {

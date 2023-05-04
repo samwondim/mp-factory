@@ -54,10 +54,10 @@
 
     <div class="cf-submitted-center hidden">
       <h1 class="cf-submitted-center-heading">
-        Article status updated.
+        Submission status updated.
       </h1>
       <div class="cf-center-button-container">
-      <a href="<?php echo home_url('mp_cf_plugin/review-requests/?moderate=true')?>">
+      <a href="<?php echo home_url('mp_cf_plugin/review-submissions/?moderate=true')?>">
         <button class="cf-center-button-primary">Review more</button>
       </a>
 
@@ -69,6 +69,31 @@
       </div>
     </div>
 
+  </div>
+
+  <div class="cf-requested-bottom-container status-update" data-post-id="<?php echo $post_id?>">
+    <table>
+      <thead>
+        <tr>
+          <th>Content creator</th>
+          <th>Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><?php echo get_user_meta( $post->post_author, 'first_name', true )?></td> 
+          <td><textarea name="" id="moderatorSubmitComment" cols="30" rows="10" data-user-id="<?php echo $post->post_author?>" data-post-id="<?php echo $post_id?>"></textarea></td>
+        </tr>
+        <tr>
+          <td>
+            <input type="button" class="cf-request-bottom-button-primary" data-status="approved" value="Approve"/>
+            <input type="button" class="cf-request-bottom-button-secondary" data-status="declined" value="Decline"/>
+          </td>
+        </tr>
+
+      </tbody>
+    </table> 
   </div>
 
 
@@ -83,22 +108,4 @@
         theme: 'snow'
     });
 })
-</script>
-
-<script>
-    const mediaTypeEl = document.querySelector('.media-type-container') 
-    SELECTED_MEDIA_TYPE = mediaTypeEl.getAttribute('data-media-type')
-    const selectedMediaRadio = document.querySelector(`input[name="mediaType"][value="${SELECTED_MEDIA_TYPE}"]`);
-
-    const requestTypeEl = document.querySelector('.request-type-container') 
-    SELECTED_REQUEST_TYPE = requestTypeEl.getAttribute('data-request-type')
-    const selectedRequestRadio = document.querySelector(`input[name="requestType"][value="${SELECTED_REQUEST_TYPE}"]`);
-
-    if (selectedMediaRadio) {
-      selectedMediaRadio.checked = true;
-    }
-    if (selectedRequestRadio) {
-      selectedRequestRadio.checked = true;
-    }
-   
 </script>

@@ -160,7 +160,7 @@
       <tbody>
         
         <tr>
-          <td>Antonio</td> 
+          <td><?php echo get_user_meta( $details->post_author, 'first_name', true )?></td> 
           <td><textarea name="" id="moderatorComment" cols="30" rows="10" data-post-id="<?php echo $details->ID?>"></textarea></td>
         </tr>
         <tr>

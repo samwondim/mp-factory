@@ -234,6 +234,11 @@ class Mp_Factory
 		
 		$mp_cf_submit_content = new Mp_cf_submit_content();
 		$this->loader->add_action('wp_ajax_mp_cf_submit_content', $mp_cf_submit_content, 'wp_ajax_mp_cf_submit_content');
+		$this->loader->add_action('wp_ajax_mp_cf_my_submission_detail', $mp_cf_submit_content, 'wp_ajax_mp_cf_my_submission_detail');
+		$this->loader->add_action('wp_ajax_mp_cf_review_submission_update', $mp_cf_submit_content, 'wp_ajax_mp_cf_review_submission_update');
+		$this->loader->add_action('wp_ajax_mp_cf_requester_submitted_update', $mp_cf_submit_content, 'wp_ajax_mp_cf_requester_submitted_update');
+		
+		
 
 		$mp_cf_home_editor_public = new Mp_cf_home_editor_public();
 		$this->loader->add_shortcode('mp_cf_review_requests_code', $mp_cf_home_editor_public, 'mp_cf_review_requests_shortcode');
@@ -245,6 +250,9 @@ class Mp_Factory
 		$this->loader->add_action('wp_ajax_mp_cf_search_review_request', $mp_cf_editor_review, 'wp_ajax_mp_cf_search_review_request');
 		$this->loader->add_action('wp_ajax_mp_cf_review_request_update', $mp_cf_editor_review, 'wp_ajax_mp_cf_review_request_update');
 		$this->loader->add_action('wp_ajax_mp_cf_detail_submissions', $mp_cf_editor_review, 'wp_ajax_mp_cf_detail_submissions');
+		$this->loader->add_action('wp_ajax_mp_cf_review_submitted_update', $mp_cf_editor_review, 'wp_ajax_mp_cf_review_submitted_update');
+
+		
 		
 
 

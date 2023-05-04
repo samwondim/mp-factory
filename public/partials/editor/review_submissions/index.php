@@ -39,13 +39,14 @@
           <?php foreach ($review_submissions as $review){
             $parent_post_id = get_post_meta($review->ID, 'mp_cf_submitted_from',true);
             ?>
+            <tr>
             <td data-label="Topic"><?php echo strlen($review->post_title) > 50 ? substr($review->post_title, 0, 50) . '...' : $review->post_title?></td>
             <td data-label="request-type"><?php echo get_post_meta($parent_post_id, 'req_type',true)?></td>
             <td data-label="category"><?php echo get_the_category($review->ID)[0]->name;?></td>
             <td data-label="Action">
               <button class="cf-request-btn submission-view-detail" data-post-id="<?php echo $review->ID?>">View Detail</button>
             </td>            
-
+            </tr>
           <?php }?>
           
         </tbody>
@@ -61,20 +62,48 @@
     const mainContainer = document.querySelector('.cf-right-section')
     const detailBtn = document.querySelector('.submission-view-detail')
     document.querySelector('.cf-review-submissions-tab').classList.add('cf-editor-active')
+    if(detailBtn){
+      detailBtn.addEventListener('click', function(){
+        jQuery.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: {
+              action: 'mp_cf_detail_submissions',
+              postId: detailBtn.getAttribute('data-post-id')
+            },
+            success: function(response) {
+              mainContainer.innerHTML = response
+            }
+          })
+      })
+    }
+    mainContainer.addEventListener('click', function(event) {
+      
+      if (event.target.matches('.cf-request-bottom-button-primary') || event.target.matches('.cf-request-bottom-button-secondary')) {
 
-    detailBtn.addEventListener('click', function(){
-      jQuery.ajax({
+        const commentContent = document.getElementById('moderatorSubmitComment');
+        console.log(commentContent.value);
+
+        jQuery.ajax({
           url: ajaxurl,
           type: 'POST',
           data: {
-            action: 'mp_cf_detail_submissions',
-            postId: detailBtn.getAttribute('data-post-id')
+            action: 'mp_cf_review_submitted_update',
+            postId: commentContent.getAttribute('data-post-id'),
+            userId: commentContent.getAttribute('data-user-id'),
+            status: event.target.getAttribute('data-status'),
+            comment: commentContent.value
           },
           success: function(response) {
-            mainContainer.innerHTML = response
+            console.log(response);
+            document.querySelector('.cf-requested-bottom-container').classList.add('hidden')
+            document.querySelector('.form-container').classList.add('hidden')
+            document.querySelector('.cf-submitted-center').classList.remove('hidden')
+            
           }
         })
-    })
+      }
+    });
    
   })
 </script>

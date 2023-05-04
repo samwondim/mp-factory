@@ -96,4 +96,34 @@ class Mp_cf_editor_review
 		die();
 	}
 
+	public function wp_ajax_mp_cf_review_submitted_update(){
+
+		// Update post status
+		$post_id = $_POST['postId'];
+		$author_id = $_POST['userId'];
+		$post_status = $_POST['status'];
+		$moderator_comment = $_POST['comment'];
+		if(get_post($post_id)){
+			$update_post = array(
+				'ID'           => $post_id,
+				'post_status'  => $post_status,
+			);
+			wp_update_post( $update_post );
+
+			update_post_meta($post_id, 'mp_cf_moderator_comment', $moderator_comment);
+
+			$requested_from = get_post_meta($post_id, 'mp_cf_submitted_from',true); 
+			$submitter_status = get_post_meta($requested_from, 'mp_cf_claim_data_'.$author_id,true); 
+			if(!empty($submitter_status)){
+
+				$submitter_status['claim_status'] = 'moderator_'.$post_status;
+				update_post_meta($requested_from, 'mp_cf_claim_data_'.$author_id, $submitter_status);
+			}
+			print_r($submitter_status);
+
+		}
+		else echo 'Error updating post status';
+		die();
+	}
+
 }

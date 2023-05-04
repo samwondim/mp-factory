@@ -31,13 +31,13 @@
               $status = 'Waiting for requester.';
             }else if($request_status['claim_status'] ==='requester_approved'){
               $is_submitted = true;
-              $status = 'Waiting for rank';
+              $status = 'Waiting for rank.';
             }
             
             ?>
           <tr>
             <td data-label="Topic"><?php echo  strlen($job->post_title) > 50 ? substr($job->post_title, 0, 50) . '...' : $job->post_title?></td>
-            <td data-label="submission-status"><?php echo !$is_submitted ? 'Waiting for content': $status?></td>
+            <td data-label="submission-status"><?php echo !$is_submitted ? 'Waiting for content.': $status?></td>
             <td data-label="request-deadline"><?php echo get_post_meta($job->ID, 'req_deadline',true)?></td>
             <td data-label="submission-deadline"><?php echo get_post_meta($job->ID, 'submission_deadline',true)?></td>
 

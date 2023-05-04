@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="<?php echo mp_cf_PLAGIN_URL . 'public/css/mp-factory-active-jobs.css'?>">
 
   <div class="cf-right-top-section">
-    <h1>My requests</h1>
+    <h1>Review requests detail</h1>
     <div class="cf-right-top-icon-container">
       <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Setting.svg'?>" alt="" />
     </div>
@@ -21,8 +21,8 @@
         </div>
 
         <div class="cf-form-input">
-          <label for="category">Title</label>
-          <input type="text"  placeholder="Title" value="<?php echo $category[0]->name?>"/>
+          <label for="category">Category</label>
+          <input type="text"  placeholder="Category" value="<?php echo $category[0]->name?>"/>
         </div>
       
         <div class="cf-form-input">

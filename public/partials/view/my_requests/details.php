@@ -165,7 +165,7 @@
                   $status = "Waiting moderator."; 
                 }else if($claimer_data['claim_status'] === 'moderator_approved'){
                   $status = "moderate"; 
-                }
+                }else $status = 'Active';
 
               }else $status = 'Active'
               ?>

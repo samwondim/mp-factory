@@ -155,7 +155,7 @@
 
         <div class="cf-form-input cf-guarantee-value hidden">
           <label for="guaranteeValue">Guarantee Value (%)</label>
-          <input type="number" id="guaranteeValue" placeholder="<?php echo $guarantee_value."%"?>" guarantee="<?php echo $guarantee_value?>" />
+          <input type="number" id="guaranteeValue" value="<?php echo $guarantee_value?>" guarantee="<?php echo $guarantee_value?>" />
         </div>
         
         <button type="submit" class="cf-submit" id="cf-submit-request" >Submit</button>

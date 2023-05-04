@@ -106,7 +106,7 @@
             console.log(response);
             document.querySelector('.cf-requested-bottom-container').classList.add('hidden')
             document.querySelector('.form-container').classList.add('hidden')
-            document.querySelector('.cf-submitted-center').innerHTML = 'Submission Approved.';
+            document.querySelector('.cf-submitted-center-heading').innerHTML = 'Submission Approved.';
             document.querySelector('.cf-submitted-center').classList.remove('hidden')
             
           }

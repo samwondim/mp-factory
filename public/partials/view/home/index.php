@@ -27,7 +27,7 @@ else $is_moderator = 'user'
             />
             <span class="cf-center-grid-card-heading">View Jobs</span>
           </div>
-          <p class="cf-card-notification">Write an article and get Paid</p>
+          <p class="cf-card-notification">Write an article and get Paid.</p>
           <p class="cf-card-notification">
             <b>Available jobs: <span><?php do_shortcode('[mp_cf_requested_articles_code display = "count"]')?></span></b>
           </p>

@@ -75,6 +75,12 @@
     document.querySelector('.cf-review-requests-tab').classList.add('cf-editor-active')
 
     mainContainer.addEventListener('click', function(event) {
+
+      const formContainer = document.querySelector('.form-container');
+
+      if(formContainer){
+        formContainer.classList.add('disable-form')
+      }
       
       if (event.target.matches('.cf-request-bottom-button-primary') || event.target.matches('.cf-request-bottom-button-secondary')) {
 

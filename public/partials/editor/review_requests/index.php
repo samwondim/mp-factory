@@ -75,19 +75,31 @@
     document.querySelector('.cf-review-requests-tab').classList.add('cf-editor-active')
 
     mainContainer.addEventListener('click', function(event) {
+
+      const formContainer = document.querySelector('.form-container');
+
+      if(formContainer){
+        formContainer.classList.add('disable-form')
+      }
       
       if (event.target.matches('.cf-request-bottom-button-primary') || event.target.matches('.cf-request-bottom-button-secondary')) {
+
+        const commentContent = document.getElementById('moderatorComment');
+        console.log(commentContent.getAttribute('data-post-id'));
 
         jQuery.ajax({
           url: ajaxurl,
           type: 'POST',
           data: {
             action: 'mp_cf_review_request_update',
-            postId: event.target.parentElement.getAttribute('data-post-id'),
-            status: event.target.getAttribute('data-status')
+            postId: commentContent.getAttribute('data-post-id'),
+            status: event.target.getAttribute('data-status'),
+            comment: commentContent.value
           },
           success: function(response) {
             console.log(response);
+            
+            document.querySelector('.cf-requested-bottom-container').classList.add('hidden')
             document.querySelector('.form-container').classList.add('hidden')
             document.querySelector('.cf-submitted-center').classList.remove('hidden')
             

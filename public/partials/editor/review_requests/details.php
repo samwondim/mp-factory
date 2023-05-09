@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="<?php echo mp_cf_PLAGIN_URL . 'public/css/mp-factory-active-jobs.css'?>">
 
   <div class="cf-right-top-section">
-    <h1>My requests</h1>
+    <h1>Review requests detail</h1>
     <div class="cf-right-top-icon-container">
-      <img src="<?php echo mp_cf_PLAGIN_DIR . 'public/assets/Setting.svg'?>" alt="" />
+      <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Setting.svg'?>" alt="" />
     </div>
   </div>
   <a href="<?php echo home_url('mp_cf_plugin/review-requests/?moderate=true')?>">
@@ -21,8 +21,8 @@
         </div>
 
         <div class="cf-form-input">
-          <label for="category">Title</label>
-          <input type="text"  placeholder="Title" value="<?php echo $category[0]->name?>"/>
+          <label for="category">Category</label>
+          <input type="text"  placeholder="Category" value="<?php echo $category[0]->name?>"/>
         </div>
       
         <div class="cf-form-input">
@@ -124,23 +124,11 @@
         </div>
         <?php }?>
 
-        <div class="cf-request-bottom-button-container" data-post-id="<?php echo $details->ID?>">
-                <input
-                  type="button"
-                  class="cf-request-bottom-button-primary"
-                  data-status="approved"
-                  value="Approve"
-                />
-                <input
-                  type="button"
-                  class="cf-request-bottom-button-secondary"
-                  data-status="declined"
-                  value="Decline"
-                />
-              </div>
+        
         
       </form>
     </div>
+  
 
     <div class="cf-submitted-center hidden">
       <h1 class="cf-submitted-center-heading">
@@ -159,6 +147,31 @@
       </div>
     </div>
 
+  </div>
+
+  <div class="cf-requested-bottom-container status-update" data-post-id="<?php echo $details->ID?>">
+    <table>
+      <thead>
+        <tr>
+          <th>Content creator</th>
+          <th>Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td><?php echo get_user_meta( $details->post_author, 'first_name', true )?></td> 
+          <td><textarea name="" id="moderatorComment" cols="30" rows="10" data-post-id="<?php echo $details->ID?>"></textarea></td>
+        </tr>
+        <tr>
+          <td>
+            <input type="button" class="cf-request-bottom-button-primary" data-status="approved" value="Approve"/>
+            <input type="button" class="cf-request-bottom-button-secondary" data-status="declined" value="Decline"/>
+          </td>
+        </tr>
+
+      </tbody>
+    </table> 
   </div>
 
 

@@ -58,8 +58,8 @@
             wp_editor($content, $editor_id, array());
           ?>
         </div>
-        
-        <button id ="submitContent" postID="<?php echo $post_id?>" userId="<?php echo get_current_user_id()?>" type="submit" class="cf-submit cf-submit-content" >Submit</button>
+          
+        <button id ="submitContent" postID="<?php echo $post->ID?>" userId="<?php echo get_current_user_id()?>" type="submit" class="cf-submit cf-submit-content" >Submit</button>
       </form>
     </div>
 
@@ -113,6 +113,7 @@
           contentCategory: submitCategory.value,submit_content
         },
         success: async function(response) {
+          console.log(response);
           loader('submitContent',false,'Submit')
           formContainer.classList.add('hidden')
           submittedCenter.classList.remove('hidden')

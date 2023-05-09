@@ -20,8 +20,8 @@
       </div>
 
       <div class="cf-form-input">
-        <label for="category">Title</label>
-        <input type="text"  placeholder="Title" value="<?php echo $category[0]->name?>"/>
+        <label for="category">Category</label>
+        <input type="text"  placeholder="Category" value="<?php echo $category[0]->name?>"/>
       </div>
      
       <div class="cf-form-input">
@@ -124,7 +124,23 @@
       <?php }?>
 
 
-      <div class="cf-requested-bottom-container">
+      
+      
+    </form>
+    
+  </div>
+  
+  <?php if(!empty($moderator_comment) && get_post_status($details->ID) !== 'pending'){?>
+  <div class="cf-request-center" style="margin-top: 23px;">
+    <div class="cf-form-input">
+    
+      <p><?php echo $moderator_comment?></p>
+      </div>
+  </div>
+  <?php }?>
+
+  
+  <div class="cf-requested-bottom-container">
         <table>
           <thead>
             <tr>
@@ -137,18 +153,35 @@
           </thead>
           <tbody>
             <?php 
-            $claimer_data = get_post_meta($details->ID, 'mp_cf_claim_data',true);
-            
+
             foreach($all_claimers as $claimer){
-              if($claimer == $claimer_data['user_id']){
-                $status = $claimer_data['claim_status'] === 'waiting_content' ? "Waiting content" : ''; 
+              $claimer_data = get_post_meta($details->ID, 'mp_cf_claim_data_'.$claimer,true);
+              
+              if(!empty($claimer_data)){
+                if($claimer_data['claim_status'] === 'waiting_content'){
+                  $status = "Waiting content"; 
+                } 
+                else if($claimer_data['claim_status'] === 'submitted'){
+                  $status = "Waiting moderator."; 
+                }else if($claimer_data['claim_status'] === 'moderator_approved'){
+                  $status = "moderate"; 
+                }else $status = 'Active';
+
               }else $status = 'Active'
               ?>
             <tr>
               <td data-label="Topic"><?php echo get_user_meta($claimer, 'first_name', true);?></td>
               <td data-label="public-0address">user public address</td>
               <td data-label="claimed-time"><?php echo $claimer == $claimer_data['user_id'] ? $claimer_data['request_time']:''?></td>
-              <td data-label="Status"><?php echo $status?></td>
+              <td data-label="Status">
+                <?php 
+                if ($status !== 'moderate') echo $status;
+                else {?>
+                  <a href="<?php echo home_url('mp_cf_plugin/my-requests/?moderate_submission=').$claimer_data['post_id']?>">
+                    <button class="cf-requester-btn" >Moderate</button>
+                  </a>
+                <?php }?>
+              </td>
               <td data-label="Status">Not yet</td>
             </tr>
 
@@ -157,9 +190,6 @@
           </tbody>
         </table>
       </div>
-      
-    </form>
-  </div>
 
 
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>

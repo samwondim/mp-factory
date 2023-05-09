@@ -101,7 +101,7 @@
       <div class="cf-form-input cf-max-submissions">
       <label for="submissions">Guarantee Value (%)</label>
       <div class="cf-request-mediaType-radio-container">
-        <label for="maxSubmission2"><?php echo $guarantee_amount?> MPX</label>
+        <label for="maxSubmission2"><?php echo $guarantee_amount?></label>
       </div>
     </div>
       <?php }?>

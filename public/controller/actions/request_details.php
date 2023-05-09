@@ -38,6 +38,8 @@ class Mp_cf_request_details
 		$submissions = get_post_meta($post_id, 'submissions',true);
 		$MPXreward = get_post_meta($post_id, 'MPXreward',true);
 		$guarantee_amount = get_post_meta($post_id, 'guarantee_amount',true);
+		$moderator_comment = get_post_meta($post_id, 'mp_cf_moderator_comment',true);
+
 
 		if(isset($_POST['detailType']) && $_POST['detailType'] == 'my_request'){
 
@@ -61,11 +63,12 @@ class Mp_cf_request_details
 
 			$data = array(
 				'user_id' => $_POST['userId'],
+				'post_id' => $_POST['postId'],
 				'claim_status' => 'waiting_content',
 				'request_time' => $request_time,
 			);
 			
-			add_post_meta( $_POST['postId'], 'mp_cf_claim_data', $data );
+			add_post_meta( $_POST['postId'], 'mp_cf_claim_data_'.$_POST['userId'], $data );
 
 			add_user_meta($_POST['userId'], 'mp_cf_claimed_count', $_POST['postId']);
 		}

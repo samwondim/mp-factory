@@ -2,3 +2,8 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+ .disable-form {
+    pointer-events: none;
+    cursor: default;
+ }

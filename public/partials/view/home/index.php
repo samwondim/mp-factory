@@ -34,7 +34,6 @@ else $is_moderator = 'user'
       <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
     </div>
   </a>
-  <!-- <a href="<?php echo home_url('mp_cf_plugin/request-content')?>"> -->
     <div class="cf-center-grid-card">
       <div class="cf-center-grid-card-top">
         <img
@@ -47,22 +46,25 @@ else $is_moderator = 'user'
 
       <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
     </div>
-  <!-- </a> -->
-  <div class="cf-center-grid-card">
-    <div class="cf-center-grid-card-top">
-      <img
-        class="cf-center-grid-card-img"
-        src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/chart-2.svg'?>"
-        alt=""
-      />
-      <span class="cf-center-grid-card-heading">Vote</span>
+
+  <a href="<?php echo home_url('mp_cf_plugin/vote')?>">
+    <div class="cf-center-grid-card">
+      <div class="cf-center-grid-card-top">
+        <img
+          class="cf-center-grid-card-img"
+          src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/chart-2.svg'?>"
+          alt=""
+        />
+        <span class="cf-center-grid-card-heading">Vote</span>
+      </div>
+      <p class="cf-card-notification">Vote on articles</p>
+      <p class="cf-card-notification">
+        <b>Active votes: <span><?php do_shortcode('[mp_cf_vote_code display = "count"]')?></span></b>
+      </p>
+      <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
     </div>
-    <p class="cf-card-notification">Vote on articles</p>
-    <p class="cf-card-notification">
-      <b>Active votes: <span>(20)</span></b>
-    </p>
-    <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
-  </div>
+  </a>
+
     
   <div class="popup" id="popup-cf">
     <div class="popcard" style="top: 30%" >

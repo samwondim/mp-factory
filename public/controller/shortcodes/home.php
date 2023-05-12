@@ -59,6 +59,10 @@ class Mp_cf_home_public
 					'compare' => '>=',
 					'type' => 'DATE'
 				),
+				array(
+					'key' => 'req_type', // get requests when its deadline is greater than the current date.
+					'value' => 'paid',
+				)
 				
 			)
 		));

@@ -5,7 +5,6 @@
       <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Setting.svg'?>" alt="" />
     </div>
   </div>
-  <div class="cf-right-section">
     <div class="cf-requested-top-container">
       <div class="cf-requested-top-left">
         <span> show</span>
@@ -59,14 +58,13 @@
         </table>
       </div>
     </div>
-  </div>
 </div>
 <script src="<?php echo mp_cf_PLAGIN_URL . 'public/js/validation.js'?>"></script>
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {
     var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
-    const mainContainer = document.querySelector('.cf-requested-top')
+    const mainContainer = document.querySelector('.cf-right-section')
     const detailBtn = document.querySelectorAll('.cf-request-btn')
 
 
@@ -85,7 +83,6 @@
         },
         success: async function(response) {
           mainContainer.innerHTML = response
-          document.querySelector('.cf-requested-top-container').innerHTML = ''
 
           var arr = document.getElementsByTagName('script')
           for (var n = 0; n < arr.length; n++)

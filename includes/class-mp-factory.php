@@ -131,9 +131,12 @@ class Mp_Factory
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-mp-factory-public.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/shortcodes/home.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/shortcodes/content-request.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/shortcodes/vote_home.php';
+
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/actions/request_content.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/actions/request_details.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/actions/submit_content.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/actions/vote_actions.php';
 
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/shortcodes/home_editor.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/controller/actions/editor_review.php';
@@ -238,7 +241,11 @@ class Mp_Factory
 		$this->loader->add_action('wp_ajax_mp_cf_review_submission_update', $mp_cf_submit_content, 'wp_ajax_mp_cf_review_submission_update');
 		$this->loader->add_action('wp_ajax_mp_cf_requester_submitted_update', $mp_cf_submit_content, 'wp_ajax_mp_cf_requester_submitted_update');
 		
-		
+		$mp_cf_vote_home = new Mp_cf_vote_home();
+		$this->loader->add_shortcode('mp_cf_vote_code', $mp_cf_vote_home, 'mp_cf_vote_shortcode');
+
+		$mp_cf_vote_actions = new Mp_cf_vote_actions();
+		$this->loader->add_action('wp_ajax_mp_cf_vote', $mp_cf_vote_actions, 'wp_ajax_mp_cf_vote');
 
 		$mp_cf_home_editor_public = new Mp_cf_home_editor_public();
 		$this->loader->add_shortcode('mp_cf_review_requests_code', $mp_cf_home_editor_public, 'mp_cf_review_requests_shortcode');

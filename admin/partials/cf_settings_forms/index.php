@@ -48,6 +48,16 @@ $fields = [
     'field_default' =>15,
     'field_info' => __('Guarantee value in MPX percent to be given to the requester.', 'mp_cf'),
   ],
+  [
+    'field_group' => 'group_set_cf_setting',
+    'field_title' => __('Minimum MPXR to request content', 'mp_cf'),
+    'field_name' => 'mp_cf_min_mpxr_to_request',
+    'field_type'  => 'text',
+    'field_length' => 2,
+    'field_required' => FALSE,
+    'field_default' =>1,
+    'field_info' => __('Minimum MPXR value for the user to request content.', 'mp_cf'),
+  ],
   
   [
     'field_group' => 'actions',

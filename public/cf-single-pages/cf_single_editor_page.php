@@ -16,7 +16,7 @@
         <h1 class="cf-meta-data-name">Hello, <?php echo $user->first_name .' '. $user->last_name; ?></h1>
         <div class="cf-meta-contain">
           <p class="cf-meta-data-mpxr">MPXR Balance:</p>
-          <span><?php echo $mpxr;?></span>
+          <span class="cf-mpxr-balance"><?php echo $mpxr;?></span>
         </div>
         <div class="cf-meta-contain">
           <p class="cf-meta-data-desc">

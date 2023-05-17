@@ -70,16 +70,35 @@ class Mp_cf_editor_review
 	public function wp_ajax_mp_cf_review_request_update(){
 
 		// Update post status
+		$current_time = new Datetime();
 		$post_id = $_POST['postId'];
 		$post_status = $_POST['status'];
 		$moderator_comment = $_POST['comment'];
 		if(get_post($post_id)){
+			$content_type = get_post_meta($_POST['postId'],'req_type',true);
+
+			if($content_type == 'free' && $post_status == 'approved'){
+				$post_status = 'pending_vote';
+				$posts_for_vote = get_posts(array('post_status' => 'pending_vote'));
+				if(count($posts_for_vote) === 0){
+					// $batch_interval = get_option('mp_cf_batch_interval',true);
+					$batch_interval = 48;
+					
+					$batch_start_time = $current_time->add(new DateInterval('PT'.$batch_interval.'H'));
+					
+					update_option('mp_cf_vote_batch_starts', $batch_start_time);
+				
+					if (!wp_next_scheduled ( 'mp_cf_move_to_vote'))
+						wp_schedule_event(time() + 60, '1min', 'mp_cf_move_to_vote');
+				}
+			}
 			$update_post = array(
 				'ID'           => $post_id,
 				'post_status'  => $post_status,
 			);
 			wp_update_post( $update_post );
 			update_post_meta($post_id, 'mp_cf_moderator_comment', $moderator_comment);
+			update_post_meta($post_id, 'mp_cf_approved_for_vote_at', $current_time);
 		}
 		else echo 'Error updating post status';
 		die();
@@ -117,9 +136,7 @@ class Mp_cf_editor_review
 			if(!empty($submitter_status)){
 
 				$submitter_status['claim_status'] = 'moderator_'.$post_status;
-				update_post_meta($requested_from, 'mp_cf_claim_data_'.$author_id, $submitter_status);
 			}
-			print_r($submitter_status);
 
 		}
 		else echo 'Error updating post status';

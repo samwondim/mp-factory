@@ -181,6 +181,11 @@ class Mp_Factory
 		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_post_type_rq_init', 1, 1);
 		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_approved_post_status', 1, 1);
 		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_declined_post_status', 1, 1);
+		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_vote_win_post_status', 1, 1);
+		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_vote_approved_post_status', 1, 1);
+		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_pending_vote_post_status', 1, 1);
+		
+		
 
 
 		$Mp_cf_submitted_contents_Admin = new Mp_cf_submitted_contents_Admin();
@@ -246,6 +251,10 @@ class Mp_Factory
 
 		$mp_cf_vote_actions = new Mp_cf_vote_actions();
 		$this->loader->add_action('wp_ajax_mp_cf_vote', $mp_cf_vote_actions, 'wp_ajax_mp_cf_vote');
+		$this->loader->add_action('mp_cf_move_to_vote', $mp_cf_vote_actions, 'mp_cf_prepare_batchs_for_vote');
+		$this->loader->add_filter('cron_schedules', $mp_cf_vote_actions, 'my_cron_schedules');
+
+		
 
 		$mp_cf_home_editor_public = new Mp_cf_home_editor_public();
 		$this->loader->add_shortcode('mp_cf_review_requests_code', $mp_cf_home_editor_public, 'mp_cf_review_requests_shortcode');

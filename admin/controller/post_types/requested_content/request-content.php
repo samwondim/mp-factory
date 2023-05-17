@@ -128,4 +128,45 @@ class Mp_cf_rq_Admin
 			
         ));
     }
+
+	function mp_cf_vote_approved_post_status(){
+        register_post_status( 'approved_for_vote', array(
+            'label'                     => _x( 'Approved for vote', 'post' ),
+            'label_count'               => _n_noop( 'Approved for vote <span class="count">(%s)</span>', 'Approved for vote <span class="count">(%s)</span>'),
+            'public'                    => true,
+            'exclude_from_search'       => true,
+            'publicly_queryable'       => true,
+            'show_in_admin_all_list'    => true,
+            'show_in_admin_status_list' => true,
+			'description'               => __( 'Approved for vote by Moderator.' ),
+			
+        ));
+    }
+
+	function mp_cf_vote_win_post_status(){
+        register_post_status( 'win_vote', array(
+            'label'                     => _x( 'Win vote', 'post' ),
+            'label_count'               => _n_noop( 'Win vote <span class="count">(%s)</span>', 'Win vote <span class="count">(%s)</span>'),
+            'public'                    => true,
+            'exclude_from_search'       => true,
+            'publicly_queryable'       => true,
+            'show_in_admin_all_list'    => true,
+            'show_in_admin_status_list' => true,
+			'description'               => __( 'Content wins the voting process.' ),
+			
+        ));
+    }
+	function mp_cf_pending_vote_post_status(){
+        register_post_status( 'pending_vote', array(
+            'label'                     => _x( 'Pending vote', 'post' ),
+            'label_count'               => _n_noop( 'Pending vote <span class="count">(%s)</span>', 'Pending vote <span class="count">(%s)</span>'),
+            'public'                    => true,
+            'exclude_from_search'       => true,
+            'publicly_queryable'       => true,
+            'show_in_admin_all_list'    => true,
+            'show_in_admin_status_list' => true,
+			'description'               => __( 'Request is pending vote.' ),
+			
+        ));
+    }
 }

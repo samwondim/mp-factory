@@ -43,4 +43,64 @@ class Mp_cf_vote_actions
 		die();
 	}
 
+	function my_cron_schedules($schedules){
+		if(!isset($schedules["1min"])){
+			$schedules["1min"] = array(
+				'interval' => 60,
+				'display' => __('Once every 1 minute'));
+		}
+		return $schedules;
+	}
+
+	function mp_cf_prepare_batchs_for_vote(){
+		
+		$posts_for_vote = get_posts(
+			array(
+				'post_type' => 'cf-requested-content',
+				'post_status' => 'pending_vote',
+				'post_per_page' => -1
+			)
+		);
+			
+		foreach ($posts_for_vote as $post) {
+			$post->post_status = 'approved_for_vote';
+			wp_update_post($post);
+		}
+
+		$votted_post_ids = get_posts(
+			array(
+				'post_type' => 'cf-requested-content',
+				'post_status' => 'approved_for_vote',
+				'post_per_page' => -1,
+				'fields' => 'ids'
+			)
+		);
+
+		$post_values = array();
+
+		// Loop through each post ID
+		foreach ($votted_post_ids as $post_id) {
+			$post_value = get_post_meta($post_id, 'post_up_vote', true);
+
+			$post_values[$post_id] = $post_value;
+		}
+
+		// Sort the post values in descending order
+		arsort($post_values, SORT_NUMERIC);
+
+		// Get the top 5 highest post values
+		$top_5_values = array_slice($post_values, 0, 5, true);
+
+		// Process the results
+		foreach ($top_5_values as $post_id => $post_value) {
+			$approve_to_vew_jobs = array(
+				'ID'          => $post_id,
+				'post_status' => 'approved',
+			);
+			wp_update_post($approve_to_vew_jobs);
+
+		}
+		// update_option('mp_cf_current_batch', $posts_for_vote);
+	}
+
 }

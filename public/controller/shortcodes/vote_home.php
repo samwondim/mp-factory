@@ -26,10 +26,12 @@ class Mp_cf_vote_home
 	{
 		$current_date = date( 'Y-m-d' ); // Get the current date in YYYY-MM-DD format
 		$user_id = get_current_user_id();
+		$vote_starts = get_option('mp_cf_vote_batch_starts',true);
+		
 
 		$requested_articles = get_posts(array(
 			'post_type' => 'cf-requested-content',
-			'post_status' => 'approved',
+			'post_status' => 'approved_for_vote',
 			'posts_per_page' => -1,
 			'author__not_in' => array( $user_id ),
 			'meta_query' => array(
@@ -41,7 +43,7 @@ class Mp_cf_vote_home
 					'type' => 'DATE'
 				),
 				array(
-					'key' => 'req_type', // get requests when its deadline is greater than the current date.
+					'key' => 'req_type', 
 					'value' => 'free',
 				)
 				

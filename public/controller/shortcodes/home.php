@@ -25,6 +25,7 @@ class Mp_cf_home_public
 
 	public function mp_cf_dashboard_shortcode()
 	{
+		$min_mpxr = get_option('mp_cf_min_mpxr_to_request',1);
 		include_once mp_cf_PLAGIN_DIR . 'public/partials/view/home/index.php';
 	}
 
@@ -58,6 +59,10 @@ class Mp_cf_home_public
 					'compare' => '>=',
 					'type' => 'DATE'
 				),
+				array(
+					'key' => 'req_type', // get requests when its deadline is greater than the current date.
+					'value' => 'paid',
+				)
 				
 			)
 		));

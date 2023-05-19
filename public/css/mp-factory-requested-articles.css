@@ -1,76 +1,4 @@
-/* 
-html {
-    background: linear-gradient(180deg, #052F46 0%, #1E253D 100%);
-}
 
-.cf-dashboard {
-color: #fff;
-display: grid;
-grid-template-columns: 370px auto;
-gap: 40px;
-margin: 34px;
-}
-
-.cf-left-section {
-    background: linear-gradient(180deg, #0E375E 0%, rgba(43, 171, 180, 0.29) 118.35%);
-    width: 397px;
-    padding: 63px 20px;
-}
-
-.cf-left-top-section {
-    display: flex;
-    gap: 13px;
-}
-
-.cf-left-top-section img {
-    width: 114px;
-    height: 114px;
-    border-radius: 50%;
-}
-
-.cf-meta-data-name {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 24px;
-    line-height: 29px;
-    display: flex;
-    align-items: center;
-}
-
-.cf-meta-contain {
-    display: flex;
-    align-items: baseline;
-    gap: 5px;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 14px;
-    margin-top: 5px;
-}
-
-.cf-left-bottom-section {
-    margin-top: 49px;
-}
-
-.cf-left-tabs-title {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-}
-
-.cf-left-tabs {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid rgba(99, 159, 152, 1);
-    padding: 17px;
-    cursor: pointer;
-    stroke: #fff;
-}
-
-*/
 .cf-right-top-section {
     display: flex;
     justify-content: space-between;
@@ -416,4 +344,8 @@ form {
         text-transform: uppercase;
         font-weight: bold;
     }
+}
+
+.cf-vote{
+    cursor: pointer;
 }

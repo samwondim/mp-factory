@@ -60,6 +60,10 @@ class Mp_cf_home_public
 					'type' => 'DATE'
 				),
 				array(
+					'key' => 'mp_cf_claim_data_'.$user_id,
+					'compare' => 'NOT EXISTS',
+				),
+				array(
 					'key' => 'req_type', // get requests when its deadline is greater than the current date.
 					'value' => 'paid',
 				)

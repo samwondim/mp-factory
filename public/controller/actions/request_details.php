@@ -56,7 +56,9 @@ class Mp_cf_request_details
 	}
 
 	public function wp_ajax_mp_cf_claim_article(){
+		global $wpdb, $table_prefix;
 		$request_time = date( 'Y-m-d h:i:s' );
+		$mp_rp_notification = $table_prefix . "mp_rp_notification";
 
 		if(isset($_POST['postId']) && isset($_POST['userId'])){
 			add_post_meta($_POST['postId'], 'mp_cf_claim_article',$_POST['userId']);
@@ -71,6 +73,13 @@ class Mp_cf_request_details
 			add_post_meta( $_POST['postId'], 'mp_cf_claim_data_'.$_POST['userId'], $data );
 
 			add_user_meta($_POST['userId'], 'mp_cf_claimed_count', $_POST['postId']);
+
+			$wpdb->insert($mp_rp_notification, array(
+				'interactor_id' => get_current_user_id(),
+				'user_id' => get_post_field ('post_author', $_POST['postId']),
+				'service_id' => $_POST['postId'],
+				'type' => 'claim_start',
+			));
 		}
 		die();
 	}

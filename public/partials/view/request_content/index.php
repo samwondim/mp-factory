@@ -295,6 +295,10 @@
             loader('cf-submit-request',false,'Submit')
             document.querySelector('.form-container').classList.add('hidden')
             document.querySelector('.cf-submitted-center').classList.remove('hidden')
+            const myRequestsSpan = document.querySelector('.cf-my-requests-notif')
+            const currentValue = parseInt(myRequestsSpan.innerHTML.match(/\d+/)[0]);
+            
+            myRequestsSpan.innerHTML = `(${currentValue + 1})`;
           }
           else{
             console.log(response);

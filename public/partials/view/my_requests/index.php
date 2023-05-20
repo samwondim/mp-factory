@@ -36,20 +36,27 @@
         <tbody>
           <?php foreach ($my_requests as $article){
             $status_object = get_post_status_object( $article->post_status );
-            
-            $is_claimed = get_post_meta($article->ID, 'mp_cf_claim_article',true);
-            if($is_claimed == get_current_user_id())
-              continue;
-
             $claimed_count = get_post_meta($article->ID, 'mp_cf_claim_article');
+            $total_submissions = get_post_meta($article->ID, 'submissions',true);
+            if(isset($status_object->description) ){
+              if(empty($claimed_count)){
+                $status_message = $status_object->description;
+              } 
+              else if(count($claimed_count) < $total_submissions)
+                $status_message = 'Claiming has begun.';
+              else if( count($claimed_count) == $total_submissions)
+                $status_message = 'Claimed.';
+
+            }
+            else $status_message = 'Waiting for moderator.';
             ?>
           <tr> 
             <td data-label="Topic"><?php echo strlen($article->post_title) > 50 ? substr($article->post_title, 0, 50) . '...' : $article->post_title?></td>
             <td data-label="Request Type"><?php echo get_post_meta($article->ID, 'req_type',true)?></td>
             <td data-label="No. of Claim"> <?php echo count($claimed_count).' out of '. get_post_meta($article->ID, 'submissions',true) ?></td>
-            <td data-label="status"><?php echo isset($status_object->description) ? $status_object->description : 'Waiting for moderator.'?></td>
+            <td data-label="status"><?php echo $status_message?></td>
             <td data-label="Action">
-              <button class="cf-request-btn" postId="<?php echo $article->ID?>">Detail</button>
+              <button class="cf-request-btn cf-detail-<?php echo $article->ID?>" postId="<?php echo $article->ID?>">Detail</button>
             </td>
           </tr>
 
@@ -67,12 +74,19 @@
   window.addEventListener('DOMContentLoaded', () => {
     
     document.querySelector('.cf-my-request-tab').classList.add('cf-active')
+    const myRequestsSpan = document.querySelector('.cf-my-requests-notif')
     
+    myRequestsSpan.innerHTML = `(0)`;
 
     var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
     const mainContainer = document.querySelector('.cf-right-section')
     const detailBtn = document.querySelectorAll('.cf-request-btn')
 
+    // const cfUrlParams = new URLSearchParams(window.location.search);
+    // if (cfUrlParams.has('cf-request')) {
+    //   // document.querySelector(`.${cfUrlParams.get('cf-request')}`).click()
+      
+    // }
 
     detailBtn.forEach(element=>{
       element.addEventListener('click', seeDetail);

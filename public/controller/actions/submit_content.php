@@ -51,6 +51,9 @@ class Mp_cf_submit_content
 					update_post_meta($_POST['postId'], 'mp_cf_claim_data_'.get_current_user_id(), $request_status);
 	
 					add_post_meta($insert_id, 'mp_cf_submitted_from', $_POST['postId']);
+
+					update_post_meta($insert_id, 'mp_gl_post_brief_overview', $_POST['contentTeaser']);
+					update_post_meta($insert_id, 'mp_gl_post_author_bio', $_POST['contentBio']);
 					
 					echo 'done';
 				}

@@ -1,7 +1,7 @@
 
 <div class="cf-right-section">
   <div class="cf-right-top-section">
-    <h1>Submit content</h1>
+    <h1>Submit your content</h1>
     <div class="cf-right-top-icon-container">
       <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Setting.svg'?>" alt="" />
     </div>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="cf-form-input">
-          <label for="description">Description</label>
+          <label for="content">Content</label>
           <!-- <input type="text" id="description" placeholder="Title" /> -->
           <?php
             // default settings - Kv_front_editor.php
@@ -58,6 +58,39 @@
             wp_editor($content, $editor_id, array());
           ?>
         </div>
+
+        <div class="cf-form-input">
+          <label for="teaser">Teaser/Deck </label>
+          <div class="">
+            <div id="cf-teaser-container" class="cf-toolbar-container">
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-link"></button>
+                <!-- <button id="custom-button" class="custom-button">
+                    &#x1F642;
+                </button> -->
+            </div>
+            <div id="cfTeaserContent"></div>
+          </div>
+        </div>
+
+        <div class="cf-form-input">
+          <label for="bio">Your Brief Bio </label>
+          <div class="">
+            <div id="cf-EditorBio-container" class="cf-toolbar-container">
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-link"></button>
+                <!-- <button id="custom-button" class="custom-button">
+                    &#x1F642;
+                </button> -->
+            </div>
+            <div id="cfEditorBioContent"></div>
+          </div>
+        </div>
+        
           
         <button id ="submitContent" postID="<?php echo $post->ID?>" userId="<?php echo get_current_user_id()?>" type="submit" class="cf-submit cf-submit-content" >Submit</button>
       </form>
@@ -83,7 +116,11 @@
 
   
 </div>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
 <script src="<?php echo mp_cf_PLAGIN_URL . 'public/js/validation.js'?>"></script>
+<script src="<?php echo mp_cf_PLAGIN_URL . 'public/js/notification.js'?>"></script>
 <script>
   window.addEventListener("DOMContentLoaded", () => {
     var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
@@ -93,14 +130,70 @@
     const contentTitle = document.getElementById('contentTitle')
     const submitCategory = document.getElementById('submitCategory')
 
+    const cfTeaser = new Quill('#cfTeaserContent', {  
+      modules: {
+          toolbar: '#cf-teaser-container'
+      },
+      theme: 'snow'
+    });
+
+    const cfEditorBio = new Quill('#cfEditorBioContent', {  
+      modules: {
+          toolbar: '#cf-EditorBio-container'
+      },
+      theme: 'snow'
+    });
+
+    const regex = /(<([^>]+)>)/ig
+    const stripContent = data => data.replaceAll(regex, " ").trim().split(/[\s]+/)
+    // const max = 140;
+    // const maxWordCount = parseInt(`< ?php echo get_option('mp_cf_max_word_count', true)?>`);
+    const maxWordCount = 3;
+    let deletingText = false;
+    cfTeaser.on('text-change',function(){
+       if (deletingText) {
+          return; // Skip the event if text deletion is already in progress
+      }
+      // const text = cfTeaser.getText();
+      // const teaserLength = text.trim().split(/\s+/);
+
+      if (cfTeaser.getLength() > maxWordCount) {
+        deletingText = true;
+            const excessText = cfTeaser.getText(maxWordCount, cfTeaser.getLength());
+            cfTeaser.deleteText(maxWordCount, cfTeaser.getLength());
+            
+            showNotificationCf(`Sorry, the maximum number of words is ${maxWordCount}.`, 'danger')
+            deletingText = false;
+      }
+    })
+    cfEditorBio.on('text-change',function(){
+       if (deletingText) {
+          return; // Skip the event if text deletion is already in progress
+      }
+      const text = cfTeaser.getText();
+      const bioLength = text.trim().split(/\s+/);
+
+      if (cfEditorBio.getLength() > maxWordCount) {
+        deletingText = true;
+            const excessText = cfEditorBio.getText(maxWordCount, cfEditorBio.getLength());
+            cfEditorBio.deleteText(maxWordCount, cfEditorBio.getLength());
+            showNotificationCf(`Sorry, the maximum number of words is ${maxWordCount}.`, 'danger')
+            deletingText = false;
+      }
+    })
+    
+
+
     submitBtn.addEventListener('click', function(e){
       e.preventDefault();
       
-      loader('submitContent',true,'Submit')
+      // loader('submitContent',true,'Submit')
 
       var submit_content = tinyMCE.activeEditor.getContent({
           format: 'raw'
       });
+
+      console.log(cfTeaser.root.innerHTML,cfEditorBio.root.innerHTML);
 
       jQuery.ajax({
         url: ajaxurl,
@@ -110,7 +203,10 @@
           postId: submitBtn.getAttribute('postId'),
           userId: submitBtn.getAttribute('userId'),
           submitTitle: contentTitle.value,
-          contentCategory: submitCategory.value,submit_content
+          contentCategory: submitCategory.value,submit_content,
+          contentTeaser: cfTeaser.root.innerHTML,
+          contentBio: cfEditorBio.root.innerHTML,
+
         },
         success: async function(response) {
           console.log(response);

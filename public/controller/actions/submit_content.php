@@ -22,6 +22,46 @@
  */
 class Mp_cf_submit_content
 {
+	public function mp_cf_image_upload_hundler($uploadedfile, $image_name, $post_id){
+		$upload_overrides = array(
+		  'test_form' => false
+		);
+		$movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
+		if($movefile['file']) {
+			$filename = $movefile['file'];
+			$filetype = wp_check_filetype( basename( $filename ), null );
+			$wp_upload_dir = wp_upload_dir();
+		
+			// Prepare an array of post data for the attachment.
+			$attachment = array(
+				'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ), 
+				'post_mime_type' => $filetype['type'],
+				'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $filename ) ),
+				'post_content'   => $image_name,
+				'post_status'    => 'inherit'
+			);
+		
+			// Insert the attachment.
+			$attach_id = wp_insert_attachment( $attachment, $filename, $post_id );
+			// Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
+			require_once( ABSPATH . 'wp-admin/includes/image.php' );
+		
+			// Generate the metadata for the attachment, and update the database record.
+			$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+			wp_update_attachment_metadata( $attach_id, $attach_data );
+
+			if($image_name === 'thumbnailImage'){
+				$image_data = array ('src' => $movefile['url']);
+				update_post_meta( $post_id, 'thumbnail_image', $image_data );
+			}
+			else {
+				set_post_thumbnail( $post_id, $attach_id );
+			} 
+			return 'uploaded';
+		} 
+		return $movefile;
+	}
+
 	public function wp_ajax_mp_cf_submit_content(){
 		if(
 			isset($_POST['postId']) &&
@@ -55,7 +95,18 @@ class Mp_cf_submit_content
 					update_post_meta($insert_id, 'mp_gl_post_brief_overview', $_POST['contentTeaser']);
 					update_post_meta($insert_id, 'mp_gl_post_author_bio', $_POST['contentBio']);
 					
-					echo 'done';
+					// echo 'done';
+				}
+
+				if(isset($_FILES['thumbnailImage'])){
+					$uploadedfile = $_FILES['thumbnailImage'];
+					$image_name = 'thumbnailImage';
+					$is_uploaded = apply_filters('mp_cf_upload', $uploadedfile, $image_name, $insert_id);
+				}
+				if(isset($_FILES['featureImage'])){
+					$uploadedfile = $_FILES['featureImage'];
+					$image_name = 'featureImage';
+					$is_uploaded = apply_filters('mp_cf_upload', $uploadedfile, $image_name, $insert_id);
 				}
 
 			}

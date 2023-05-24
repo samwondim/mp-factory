@@ -245,6 +245,9 @@ class Mp_Factory
 		$this->loader->add_action('wp_ajax_mp_cf_my_submission_detail', $mp_cf_submit_content, 'wp_ajax_mp_cf_my_submission_detail');
 		$this->loader->add_action('wp_ajax_mp_cf_review_submission_update', $mp_cf_submit_content, 'wp_ajax_mp_cf_review_submission_update');
 		$this->loader->add_action('wp_ajax_mp_cf_requester_submitted_update', $mp_cf_submit_content, 'wp_ajax_mp_cf_requester_submitted_update');
+
+		$this->loader->add_filter('mp_cf_upload', $mp_cf_submit_content, 'mp_cf_image_upload_hundler',10,3);
+
 		
 		$mp_cf_vote_home = new Mp_cf_vote_home();
 		$this->loader->add_shortcode('mp_cf_vote_code', $mp_cf_vote_home, 'mp_cf_vote_shortcode');

@@ -90,6 +90,32 @@
             <div id="cfEditorBioContent"></div>
           </div>
         </div>
+
+        <div class="cf-form-input">
+          <label for="featured">Featured image </label>
+          <input type="file" class="filepond" name="filepond" id="featured-image" style="display:none" accept="image/png,image/jpg,image/jpeg,video/mp4,image/gif,video/MOV,video/WMV,video/WEBM" data-max-file-size="5MB">
+          <div class="form-submit">
+              <div class="wall-upload-multi">
+                  <div for="featured-image" class="img-container">
+                  </div>
+                  <div class="video-container">
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="cf-form-input">
+          <label for="thumbnail">Thumbnail image </label>
+          <input type="file" class="filepond" name="filepond" id="thumbnail-image" style="display:none" accept="image/png,image/jpg,image/jpeg,video/mp4,image/gif,video/MOV,video/WMV,video/WEBM" data-max-file-size="5MB">
+          <div class="form-submit">
+              <div class="wall-upload-multi">
+                  <div for="thumbnail-image" class="img-container">
+                  </div>
+                  <div class="video-container">
+                  </div>
+              </div>
+          </div>
+        </div>
         
           
         <button id ="submitContent" postID="<?php echo $post->ID?>" userId="<?php echo get_current_user_id()?>" type="submit" class="cf-submit cf-submit-content" >Submit</button>
@@ -118,6 +144,23 @@
 </div>
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<script src="<?php echo mp_up_PLAGIN_URL . 'public/js/imageCompress.js' ?>"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.1.1/compressor.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" />
+<link href="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/filepond-plugin-media-preview@1.0.11/dist/filepond-plugin-media-preview.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/fluent-ffmpeg@2.1.2"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-edit/dist/filepond-plugin-image-edit.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/filepond-plugin-media-preview@1.0.11/dist/filepond-plugin-media-preview.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/filepond-plugin-file-validate-type@1.2.8/dist/filepond-plugin-file-validate-type.min.js"></script>
 
 <script src="<?php echo mp_cf_PLAGIN_URL . 'public/js/validation.js'?>"></script>
 <script src="<?php echo mp_cf_PLAGIN_URL . 'public/js/notification.js'?>"></script>
@@ -181,7 +224,26 @@
             deletingText = false;
       }
     })
+
     
+    FilePond.registerPlugin(
+      FilePondPluginImagePreview,
+      FilePondPluginImageExifOrientation,
+      FilePondPluginFileValidateSize,
+      FilePondPluginImageEdit,
+      FilePondPluginMediaPreview, FilePondPluginFileValidateType
+    );
+
+    const pondFeatue = FilePond.create(
+      document.querySelector("#featured-image"), {
+        labelIdle: `<img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Img.svg' ?>" alt="">`,
+      }
+    );
+    const pondThumbnail = FilePond.create(
+      document.querySelector("#thumbnail-image"), {
+        labelIdle: `<img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Img.svg' ?>" alt="">`,
+      }
+    );
 
 
     submitBtn.addEventListener('click', function(e){
@@ -193,20 +255,34 @@
           format: 'raw'
       });
 
-      console.log(cfTeaser.root.innerHTML,cfEditorBio.root.innerHTML);
+      // getting image files
+      const feature = pondFeatue.getFiles();
+      const featureImage = feature.length ? feature[0].file : null
+
+      const thumbnail = pondThumbnail.getFiles();
+      const thumbnailImage = thumbnail.length ? thumbnail[0].file : null
+
+      if (featureImage && !featureImage?.type?.includes("video") && !featureImage?.type?.includes("image/gif")) {
+          compressImage(featureImage).then(res => {
+          })
+      }
 
       jQuery.ajax({
         url: ajaxurl,
         type: 'POST',
+        contentType: false,
+        processData: false,
         data: {
-          action: 'mp_cf_submit_content',
-          postId: submitBtn.getAttribute('postId'),
-          userId: submitBtn.getAttribute('userId'),
-          submitTitle: contentTitle.value,
-          contentCategory: submitCategory.value,submit_content,
-          contentTeaser: cfTeaser.root.innerHTML,
-          contentBio: cfEditorBio.root.innerHTML,
-
+          action: 'mp_cf_submit_content'
+          postId: submitBtn.getAttribute('postId')
+          userId: submitBtn.getAttribute('userId')
+          submitTitle: contentTitle.value
+          contentCategory: submitCategory.value
+          submit_content: submit_content
+          contentTeaser: cfTeaser.root.innerHTML
+          contentBio: cfEditorBio.root.innerHTML
+          featureImage: featureImage
+          thumbnailImage: thumbnailImage
         },
         success: async function(response) {
           console.log(response);

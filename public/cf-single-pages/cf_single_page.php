@@ -69,7 +69,7 @@
         <span class="cf-left-tabs-title">My requests</span>
         <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/notification-bing.svg'); ?>
       </a>
-        <span>(<?php do_shortcode('[mp_cf_my_requests_code display = "count"]')?>)</span>
+        <span class="cf-my-requests-notif">(<?php do_shortcode('[mp_cf_my_requests_code display = "count"]')?>)</span>
       </div>
 
       <div class="cf-left-tabs">

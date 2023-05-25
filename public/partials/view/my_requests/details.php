@@ -156,13 +156,16 @@
 
             foreach($all_claimers as $claimer){
               $claimer_data = get_post_meta($details->ID, 'mp_cf_claim_data_'.$claimer,true);
+              $claimer_fname = get_user_meta($claimer, 'first_name', true);
+              $claimer_lname = get_user_meta($claimer, 'last_name', true);
+              $claimer_username = get_user_by('id',$claimer)?get_user_by('id',$claimer)->user_login:null;
               
               if(!empty($claimer_data)){
                 if($claimer_data['claim_status'] === 'waiting_content'){
-                  $status = "Waiting content"; 
+                  $status = "Waiting for claimer to submit a content."; 
                 } 
                 else if($claimer_data['claim_status'] === 'submitted'){
-                  $status = "Waiting moderator."; 
+                  $status = "Waiting for moderator approval."; 
                 }else if($claimer_data['claim_status'] === 'moderator_approved'){
                   $status = "moderate"; 
                 }else $status = 'Active';
@@ -170,7 +173,11 @@
               }else $status = 'Active'
               ?>
             <tr>
-              <td data-label="Topic"><?php echo get_user_meta($claimer, 'first_name', true);?></td>
+              <td data-label="claimer_name">
+                <a target="_blanck" href="<?php echo home_url('/user/') . $claimer_username; ?>">
+                  <?php echo !empty($claimer_fname) ? $claimer_fname. ' '. $claimer_lname: $claimer_username?>
+                </a>
+              </td>
               <td data-label="public-0address">user public address</td>
               <td data-label="claimed-time"><?php echo $claimer == $claimer_data['user_id'] ? $claimer_data['request_time']:''?></td>
               <td data-label="Status">

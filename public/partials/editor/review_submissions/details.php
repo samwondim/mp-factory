@@ -32,22 +32,7 @@
           <div id="cf-my-content">
             <?php echo $post->post_content?>
           </div>
-        </div> 
-
-        <!-- <div class="cf-request-bottom-button-container" data-post-id="< ?php echo $details->ID?>">
-                <input
-                  type="button"
-                  class="cf-request-bottom-button-primary"
-                  data-status="approved"
-                  value="Approve"
-                />
-                <input
-                  type="button"
-                  class="cf-request-bottom-button-secondary"
-                  data-status="declined"
-                  value="Decline"
-                />
-              </div> -->
+        </div>
         
       </form>
     </div>
@@ -75,7 +60,7 @@
     <table>
       <thead>
         <tr>
-          <th>Content creator</th>
+          <th>Submitter</th>
           <th>Comment</th>
         </tr>
       </thead>

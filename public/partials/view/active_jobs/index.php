@@ -25,10 +25,10 @@
               $is_submitted = false;
             }else if($request_status['claim_status'] ==='submitted'){
               $is_submitted = true;
-              $status = 'Waiting for moderator.';
+              $status = 'Waiting for moderator approval.';
             }else if($request_status['claim_status'] ==='moderator_approved'){
               $is_submitted = true;
-              $status = 'Waiting for requester.';
+              $status = 'Waiting for requester approval.';
             }else if($request_status['claim_status'] ==='requester_approved'){
               $is_submitted = true;
               $status = 'Waiting for rank.';
@@ -37,7 +37,7 @@
             ?>
           <tr>
             <td data-label="Topic"><?php echo  strlen($job->post_title) > 50 ? substr($job->post_title, 0, 50) . '...' : $job->post_title?></td>
-            <td data-label="submission-status"><?php echo !$is_submitted ? 'Waiting for content.': $status?></td>
+            <td data-label="submission-status"><?php echo !$is_submitted ? 'Waiting for your content.': $status?></td>
             <td data-label="request-deadline"><?php echo get_post_meta($job->ID, 'req_deadline',true)?></td>
             <td data-label="submission-deadline"><?php echo get_post_meta($job->ID, 'submission_deadline',true)?></td>
 

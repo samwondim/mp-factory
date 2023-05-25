@@ -153,7 +153,7 @@
     <table>
       <thead>
         <tr>
-          <th>Content creator</th>
+          <th>Requestor</th>
           <th>Comment</th>
         </tr>
       </thead>

@@ -132,7 +132,7 @@ class Mp_cf_submit_content
 				else if($request_status['claim_status'] ==='moderator_approved'){
 					$claimer_status = 'Waiting for requester.';
 				}else if($request_status['claim_status'] ==='requester_approved'){
-					$claimer_status = 'Waiting for rank';
+					$claimer_status = 'Waiting for rank.';
 				}
 			}
 			else $claimer_status = 'Active';

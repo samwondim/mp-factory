@@ -43,7 +43,7 @@
       </h1>
       <div class="cf-center-button-container">
       <a href="<?php echo home_url('mp_cf_plugin/my-requests')?>">
-        <button class="cf-center-button-primary">Submit more content</button>
+        <button class="cf-center-button-primary">Review more submissions</button>
       </a>
 
         <a href="<?php echo home_url('mp_cf_plugin/factory-dashboard')?>">
@@ -106,7 +106,6 @@
             console.log(response);
             document.querySelector('.cf-requested-bottom-container').classList.add('hidden')
             document.querySelector('.form-container').classList.add('hidden')
-            document.querySelector('.cf-submitted-center-heading').innerHTML = 'Submission Approved.';
             document.querySelector('.cf-submitted-center').classList.remove('hidden')
             
           }

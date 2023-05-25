@@ -118,7 +118,7 @@
         </div>
         
           
-        <button id ="submitContent" postID="<?php echo $post->ID?>" userId="<?php echo get_current_user_id()?>" type="submit" class="cf-submit cf-submit-content" >Submit</button>
+        <button id ="submitContent" postId="<?php echo $post->ID?>" userId="<?php echo get_current_user_id()?>" type="submit" class="cf-submit cf-submit-content" >Submit</button>
       </form>
     </div>
 
@@ -191,7 +191,7 @@
     const stripContent = data => data.replaceAll(regex, " ").trim().split(/[\s]+/)
     // const max = 140;
     // const maxWordCount = parseInt(`< ?php echo get_option('mp_cf_max_word_count', true)?>`);
-    const maxWordCount = 3;
+    const maxWordCount = 500;
     let deletingText = false;
     cfTeaser.on('text-change',function(){
        if (deletingText) {
@@ -249,7 +249,7 @@
     submitBtn.addEventListener('click', function(e){
       e.preventDefault();
       
-      // loader('submitContent',true,'Submit')
+      loader('submitContent',true,'Submit')
 
       var submit_content = tinyMCE.activeEditor.getContent({
           format: 'raw'
@@ -266,24 +266,25 @@
           compressImage(featureImage).then(res => {
           })
       }
+      var submitObject = new FormData();
+      submitObject.append('action', 'mp_cf_submit_content');
+      submitObject.append('postId', submitBtn.getAttribute('postId'));
+      submitObject.append('userId', submitBtn.getAttribute('userId'));
+      submitObject.append('submitTitle',  contentTitle.value);
+      submitObject.append('contentCategory', submitCategory.value);
+      submitObject.append('submit_content', submit_content);
+      submitObject.append('contentTeaser',  cfTeaser.root.innerHTML);
+      submitObject.append('contentBio', cfEditorBio.root.innerHTML);
+      submitObject.append('featureImage', featureImage);
+      submitObject.append('thumbnailImage', thumbnailImage);
+
 
       jQuery.ajax({
         url: ajaxurl,
         type: 'POST',
         contentType: false,
         processData: false,
-        data: {
-          action: 'mp_cf_submit_content'
-          postId: submitBtn.getAttribute('postId')
-          userId: submitBtn.getAttribute('userId')
-          submitTitle: contentTitle.value
-          contentCategory: submitCategory.value
-          submit_content: submit_content
-          contentTeaser: cfTeaser.root.innerHTML
-          contentBio: cfEditorBio.root.innerHTML
-          featureImage: featureImage
-          thumbnailImage: thumbnailImage
-        },
+        data: submitObject,
         success: async function(response) {
           console.log(response);
           loader('submitContent',false,'Submit')

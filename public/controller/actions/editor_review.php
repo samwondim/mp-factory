@@ -148,6 +148,9 @@ class Mp_cf_editor_review
 			if(!empty($submitter_status)){
 
 				$submitter_status['claim_status'] = 'moderator_'.$post_status;
+				update_post_meta($requested_from, 'mp_cf_claim_data_'.$author_id, $submitter_status);
+				
+				echo 'done';
 			}
 
 		}

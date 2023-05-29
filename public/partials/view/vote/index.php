@@ -53,11 +53,11 @@
                   <input class="cf-vote-value-<?php echo $article->ID?>" type="number" style="width: 60px;" />
                 </span>
                 <?php if($is_user_vote !== 'down') {?>
-                  <span class="cf-vote" data-vote-type="up" data-post-id="<?php echo $article->ID?>">Up</span>
+                  <span class="cf-vote" data-vote-type="up" data-user-id="<?php echo get_current_user_id()?>" data-post-id="<?php echo $article->ID?>">Up</span>
                   <?php } ?>
                 <?php if($is_user_vote !== 'up') {?>
 
-                <span class="cf-vote" data-vote-type="down" data-post-id="<?php echo $article->ID?>">Down</span>
+                <span class="cf-vote" data-vote-type="down" data-user-id="<?php echo get_current_user_id()?>" data-post-id="<?php echo $article->ID?>">Down</span>
                 <?php } ?>
 
               </td>
@@ -82,7 +82,6 @@
     const mainContainer = document.querySelector('.cf-right-section')
     const detailBtn = document.querySelectorAll('.cf-request-btn')
     const voteEl = document.querySelectorAll('.cf-vote')
-    const voteAmount = document.querySelector('.cf-vote-value')
 
     function seeDetail(event){
       const clickedElement = event.target;
@@ -107,6 +106,7 @@
     function cfVote(element){
       const voteType = element.target.getAttribute('data-vote-type')
       const postId = element.target.getAttribute('data-post-id')
+      const userId = element.target.getAttribute('data-user-id')
       const voteAmount = document.querySelector(`.cf-vote-value-${postId}`)
       
       if (isNaN(parseFloat(voteAmount.value))) {
@@ -119,15 +119,19 @@
           data: {
             action: 'mp_cf_vote',
             postId,
-            voteType,
+            voteType,userId,
             voteAmount: voteAmount.value,
           },
           success: function(response) {
+            console.log(response);
             let status = JSON.parse(response)
+            const nextElement = element.target.nextElementSibling
+            const previousElement = element.target.previousElementSibling
+
             document.querySelector(`.cf-${status.vote_type}-vote-${postId}`).innerHTML = status.current_value
-            if(voteType == 'up' && element.target.nextElementSibling){
+            if(voteType == 'up' && nextElement && nextElement.getAttribute('data-vote-type') === 'down'){
               element.target.nextElementSibling.innerHTML = ''
-            }else if(voteType == 'down' && element.target.previousElementSibling){
+            }else if(voteType == 'down' && previousElement &&previousElement.getAttribute('data-vote-type') === 'up'){
               element.target.previousElementSibling.innerHTML = ''
             }
           }

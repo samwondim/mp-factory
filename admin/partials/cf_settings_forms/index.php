@@ -58,6 +58,16 @@ $fields = [
     'field_default' =>1,
     'field_info' => __('Minimum MPXR value for the user to request content.', 'mp_cf'),
   ],
+  [
+    'field_group' => 'group_set_cf_setting',
+    'field_title' => __('Vote waiting room hour', 'mp_cf'),
+    'field_name' => 'mp_cf_vote_hour',
+    'field_type'  => 'text',
+    'field_length' => 2,
+    'field_required' => FALSE,
+    'field_default' =>48,
+    'field_info' => __('Insert time (in hour) for vote registery here. System will open Request Registry as waiting rooms every specified hour.', 'mp_cf'),
+  ],
   
   [
     'field_group' => 'actions',

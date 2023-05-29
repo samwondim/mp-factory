@@ -48,7 +48,7 @@ class Mp_cf_home_public
 
 		$requested_articles = get_posts(array(
 			'post_type' => 'cf-requested-content',
-			'post_status' => 'approved',
+			'post_status' => ['approved','win_vote'],
 			'posts_per_page' => -1,
 			'author__not_in' => array( $user_id ),
 			'meta_query' => array(
@@ -62,10 +62,6 @@ class Mp_cf_home_public
 				array(
 					'key' => 'mp_cf_claim_data_'.$user_id,
 					'compare' => 'NOT EXISTS',
-				),
-				array(
-					'key' => 'req_type', // get requests when its deadline is greater than the current date.
-					'value' => 'paid',
 				)
 				
 			)

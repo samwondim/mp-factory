@@ -182,6 +182,8 @@ class Mp_Factory
 		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_approved_post_status', 1, 1);
 		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_declined_post_status', 1, 1);
 		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_vote_win_post_status', 1, 1);
+		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_vote_lose_post_status', 1, 1);
+		
 		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_vote_approved_post_status', 1, 1);
 		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_pending_vote_post_status', 1, 1);
 		

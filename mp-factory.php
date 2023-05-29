@@ -38,6 +38,17 @@ if (!defined("mp_cf_PLAGIN_DIR"))
 if (!defined("mp_cf_PLAGIN_URL"))
     define("mp_cf_PLAGIN_URL", plugin_dir_url(__FILE__));
 
+
+if (!defined("mp_rep_base_api"))
+	define('mp_rep_base_api',get_option('mp_rep_base_api', 'none'));
+if (!defined("mp_rep_community_slug"))
+	define('mp_rep_community_slug',get_option('mp_rep_community_slug', 'none'));
+if (!defined("mp_rep_community_id"))
+	define('mp_rep_community_id',get_option('mp_rep_community_id', 'none'));
+if (!defined("mp_rep_community_api_key"))
+	define('mp_rep_community_api_key',get_option('mp_rep_community_api_key', 'none'));
+
+
 /**
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org

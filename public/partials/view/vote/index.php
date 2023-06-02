@@ -30,6 +30,7 @@
               <th>Requested content</th>
               <th>Up vote</th>
               <th>Down vote</th>
+              <th>Tip</th>
               <th>Vote</th>
               <th>Action</th>
             </tr>
@@ -45,20 +46,33 @@
                 continue;
               ?>
             <tr> 
-              <td data-label="requested-content"><?php echo strlen($article->post_title) > 50 ? substr($article->post_title, 0, 50) . '...' : $article->post_title?></td>
+              <td data-label="requested-content"><?php echo strlen($article->post_title) > 50 ? substr($article->post_title, 0, 50) . '...' : $article->post_title . ' '.$article->ID?></td>
               <td class="cf-up-vote-<?php echo $article->ID?>" data-label="up-vote"><?php echo $up_vote ? $up_vote : '0'?></td>
               <td class="cf-down-vote-<?php echo $article->ID?>" data-label="down-vote"><?php echo $down_vote ? $down_vote : '0'?></td>
+              <td class="cf-tip-<?php echo $article->ID?>">
+                <span class="cf-vote-input" >
+                    <input class="cf-tip-input cf-tip-value-<?php echo $article->ID?>" type="number" min="1" style="width: 60px;" />
+                </span>
+              </td>
               <td data-label="vote" > 
                 <span class="cf-vote-input" >
-                  <input class="cf-vote-value-<?php echo $article->ID?>" type="number" style="width: 60px;" />
+                  <input class="cf-vote-content cf-vote-value-<?php echo $article->ID?>" type="number" min="1" style="width: 60px;" />
                 </span>
-                <?php if($is_user_vote !== 'down') {?>
+                <?php 
+                if(isset($is_user_vote['vote_type'])){
+                  if($is_user_vote['vote_type'] !== 'up'){?>
+                  <span class="cf-vote" data-vote-type="down" data-user-id="<?php echo get_current_user_id()?>" data-post-id="<?php echo $article->ID?>">Down</span>
+                  <?php
+                  }
+                  if($is_user_vote['vote_type'] !== 'down'){?>
+                    <span class="cf-vote" data-vote-type="up" data-user-id="<?php echo get_current_user_id()?>" data-post-id="<?php echo $article->ID?>">Up</span>
+                    <?php
+                    }
+                }else{
+                ?>
                   <span class="cf-vote" data-vote-type="up" data-user-id="<?php echo get_current_user_id()?>" data-post-id="<?php echo $article->ID?>">Up</span>
-                  <?php } ?>
-                <?php if($is_user_vote !== 'up') {?>
-
-                <span class="cf-vote" data-vote-type="down" data-user-id="<?php echo get_current_user_id()?>" data-post-id="<?php echo $article->ID?>">Down</span>
-                <?php } ?>
+                  <span class="cf-vote" data-vote-type="down" data-user-id="<?php echo get_current_user_id()?>" data-post-id="<?php echo $article->ID?>">Down</span>
+                <?php }?>
 
               </td>
               <td data-label="Action">
@@ -75,6 +89,7 @@
   </div>
 </div>
 <script src="<?php echo mp_cf_PLAGIN_URL . 'public/js/validation.js'?>"></script>
+<script src="<?php echo mp_cf_PLAGIN_URL . 'public/js/notification.js'?>"></script>
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {
@@ -82,6 +97,24 @@
     const mainContainer = document.querySelector('.cf-right-section')
     const detailBtn = document.querySelectorAll('.cf-request-btn')
     const voteEl = document.querySelectorAll('.cf-vote')
+    const tipEl = document.querySelectorAll('.cf-tip-input');
+    const voteInputEl = document.querySelectorAll('.cf-vote-content');
+
+    tipEl.forEach(function(element){
+      element.addEventListener('keypress', function(event){
+        if(isNaN(parseFloat(event.key)) ){
+          event.preventDefault()
+        }
+      })
+    })
+
+    voteInputEl.forEach(function(element){
+      element.addEventListener('keypress', function(event){
+        if(isNaN(parseFloat(event.key))){
+          event.preventDefault()
+        }
+      })
+    })
 
     function seeDetail(event){
       const clickedElement = event.target;
@@ -108,11 +141,7 @@
       const postId = element.target.getAttribute('data-post-id')
       const userId = element.target.getAttribute('data-user-id')
       const voteAmount = document.querySelector(`.cf-vote-value-${postId}`)
-      
-      if (isNaN(parseFloat(voteAmount.value))) {
-        console.log('Invalid entry.');
-      }
-      else {
+      const tipAmount = document.querySelector(`.cf-tip-value-${postId}`)
         jQuery.ajax({
           url: ajaxurl,
           type: 'POST',
@@ -121,6 +150,7 @@
             postId,
             voteType,userId,
             voteAmount: voteAmount.value,
+            tipAmount: tipAmount.value,
           },
           success: function(response) {
             console.log(response);
@@ -136,7 +166,6 @@
             }
           }
         })
-      }
     }
 
     detailBtn.forEach(element=>{

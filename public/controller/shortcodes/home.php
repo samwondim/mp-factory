@@ -80,7 +80,7 @@ class Mp_cf_home_public
 		$user_id =  get_current_user_id();
 		$my_requests = get_posts(array(
 			'post_type' => 'cf-requested-content',
-			'post_status' => ['approved','declined','pending'],
+			'post_status' => ['approved','declined','pending', 'win_vote','pending_vote','lose_vote'],
 			'author__in' => $user_id ,
 			'posts_per_page' => -1
 
@@ -117,7 +117,7 @@ class Mp_cf_home_public
 		$user_id =  get_current_user_id();
 		$active_jobs = get_posts(array(
 			'post_type' => 'cf-requested-content',
-			'post_status' => 'approved',
+			'post_status' => ['approved','win_vote'],
 			'meta_query' => array(
 				array(
 					'key' => 'mp_cf_claim_article', 

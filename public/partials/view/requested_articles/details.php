@@ -116,9 +116,7 @@
       </div>
         <?php }?>
         
-        <?php if(get_post_meta($details->ID, 'req_type',true) == 'paid'){ ?>
-          <button type="submit" userId="<?php echo get_current_user_id()?>" postId="<?php echo $details->ID?>" class="cf-submit cf-claim" id="cf-claim-request">Claim</button>
-        <?php }?>
+        <button type="submit" userId="<?php echo get_current_user_id()?>" postId="<?php echo $details->ID?>" class="cf-submit cf-claim" id="cf-claim-request">Claim</button>
 
       </form>
       

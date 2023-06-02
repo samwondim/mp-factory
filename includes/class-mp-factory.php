@@ -186,9 +186,8 @@ class Mp_Factory
 		
 		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_vote_approved_post_status', 1, 1);
 		$this->loader->add_action('init', $Mp_cf_rq_Admin, 'mp_cf_pending_vote_post_status', 1, 1);
-		
-		
-
+		$this->loader->add_filter('bulk_actions-edit-cf-requested-content', $Mp_cf_rq_Admin, 'mp_cf_register_pending_vote_bulk_action', 1, 1);
+		$this->loader->add_filter('handle_bulk_actions-edit-cf-requested-content', $Mp_cf_rq_Admin, 'mp_cf_bulk_action_handler', 10, 3);		
 
 		$Mp_cf_submitted_contents_Admin = new Mp_cf_submitted_contents_Admin();
 		$this->loader->add_action('init', $Mp_cf_submitted_contents_Admin, 'mp_cf_post_type_submitted_content_init', 1, 1);

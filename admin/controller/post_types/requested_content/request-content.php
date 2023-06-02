@@ -35,6 +35,28 @@ class Mp_cf_rq_Admin
 	{
 	}
 
+	function mp_cf_register_pending_vote_bulk_action($bulk_actions) {
+		$bulk_actions['pending_vote'] = __( 'Pending vote', 'pending_vote');
+		return $bulk_actions;
+	}
+
+	function mp_cf_bulk_action_handler( $redirect_to, $doaction, $post_ids ) {
+		if ( $doaction !== 'pending_vote' ) {
+			die();
+		}
+		foreach ( $post_ids as $post_id ) {
+			// Perform action for each post.
+			$post_data = array(
+				'ID'          => $post_id,
+				'post_status' => 'pending_vote',
+			);
+		
+			// Update the post
+			wp_update_post($post_data);
+		}
+		return $redirect_to;
+	}
+
 	public function main(){
 		function mp_cf_approved_status_add_in_quick_edit() {
 			echo "<script>

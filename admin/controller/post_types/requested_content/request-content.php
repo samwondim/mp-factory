@@ -35,6 +35,28 @@ class Mp_cf_rq_Admin
 	{
 	}
 
+	function mp_cf_register_pending_vote_bulk_action($bulk_actions) {
+		$bulk_actions['pending_vote'] = __( 'Pending vote', 'pending_vote');
+		return $bulk_actions;
+	}
+
+	function mp_cf_bulk_action_handler( $redirect_to, $doaction, $post_ids ) {
+		if ( $doaction !== 'pending_vote' ) {
+			die();
+		}
+		foreach ( $post_ids as $post_id ) {
+			// Perform action for each post.
+			$post_data = array(
+				'ID'          => $post_id,
+				'post_status' => 'pending_vote',
+			);
+		
+			// Update the post
+			wp_update_post($post_data);
+		}
+		return $redirect_to;
+	}
+
 	public function main(){
 		function mp_cf_approved_status_add_in_quick_edit() {
 			echo "<script>
@@ -44,6 +66,7 @@ class Mp_cf_rq_Admin
 			</script>";
 		}
 		add_action('admin_footer-edit.php','mp_cf_approved_status_add_in_quick_edit');
+
 		function mp_cf_declined_status_add_in_quick_edit() {
 			echo "<script>
 			jQuery(document).ready( function() {
@@ -51,7 +74,43 @@ class Mp_cf_rq_Admin
 			}); 
 			</script>";
 		}
-		add_action('admin_footer-edit.php','mp_cf_declined_status_add_in_quick_edit');
+		add_action('admin_footer-edit.php','mp_cf_approved_for_vote_status_add_in_quick_edit');
+
+		function mp_cf_pending_vote_status_add_in_quick_edit() {
+			echo "<script>
+			jQuery(document).ready( function() {
+				jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"pending_vote\">Pending vote</option>' );      
+			}); 
+			</script>";
+		}
+		add_action('admin_footer-edit.php','mp_cf_pending_vote_status_add_in_quick_edit');
+
+		function mp_cf_approved_for_vote_status_add_in_quick_edit() {
+			echo "<script>
+			jQuery(document).ready( function() {
+				jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"approved_for_vote\">Approved for vote</option>' );      
+			}); 
+			</script>";
+		}
+		add_action('admin_footer-edit.php','mp_cf_approved_for_vote_status_add_in_quick_edit');
+
+		function mp_cf_win_vote_status_add_in_quick_edit() {
+			echo "<script>
+			jQuery(document).ready( function() {
+				jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"win_vote\">Content win vote</option>' );      
+			}); 
+			</script>";
+		}
+		add_action('admin_footer-edit.php','mp_cf_win_vote_status_add_in_quick_edit');
+
+		function mp_cf_lose_vote_status_add_in_quick_edit() {
+			echo "<script>
+			jQuery(document).ready( function() {
+				jQuery( 'select[name=\"_status\"]' ).append( '<option value=\"lose_vote\">Content lose vote</option>' );      
+			}); 
+			</script>";
+		}
+		add_action('admin_footer-edit.php','mp_cf_lose_vote_status_add_in_quick_edit');
 	}
 
 	function mp_cf_post_type_rq_init()
@@ -153,6 +212,19 @@ class Mp_cf_rq_Admin
             'show_in_admin_all_list'    => true,
             'show_in_admin_status_list' => true,
 			'description'               => __( 'Content wins the voting process.' ),
+			
+        ));
+    }
+	function mp_cf_vote_lose_post_status(){
+        register_post_status( 'lose_vote', array(
+            'label'                     => _x( 'Lose vote', 'post' ),
+            'label_count'               => _n_noop( 'Lose vote <span class="count">(%s)</span>', 'Lose vote <span class="count">(%s)</span>'),
+            'public'                    => true,
+            'exclude_from_search'       => true,
+            'publicly_queryable'       => true,
+            'show_in_admin_all_list'    => true,
+            'show_in_admin_status_list' => true,
+			'description'               => __( 'Content loses the voting process.' ),
 			
         ));
     }

@@ -91,18 +91,26 @@ class Mp_cf_editor_review
 					
 					$batch_start_time = $current_time->add(new DateInterval('PT'.$batch_interval.'H'));
 					
-					update_option('mp_cf_vote_batch_starts', $batch_start_time);
-
-				
-					if (!wp_next_scheduled ( 'mp_cf_move_to_vote'))
+					
+					
+					if (!wp_next_scheduled ( 'mp_cf_move_to_vote')){
+						update_option('mp_cf_vote_ballot_number', 1);
 						wp_schedule_event(time() + 60, '1min', 'mp_cf_move_to_vote');
+					}
 				}
+				$update_post = array(
+					'ID'           => $post_id,
+					'post_status'  => 'pending_vote',
+				);
+				wp_update_post( $update_post );
 			}
-			$update_post = array(
-				'ID'           => $post_id,
-				'post_status'  => $post_status,
-			);
-			wp_update_post( $update_post );
+			else{
+				$update_post = array(
+					'ID'           => $post_id,
+					'post_status'  => $post_status,
+				);
+				wp_update_post( $update_post );
+			}
 			update_post_meta($post_id, 'mp_cf_moderator_comment', $moderator_comment);
 
 			$wpdb->insert($mp_rp_notification, array(

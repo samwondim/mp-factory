@@ -39,6 +39,10 @@ class Mp_cf_editor_review
 		$MPXreward = get_post_meta($post_id, 'MPXreward',true);
 		$guarantee_amount = get_post_meta($post_id, 'guarantee_amount',true);
 
+		$author_id = $details->post_author;
+		$user = get_userdata( $author_id );
+		$display_name = $user->display_name;
+		$user_url = $user->username;
 		
 		include_once mp_cf_PLAGIN_DIR . 'public/partials/editor/review_requests/details.php';
 

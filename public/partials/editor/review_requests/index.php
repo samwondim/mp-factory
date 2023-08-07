@@ -107,6 +107,7 @@
         })
       }
     });
+    
 
     function seeDetail(event){
       const clickedElement = event.target;
@@ -119,11 +120,12 @@
         },
         success: async function(response) {
           // document.querySelector('.cf-requested-top-container').innerHTML = ''
+          
           mainContainer.innerHTML = response
           
-          var arr = document.getElementsByTagName('script')
-          for (var n = 0; n < arr.length; n++)
-            eval(arr[n].innerHTML) //run script inside div
+          // var arr = document.getElementsByTagName('script')
+          // for (var n = 0; n < arr.length; n++)
+          //   eval(arr[n].innerHTML) //run script inside div
         }
       })
     }

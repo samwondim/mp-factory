@@ -26,6 +26,9 @@ class Mp_cf_request_content
 
 	public function wp_ajax_mp_cf_submit_requested_content()
 	{
+		global $table_prefix, $wpdb;
+
+        $mp_rp_notification = $table_prefix . "mp_rp_notification";
 
 		if (get_current_user_id() == 0) {
 			echo 'not logged in';
@@ -72,9 +75,19 @@ class Mp_cf_request_content
 				isset($_POST['backing_amount']) ? add_post_meta($insert_id, 'backing_amount', esc_attr($_POST['backing_amount']), true) : '';
 
 				add_user_meta(get_current_user_id(), 'mp_cf_new_request', $insert_id);
-			}
 
-			echo "done";
+				$wpdb->insert($mp_rp_notification, array(
+					'type' => 'content_submitted',
+					'service_id' => $insert_id,
+					'interactor_id' => 0,
+					'post_type' => 'cf-requested-content',
+					'user_id' => get_current_user_id(),
+					'message' => 'We have received your request and it is under review'
+				));
+				echo "done";
+			}
+			else echo 'post not inserted';
+
 			die();
 		} 
 		else {

@@ -22,6 +22,10 @@ $groups = [
     'group' => 'group_set_cf_setting',
     'title' => __('Content Factory Settings', 'mp_cf'),
   ],
+  [
+    'group' => 'cf_group_punish',
+    'title' => __('System will punish (in MPXR) requester if the Editorial Team labeled the Content request as:', 'mp_cf'),
+  ],
  
   [
     'group' => 'actions',
@@ -69,6 +73,47 @@ $fields = [
     'field_info' => __('Insert time (in hour) for vote registery here. System will open Request Registry as waiting rooms every specified hour.', 'mp_cf'),
   ],
   
+  
+  [
+    'field_group' => 'cf_group_punish',
+    'field_title' => __('For Hate speech', 'mp_cf'),
+    'field_name' => 'mp_cf_hate_speech',
+    'field_type'  => 'text',
+    'field_length' => 2,
+    'field_required' => FALSE,
+    'field_default' =>5,
+  ],
+
+  [
+    'field_group' => 'cf_group_punish',
+    'field_title' => __('For Bullying', 'mp_cf'),
+    'field_name' => 'mp_cf_bullying',
+    'field_type'  => 'text',
+    'field_length' => 2,
+    'field_required' => FALSE,
+    'field_default' =>3,
+  ],
+
+  [
+    'field_group' => 'cf_group_punish',
+    'field_title' => __('For Spamming', 'mp_cf'),
+    'field_name' => 'mp_cf_spamming',
+    'field_type'  => 'text',
+    'field_length' => 2,
+    'field_required' => FALSE,
+    'field_default' =>2,
+  ],
+
+  [
+    'field_group' => 'cf_group_punish',
+    'field_title' => __('For Profanity', 'mp_cf'),
+    'field_name' => 'mp_cf_profanity',
+    'field_type'  => 'text',
+    'field_length' => 2,
+    'field_required' => FALSE,
+    'field_default' =>1,
+  ],
+
   [
     'field_group' => 'actions',
     'field_title' => __('Save settings', 'mp_cf'),
@@ -76,6 +121,7 @@ $fields = [
     'field_default' => __('Save'),
     'field_type' => 'submit',
   ],
+  
 ];
 
 /**

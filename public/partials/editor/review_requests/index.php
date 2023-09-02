@@ -38,6 +38,7 @@
         <tbody>
           <?php foreach ($review_requests as $request){
             
+            
             $is_claimed = get_post_meta($request->ID, 'mp_cf_claim_article',true);
             $submissions = get_post_meta($request->ID, 'submissions',true);
             if($is_claimed == get_current_user_id() || $submissions <= count(get_post_meta($request->ID, 'mp_cf_claim_article')))
@@ -84,8 +85,9 @@
       if (event.target.matches('.cf-request-bottom-button-primary') || event.target.matches('.cf-request-bottom-button-secondary')) {
 
         const commentContent = document.getElementById('moderatorComment');
-        console.log(commentContent.getAttribute('data-post-id'));
-
+        const punished = document.querySelector('.cf-punish');
+        const approvedAs = event.target.getAttribute('data-status')
+      
         jQuery.ajax({
           url: ajaxurl,
           type: 'POST',
@@ -93,7 +95,8 @@
             action: 'mp_cf_review_request_update',
             postId: commentContent.getAttribute('data-post-id'),
             status: event.target.getAttribute('data-status'),
-            comment: commentContent.value
+            comment: commentContent.value,
+            punished: punished.value ? punished.value : 0
           },
           success: function(response) {
             console.log(response);
@@ -102,7 +105,6 @@
             document.querySelector('.form-container').classList.add('hidden')
             document.querySelector('.cf-submitted-center').classList.remove('hidden')
             
-           
           }
         })
       }

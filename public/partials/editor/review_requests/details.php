@@ -22,7 +22,7 @@
 
       <div class="cf-form-input">
         <label for="category">Category</label>
-        <input type="text" placeholder="Category" value="<?php echo $category[0]->name ?>" />
+        <input type="text" placeholder="Category" value="<?php echo isset($category[0]->name) ? $category[0]->name : '' ?>" />
       </div>
 
       <div class="cf-form-input">
@@ -142,16 +142,27 @@
     </thead>
     <tbody>
       <tr>
-        <td style="width: 166px; vertical-align: top"><a href="<?php echo home_url('user/'.$user_url)?>"><?php echo $display_name?></a></td>
+        <td class="cf-user-status" >
+          
+          <span style="display: flex;">
+            <?php $avatar_url = get_avatar_url($details->post_author, array("size" => 20)); ?>
+            <img src="<?php echo $avatar_url?>" style="width: 30px;" alt="authorprofile" />
+            <a href="<?php echo home_url('user/'.$user_url)?>" style="padding-inline: 10px;"><?php echo $display_name?></a>
+          </span>
+          <span style="padding-block: 10px; font-weight: 700;">Status</span>
+          <span>
+            <select class="cf-textarea cf-punish" name="" id="status" style="width: fit-content !important;">
+              <option value="" selected disabled>Select Status</option>
+              <option value="hate_speech">Hate speech</option>
+              <option value="bullying">Bullying</option>
+              <option value="spamming">Spamming</option>
+              <option value="profanity">Profanity</option>
+              <option value="legally_unacceptable">Legally unacceptable</option>
+            </select>
+          </span>
+      </td>
         <td>
-          <textarea name="" id="moderatorComment" cols="30" rows="10" data-post-id="2847" style="
-                      background: transparent;
-                      border: 1px solid #fff;
-                      border-radius: 10px;
-                      width: 100%;
-                      color: white;
-                      padding: 10px;
-                    " data-post-id="<?php echo $details->ID ?>"></textarea>
+          <textarea class="cf-textarea" name="" id="moderatorComment" cols="30" rows="10" data-post-id="<?php echo $details->ID ?>"></textarea>
         </td>
       </tr>
       <tr>

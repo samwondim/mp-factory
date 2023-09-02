@@ -42,7 +42,7 @@ class Mp_cf_editor_review
 		$author_id = $details->post_author;
 		$user = get_userdata( $author_id );
 		$display_name = $user->display_name;
-		$user_url = $user->username;
+		$user_url = $user->user_login;
 		
 		include_once mp_cf_PLAGIN_DIR . 'public/partials/editor/review_requests/details.php';
 
@@ -81,6 +81,7 @@ class Mp_cf_editor_review
 		$post_id = $_POST['postId'];
 		$post_status = $_POST['status'];
 		$moderator_comment = $_POST['comment'];
+		$content_punished = $_POST['punished'];
 		if(get_post($post_id)){
 
 			$post = get_post($post_id);
@@ -98,6 +99,7 @@ class Mp_cf_editor_review
 					
 					
 					if (!wp_next_scheduled ( 'mp_cf_move_to_vote')){
+						// $vote_hour = get_option('mp_cf_vote_hour', 60);
 						update_option('mp_cf_vote_ballot_number', 1);
 						wp_schedule_event(time() + 60, '1min', 'mp_cf_move_to_vote');
 					}
@@ -115,7 +117,11 @@ class Mp_cf_editor_review
 				);
 				wp_update_post( $update_post );
 			}
+
 			update_post_meta($post_id, 'mp_cf_moderator_comment', $moderator_comment);
+			if($content_punished !== "0" && $post_status == 'declined'){
+				update_post_meta($post_id, 'mp_cf_content_punished', $content_punished);
+			}
 
 			$wpdb->insert($mp_rp_notification, array(
 				'interactor_id' => get_current_user_id(),

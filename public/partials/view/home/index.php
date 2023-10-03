@@ -16,8 +16,8 @@ else $is_moderator = 'user'
     </div>
     <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
   </div>
-  <a href="<?php echo home_url('mp_cf_plugin/view-all-jobs/')?>">
 
+  <a href="<?php echo home_url('mp_cf_plugin/view-all-jobs/')?>">
     <div class="cf-center-grid-card">
       <div class="cf-center-grid-card-top">
         <img
@@ -34,6 +34,7 @@ else $is_moderator = 'user'
       <img src="<?php echo mp_cf_PLAGIN_URL . 'public/assets/Line 14.svg'?>" class="cf-line" alt="line" />
     </div>
   </a>
+
     <div class="cf-center-grid-card">
       <div class="cf-center-grid-card-top">
         <img
@@ -94,13 +95,13 @@ else $is_moderator = 'user'
     
     requestBtn.addEventListener('click',function(){
       const minMPXR = requestBtn.getAttribute('data-min-mpxr')
-      if(mpxrBalance >= parseInt(minMPXR)){
+      // if(mpxrBalance >= parseInt(minMPXR)){
         window.location.href = `<?php echo home_url('mp_cf_plugin/request-content')?>`
-      }
-      else{
-        cfPopup.style.display = 'block'
-        document.querySelector('.cf-popup-content').innerHTML = `You need Minimum ${minMPXR}MPXR to request content.`
-      }
+      // }
+      // else{
+      //   cfPopup.style.display = 'block'
+      //   document.querySelector('.cf-popup-content').innerHTML = `You need Minimum ${minMPXR}MPXR to request content.`
+      // }
     })
     window.addEventListener('click', function(e) {
       if (e.target == cfPopup) {

@@ -270,13 +270,7 @@ class Mp_Factory
 		$this->loader->add_action('wp_ajax_mp_cf_search_review_request', $mp_cf_editor_review, 'wp_ajax_mp_cf_search_review_request');
 		$this->loader->add_action('wp_ajax_mp_cf_review_request_update', $mp_cf_editor_review, 'wp_ajax_mp_cf_review_request_update');
 		$this->loader->add_action('wp_ajax_mp_cf_detail_submissions', $mp_cf_editor_review, 'wp_ajax_mp_cf_detail_submissions');
-		$this->loader->add_action('wp_ajax_mp_cf_review_submitted_update', $mp_cf_editor_review, 'wp_ajax_mp_cf_review_submitted_update');
-
-		
-		
-
-
-		
+		$this->loader->add_action('wp_ajax_mp_cf_review_submitted_update', $mp_cf_editor_review, 'wp_ajax_mp_cf_review_submitted_update');	
 	}
 
 	/**

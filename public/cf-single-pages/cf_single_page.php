@@ -40,7 +40,7 @@
       <?php
         $user_data = get_userdata(get_current_user_id());
         $user_roles = $user_data->roles;
-        if(in_array('editor', $user_roles)){?> 
+        if(in_array('administrator', $user_roles)){?> 
           <div class="cf-left-tabs ">
             <?php echo file_get_contents(mp_cf_PLAGIN_DIR . 'public/assets/layer.svg'); 
             ?>

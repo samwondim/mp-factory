@@ -146,7 +146,7 @@ class Mp_cf_home_public
 						'hide_empty' => FALSE
 					));
 					$requested_title = get_the_title($post->ID);
-					$requested_category = get_the_category($post->ID)[0];
+					$requested_category = get_the_category($post->ID);
 					include_once mp_cf_PLAGIN_DIR . 'public/partials/view/active_jobs/submit_form.php';
 				}
 				else {

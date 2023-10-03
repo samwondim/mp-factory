@@ -46,6 +46,9 @@ class Mp_Factory_Loader {
 	 *
 	 * @since    1.0.0
 	 */
+	
+	protected $shortcodes;
+
 	public function __construct() {
 
 		$this->actions = array();

@@ -79,17 +79,7 @@ class Mp_cf_request_content
 		} else if (empty($is_form_valid)) {
 
 			// $additional_fields = [];
-			/*
-			private string $topic;
-			private string $desc;
-			private int $minMpxr;
-			private string $req_deadline;
-			private int $submission_deadline;
-			private string $req_type;
-			private string $media_type;
-			*/
-			// further validation on inputs
-
+			
 			$cf_category = isset($_POST['cfCategory']) ? esc_attr($_POST['cfCategory']) : '';
 
 			$insert_id = wp_insert_post(array(

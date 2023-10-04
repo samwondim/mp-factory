@@ -41,7 +41,7 @@
             <td data-label="request-deadline"><?php echo get_post_meta($job->ID, 'req_deadline',true)?></td>
             <td data-label="submission-deadline"><?php echo get_post_meta($job->ID, 'submission_deadline',true)?></td>
 
-            <td data-label="Action"><?php if(!$is_submitted){?>
+            <td data-label="Action"><?php if(!isset($is_submitted) || !$is_submitted){?>
               <button class="cf-request-btn cf-submit-content" postId="<?php echo $job->ID?>">Submit your content</button>
               <?php }else {?>
                 <button  data-request-id="<?php echo $job->ID?>" data-post-id ="<?php echo $request_status['post_id']?>" class="cf-request-btn cf-view-detail" >Veiw detail</button>

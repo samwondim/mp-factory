@@ -22,16 +22,17 @@
  */
 class Mp_cf_submit_content
 {
+	
 	public function mp_cf_image_upload_hundler($uploadedfile, $image_name, $post_id){
 		$upload_overrides = array(
-		  'test_form' => false
+			'test_form' => false
 		);
 		$movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
 		if($movefile['file']) {
 			$filename = $movefile['file'];
 			$filetype = wp_check_filetype( basename( $filename ), null );
 			$wp_upload_dir = wp_upload_dir();
-		
+			
 			// Prepare an array of post data for the attachment.
 			$attachment = array(
 				'guid'           => $wp_upload_dir['url'] . '/' . basename( $filename ), 
@@ -49,7 +50,7 @@ class Mp_cf_submit_content
 			// Generate the metadata for the attachment, and update the database record.
 			$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
 			wp_update_attachment_metadata( $attach_id, $attach_data );
-
+			
 			if($image_name === 'thumbnailImage'){
 				$image_data = array ('src' => $movefile['url']);
 				update_post_meta( $post_id, 'thumbnail_image', $image_data );
@@ -61,14 +62,34 @@ class Mp_cf_submit_content
 		} 
 		return $movefile;
 	}
+	public function validate_inputs()
+	{
+		$errors = [];
 
+		if(empty($_POST['postId'])) 
+			$errors[] = 'postID not set!';
+		if(empty($_POST['userId']))
+			$errors[] = 'userID not set!';
+		if(empty($_POST['contentCategory'])) 
+			$errors[] = 'content category not selected!';
+		if(empty($_POST['submitTitle'])) 
+			$errors[] = 'empty title';
+		if(empty($_POST['submit_content'])) 
+			$errors[] = 'empty category';
+		
+		return $errors;
+	}
+	
 	public function wp_ajax_mp_cf_submit_content(){
+		$is_form_valid = $this->validate_inputs();
 		if(
-			isset($_POST['postId']) &&
-			isset($_POST['userId']) &&
-			isset($_POST['contentCategory']) &&
-			isset($_POST['submitTitle']) &&
-			isset($_POST['submit_content'])
+		// 	isset($_POST['postId']) &&
+		// 	isset($_POST['userId']) &&
+		// 	isset($_POST['contentCategory']) &&
+		// 	isset($_POST['submitTitle']) &&
+		// 	isset($_POST['submit_content'])
+		// 
+		empty($is_form_valid) 
 		){
 
 			$insert_id = wp_insert_post(array(
@@ -110,6 +131,9 @@ class Mp_cf_submit_content
 				}
 
 			}
+		} else {
+			$errors = json_encode($is_form_valid);
+			echo $errors;
 		}
 	die();
 	}

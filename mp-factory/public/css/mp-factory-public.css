@@ -1,0 +1,49 @@
+/**
+ * All of the CSS for your public-facing functionality should be
+ * included in this file.
+ */
+
+ .disable-form {
+    pointer-events: none;
+    cursor: default;
+ }
+
+
+/* -------------------------------------------------------notification------------------------------------- */
+
+.mp-notificationCf {
+   background-color: var(--color-new-modal-green-200);
+   color: var(--color-white-universal);
+   display: grid;
+   padding: 0rem;
+   grid-template-columns: 1fr 1fr 1fr;
+   overflow: hidden;
+   transition: all 0.3s ease-in-out;
+   height: 50px;
+   position: sticky;
+   top: 0;
+   z-index: 1;
+   animation: slide-up 0.3s;
+ }
+ 
+ .mp-notificationCf-content {
+   overflow-wrap: break-word;
+   grid-column-start: 2;
+   grid-column-end: 3;
+   grid-row-start: 1;
+   place-self: center;
+ }
+ 
+ .close-mp-notificationCf {
+   overflow-wrap: break-word;
+   grid-column-start: 3;
+   grid-column-end: 4;
+   grid-row-start: 1;
+   place-self: end;
+   cursor: pointer;
+   padding: 0.8rem 2rem;
+ }
+ 
+ .notificationCf-error {
+   background-color: var(--color-new-red-100);
+ }

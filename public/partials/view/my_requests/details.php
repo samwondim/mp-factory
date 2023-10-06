@@ -21,7 +21,7 @@
 
       <div class="cf-form-input">
         <label for="category">Category</label>
-        <input type="text"  placeholder="Category" value="<?php echo $category[0]->name?>"/>
+        <input type="text"  placeholder="Category" value="<?php echo count($category) == 0 ? 'Uncategorized' : $category[0]->name?>"/>
       </div>
      
       <div class="cf-form-input">
@@ -185,7 +185,7 @@
                 if ($status !== 'moderate') echo $status;
                 else {?>
                   <a href="<?php echo home_url('mp_cf_plugin/my-requests/?moderate_submission=').$claimer_data['post_id']?>">
-                    <button class="cf-requester-btn" >Moderate</button>
+                    <button class="cf-request-bottom-button-primary" >Moderate</button>
                   </a>
                 <?php }?>
               </td>

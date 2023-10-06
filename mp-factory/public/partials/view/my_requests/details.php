@@ -21,7 +21,7 @@
 
       <div class="cf-form-input">
         <label for="category">Category</label>
-        <input type="text"  placeholder="Category" value="<?php echo $category[0]->name?>"/>
+        <input type="text"  placeholder="Category" value="<?php echo count($category) != 0 ? $category[0]->name?> : 'Uncategorized'"/>
       </div>
      
       <div class="cf-form-input">
